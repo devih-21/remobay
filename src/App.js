@@ -1,11 +1,11 @@
+import './Components/FontAwesomeIcons/index';
 import './App.css';
+import Header from './Components/Header/Header';
 
 function App() {
   return (
     <div>
-      <div className="display-1 text-center">
-        Test Bootstrap
-      </div>
+      <Header/>
     </div>
   );
 }
