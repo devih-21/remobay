@@ -1,0 +1,17 @@
+.Home-container{
+    background-color: #F1F2F4;
+    margin: 0px;
+    padding: 5vh 13vw;
+}
+.Home-row{
+    display: flex;
+}
+.Home-leftSection{
+    flex: 0 0 25%;
+}
+.Home-centerSection{
+    flex: 0 0 50%;
+}
+.Home-rightSection{
+    flex: 0 0 25%;
+}
