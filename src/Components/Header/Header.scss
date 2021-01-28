@@ -1,0 +1,42 @@
+@import '../../../public/colors/colors.scss';
+
+#header-container {
+  background-color: $secondary-color;
+}
+
+#searchBar {
+  background-color: lighten($color: $secondary-color , $amount: 5%);
+  padding-left: 1.2em;
+  &::placeholder {
+    color: white;
+  }
+
+  &:focus {
+    outline: none;
+    color: white;
+  }
+}
+
+#mobile-nav-bar {
+  display: none;
+}
+
+#navbar li {
+  margin-right: 1em;
+  &:hover {
+    cursor: pointer;
+    color: lighten($color: $tertiary-color, $amount: 10%);
+  }
+}
+
+#find-work {
+  color: lighten($color: $tertiary-color, $amount: 10%);
+  &:hover {
+    #sub-menu {
+      display: block !important;
+    }
+  }
+  & ul {
+    position: absolute;
+  }
+}
