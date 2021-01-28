@@ -1,0 +1,20 @@
+@import '../../../public/colors/colors.scss';
+
+#freelancer-profile-body {
+  background-color: $primary-color;
+}
+
+#profile-settings-btn {
+  background-color: $tertiary-color;
+  color: white;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 5px;
+  &:hover {
+    background-color: darken($color: $tertiary-color, $amount: 5%);
+  }
+}
+
+.portfolio-item {
+  color: darken($color: $tertiary-color, $amount: 5%);
+}

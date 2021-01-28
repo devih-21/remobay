@@ -1,0 +1,20 @@
+#freelancer-profile-body {
+  background-color: #f1f2f4;
+}
+
+#profile-settings-btn {
+  background-color: #37a000;
+  color: white;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+#profile-settings-btn:hover {
+  background-color: #2e8700;
+}
+
+.portfolio-item {
+  color: #2e8700;
+}
+/*# sourceMappingURL=FreelancerProfile.css.map */
