@@ -1,5 +1,6 @@
 import "./FreelancerProfile.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import UploadProfileImage from '../Modals/Upload Profile Image/UploadProfileImage.jsx';
 
 const FreelancerProfile = () => {
   return (
@@ -7,7 +8,13 @@ const FreelancerProfile = () => {
       <div className="container bg-white pb-5 col-12 col-lg-10 rounded">
         <div className="row col-12 d-flex">
           <div className="my-4 mr-0 col-3 col-md-2 col-lg-1 p-0">
-            <img src="https://via.placeholder.com/60" alt="profile pic" className="rounded-circle offset-3"/>
+            <div id="profile-img-div" className="offset-3">
+              <img src="https://via.placeholder.com/60" alt="profile pic" className="rounded-circle"/>
+              <span id="edit-profile-img" role="button" data-toggle="modal" data-target="#uploadProfileImage" >
+                <FontAwesomeIcon icon="pencil-alt" />
+              </span>
+              <UploadProfileImage />
+            </div>
           </div>
           <div className="col-9 col-lg-11 p-0 d-flex mt-4 flex-wrap">
             <div className="col-12 col-lg-6 h4 mb-0">User Name</div>
