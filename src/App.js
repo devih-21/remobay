@@ -3,14 +3,14 @@ import './App.css';
 import Header from './Components/Header/Header';
 import FreelancerProfile  from './Components/FreelancerProfile/FreelancerProfile';
 import Home from './Components/HomePage/HomePage';
-import Header from './Components/Header/Header';
+
 
 function App() {
   return (
     <div>
-      <Header/>
+      {/*<Header/>*/}
+      {/*<FreelancerProfile />*/}
         <Home/>
-      <FreelancerProfile />
     </div>
   );
 }
