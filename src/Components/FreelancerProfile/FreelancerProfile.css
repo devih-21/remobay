@@ -17,4 +17,18 @@
 .portfolio-item {
   color: #2e8700;
 }
+
+#profile-img-div {
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  background-color: black;
+  padding: 0;
+}
+
+#edit-profile-img {
+  position: absolute;
+  top: 0;
+  left: .2em;
+}
 /*# sourceMappingURL=FreelancerProfile.css.map */
