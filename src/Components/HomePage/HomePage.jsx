@@ -125,12 +125,12 @@ class Home extends Component {
                               <div className="ellipsish " id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 <FontAwesomeIcon icon={faEllipsisH}/>
                               </div>
-
                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">RSS</a></li>
-                                <li><a class="dropdown-item" href="#">Atom</a></li>
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
                               </ul>
-                            </div>  
+                            </div>
                             
                         </div>
                             {this.state.data.map((m)=>{
