@@ -8,9 +8,8 @@ import Home from './Components/HomePage/HomePage';
 function App() {
   return (
     <div>
-      {/*<Header/>*/}
-      {/*<FreelancerProfile />*/}
-        <Home/>
+      <Header/>
+      <FreelancerProfile/>
     </div>
   );
 }
