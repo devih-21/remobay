@@ -2,7 +2,8 @@ import { faSearch , faEllipsisH, faCheckCircle,faHeart as fullHeart ,faStar, faM
 import {faClock, faHeart , faThumbsUp} from '@fortawesome/free-regular-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import React, { Component } from 'react';
-import './HomePage.css'
+import './HomePage.css';
+
 
 class Home extends Component {
     constructor(){
@@ -24,7 +25,11 @@ class Home extends Component {
                     paymentvervied:false,
                     stars:0,
                     spend:0,
-                    country:"Canada"
+                    country:"Canada",
+                    like: true,
+                    id:1,
+                    dislike: false,
+                    dislikeTitle:""
                 },
                 {
                     title:"Website development for education course",
@@ -39,7 +44,11 @@ class Home extends Component {
                     proposals:"Less than 5",
                     paymentvervied:false,
                     stars:0,
-                    country:"Canada"
+                    country:"Canada",
+                    like: true,
+                    id:2,
+                    dislike: false,
+                    dislikeTitle:""
                 },
             ],
             searchHistory : ["html","css and simple js","javaScript"],
@@ -49,21 +58,41 @@ class Home extends Component {
         }
     }
 
-    handleLike = ()=>{
-        if(this.state.like === false){
+    handleLike = (like)=>{
+        console.log(like);
+        console.log("done");
+        if(like === false){
             return(<FontAwesomeIcon icon={fullHeart} />)
         }else{
             return(<FontAwesomeIcon icon={faHeart} />)
         }
     }
 
+    handleDislike = (dislike,id,reason)=>{
+            dislike === false ?
+            this.setState(prevState => ({
+                data: prevState.data.map(
+                obj =>(obj.id === id ? Object.assign(obj, { dislike: true }) : obj)
+              )
+            })): this.setState(prevState => ({
+                data: prevState.data.map(
+                obj => (obj.id === id ? Object.assign(obj, { dislike: false }) : obj)
+              )
+            }))
+
+            this.setState(prevState => ({
+                data: prevState.data.map(
+                obj =>(obj.id === id ? Object.assign(obj, { dislikeTitle: reason }) : obj)
+              )
+            }))
+            
+             
+    }
+
+  
+
     componentDidMount=()=>{
         this.handleLike();
-        // if(window.innerWidth < 760){
-        //     this.setState({containerClass:"container-home"})
-        // }else{
-        //     this.setState({containerClass:"container"})
-        // }
     }
 
     render=()=>{
@@ -122,40 +151,53 @@ class Home extends Component {
                             <div className="Home-myfeed">
                             <p >My Feed</p>
                             <div class="dropdown">
-                              <div className="ellipsish " id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                <FontAwesomeIcon icon={faEllipsisH}/>
+                                <div className="ellipsish " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <FontAwesomeIcon icon={faEllipsisH}/>
+                                </div>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item" href="#">RSS</a>
+                                  <a class="dropdown-item" href="#">Atom</a>
+                                </div>
                               </div>
-
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">RSS</a></li>
-                                <li><a class="dropdown-item" href="#">Atom</a></li>
-                              </ul>
-                            </div>  
-                            
-                        </div>
+                            </div>
                             {this.state.data.map((m)=>{
+                            if(m.dislike === false)
+                            
                             return(
                                 <div className="Home-posts">
                                     <div className="title-container">
                                         <p>{m.title}</p>
-                                        <div className="title-icons-posts">
+                                        <div className="title-icons-posts">  
                                             <div class="dropdown">
-                                                <div className="title-faThumbsDown" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <div className="title-faThumbsDown" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <FontAwesomeIcon icon={faThumbsUp} />
                                                  </div>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                  <li><a class="dropdown-item" href="#" >Just not interested</a></li>
-                                                  <li><a class="dropdown-item" href="#">Vague Description</a></li>
-                                                  <li><a class="dropdown-item" href="#">Unrealistic Expectations</a></li>
-                                                  <li><a class="dropdown-item" href="#">Too Many Applications</a></li>
-                                                  <li><a class="dropdown-item" href="#">Job posted too long ago</a></li>
-                                                  <li><a class="dropdown-item" href="#">Doesn't Match Skills</a></li>
-                                                  <li><a class="dropdown-item" href="#">I am overqualified</a></li>
-                                                  <li><a class="dropdown-item" href="#">Budget too low</a></li>
-                                                </ul>
-                                            </div>  
-                                            <div className="title-faHeart" onClick={()=>{this.state.like === false ? this.setState({like : true}) : this.setState({like : false}) }}>
-                                                {this.handleLike()}
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                  <a class="dropdown-item" href="#" onClick={()=>this.handleDislike(m.dislike,m.id,"Just not interested")}>Just not interested</a>
+                                                  <a class="dropdown-item" href="#" onClick={()=>this.handleDislike(m.dislike,m.id,"Vague Description")}>Vague Description</a>
+                                                  <a class="dropdown-item" href="#" onClick={()=>this.handleDislike(m.dislike,m.id,"Unrealistic Expectations")}>Unrealistic Expectations</a>
+                                                  <a class="dropdown-item" href="#" onClick={()=>this.handleDislike(m.dislike,m.id,"Too Many Applications")}>Too Many Applications</a>
+                                                  <a class="dropdown-item" href="#" onClick={()=>this.handleDislike(m.dislike,m.id,"Job posted too long ago")}>Job posted too long ago</a>
+                                                  <a class="dropdown-item" href="#" onClick={()=>this.handleDislike(m.dislike,m.id,"Doesn't Match Skills")}>Doesn't Match Skills</a>
+                                                  <a class="dropdown-item" href="#" onClick={()=>this.handleDislike(m.dislike,m.id,"I am overqualified")}>I am overqualified</a>
+                                                  <a class="dropdown-item" href="#" onClick={()=>this.handleDislike(m.dislike,m.id,"Budget too low")}>Budget too low</a>
+                                                </div>
+                                            </div>
+                                            <div className="title-faHeart" 
+                                                onClick={()=>{
+                                                    m.like === false ?
+                                                    this.setState(prevState => ({
+                                                        data: prevState.data.map(
+                                                        obj => (obj.id === m.id ? Object.assign(obj, { like: true }) : obj)
+                                                      )
+                                                    })): this.setState(prevState => ({
+                                                        data: prevState.data.map(
+                                                        obj => (obj.id === m.id ? Object.assign(obj, { like: false }) : obj)
+                                                      )
+                                                    }))
+                                                    
+                                                     }}>
+                                                {this.handleLike(m.like)}
                                             </div>
                                         </div>
                                     </div>
@@ -192,8 +234,18 @@ class Home extends Component {
                                         <p className="payment mb-2">{m.country}</p>
                                     </div>
                                 </div>
-                            )
-                            })}
+                            )  
+                            else
+                             return(
+                             <div className="Home-posts">
+                                 <div className="title-container-dislike ">
+                                        <p className="title-post-dislike">{m.title}</p>
+                                        <p className="expand-post"  onClick={()=>this.handleDislike(m.dislike,m.id)}>Expand</p>
+                                  </div>
+                                  <p className="reason-home">{m.dislikeTitle}</p>
+                             </div>
+                             )
+                            }) }
                         </div>
                         <div className="Home-rightSection ">
                         <div className="home-profile">
