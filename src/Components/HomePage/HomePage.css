@@ -174,7 +174,27 @@
     margin-right: 5px;
     margin-top: 5px;
 }
-
+.title-post-dislike{
+    font-weight: 500;
+    font-size: 1.3em;
+    color: #4a4a4a;
+}
+.reason-home{
+    color: #353535;
+}
+.title-container-dislike{
+    display: flex;
+    justify-content: space-between;
+}
+.expand-post{
+    font-size: 1em;
+    cursor: pointer;
+    color: #37A000;
+}
+.expand-post:hover{
+    text-decoration: underline;
+    color: #008329;
+}
 /* ---------------------------------------------------------- */
 
 .Home-leftSection .main-title{

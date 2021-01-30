@@ -4,10 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "../node_modules/font-awesome/css/font-awesome.css";
-import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "../node_modules/jquery/dist/jquery";
 import "../node_modules/popper.js/dist/popper-utils";
 import "../node_modules/bootstrap/js/src/modal"
+import "../node_modules/bootstrap/dist/css/bootstrap.css";
+import '../node_modules/bootstrap/dist/js/bootstrap.js';
 
 
 
