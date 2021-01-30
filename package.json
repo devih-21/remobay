@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/free-regular-svg-icons": "^5.15.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
-    "@fortawesome/free-regular-svg-icons": "^5.15.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@testing-library/jest-dom": "^5.11.4",
@@ -17,6 +17,7 @@
     "popper.js": "^1.12.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-hooks": "^1.0.1",
     "react-scripts": "4.0.1",
     "sass": "^1.32.5",
     "web-vitals": "^0.2.4"
