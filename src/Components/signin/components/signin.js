@@ -1,15 +1,15 @@
 import '../styles/signin.css';
 import Head from './head';
-import SignupForm from './sign-in-form'
+import SigninForm from './sign-in-form'
 import SigninFooter from './signin-footer';
-const Signup = () => {
+const Signin = () => {
     return(
         <div className="signin">
             <Head/>
-            <SignupForm/>
+            <SigninForm/>
             <SigninFooter/>
         </div>
     )
 }
 
-export default Signup;
+export default Signin;

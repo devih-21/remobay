@@ -1,10 +1,22 @@
 @import '../../public/colors/colors.scss';
 .signup{
-    // font-family: 'Noto Sans', sans-serif;
     font-family: "Gotham SSm", Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     background-color: $secondary-color;
-    // font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace;
-    //--font-family-rebrand: "Canela Deck Bold";
+    .navbar-brand{
+        @media screen and (max-width:1000px){
+            margin: auto;
+        }
+    }
+    .about-details{
+        @media screen and (max-width: 1000px) {
+            h5{
+                font-size: 22px;
+            }
+            p{
+                font-size:14px;
+            }
+        }
+    }
     .secondColor {
         color: $tertiary-color;
     }
@@ -38,7 +50,7 @@
         &::after{
             position: absolute;
             content:"";
-            width: 200px;
+            width: 190px;
             height: 1px;
             top: 50%;
             left: 55%;
@@ -47,7 +59,7 @@
         &::before{
             position: absolute;
             content:"";
-            width: 200px;
+            width: 190px;
             height: 1px;
             top: 50%;
             right: 55%;
@@ -67,21 +79,58 @@
     }
     .input{
         position: relative;
-        & input[type="email"]{
+        input[type="email"]{
             padding-left: 60px;
+            height: 100%;
             &:hover,&:active,&:focus{
                 border-color: $tertiary-color!important;
                 box-shadow: none!important;
             }
         }
-        & .msg-icon{
+        .msg-icon{
             position: absolute;
-            top:0;
+            top: 5px;
             left: 20px;
-            bottom: 0;
         }
     }
-    .continue-button{
+    .second-form-input{
+        position: relative;
+        input{
+            padding: 10px 50px 10px 50px;
+            height: 100%;
+            &:hover,&:active,&:focus{
+                border-color: $tertiary-color!important;
+                box-shadow: none!important;
+            }
+        }
+        .icon{
+            position: absolute;
+            top: 8px;
+            left: 20px;
+        }
+    }
+    .second-form-input3{
+        select{
+            &:hover,&:active,&:focus{
+                border-color: $tertiary-color!important;
+                box-shadow: none!important;
+            }
+            option{
+                &:hover,&:active,&:focus{
+                    border-left:solid 3px $tertiary-color!important;
+                    background-color: $tertiary-color!important;
+                    box-shadow: none!important;
+                }
+            }
+        }
+    }
+    .form-check{
+        text-align: left;
+    }
+    .continue-button,.submit-button{
+        background-color: $tertiary-color;
+    }
+    .user-type:hover,.user-type:focus,.user-type:active{
         background-color: $tertiary-color;
     }
     .companies{

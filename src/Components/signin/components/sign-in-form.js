@@ -3,20 +3,9 @@ import Input from 'react-validation/build/input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
-import validator from 'validator';
+//import validator from 'validator';
 import axios from 'axios';
-/*const requiredmail = (value) => {
-  if (!value.toString().trim().length) {
-    // We can return string or jsx as the 'error' prop for the validated Component
-    return 'Email address is required';
-  }
-};
 
-const useremail = (value) => {
-  if (!validator.isEmail(value)) {
-    return `${value} is not a valid email.`
-  }
-};*/
 
 class SigninForm extends Component {
     constructor(props) {
@@ -43,20 +32,7 @@ class SigninForm extends Component {
              })
 
          }
-         /*onSubmit(e){
-            e.preventDefault();
-            const user = {​​​​
-                email: this.state.email,
-                password: this.state.password
-
-                }​​​​
-                console.log(user);
-
-                axios.post('http://localhost:3000/api/user/login',user)
-                .then(res =>console.log(res.data));
-                this.setState({email:'',
-                               password:''})
-                 }*/
+        
                  onSubmit = (e) => {
                     e.preventDefault();
                     const data = {
@@ -93,12 +69,7 @@ class SigninForm extends Component {
                               
                           
                         });
-                        // console.log("hxhshshsh")
-                        // if(this.state.Errflag){
-                        //     var errElement =document.getElementById("error");
-                        //     console.log(errElement);
-                        //     errElement.style.display="block";
-                        // } 
+                      
                 }
 
 

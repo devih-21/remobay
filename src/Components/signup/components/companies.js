@@ -5,24 +5,34 @@ const Companies = () => {
                 <h5 className="font-weight-bold">Trusted by 5M+ businesses</h5>
             </div>
             <div className="container my-2">
-                <div className="d-flex justify-content-center">
-                    <div className="d-flex">
-                        <div className="ml-5 mr-3">
+                <div className="row">
+                    <div className="col-sm-12 col-md-3 col-lg-2">
+                        <div className="ml-5 mr-3 d-flex justify-content-center">
                             <img src="https://www.upwork.com/ab/assets/Signup/f4aecef/bundles/upworkvscomponents/logo-bar-light/images/microsoft.svg"/>
                         </div>
-                        <div className="ml-5 mr-3">
+                    </div>
+                    <div className="col-sm-12 col-md-3 col-lg-2">
+                        <div className="ml-5 mr-3 d-flex justify-content-center">
                             <img src="https://www.upwork.com/ab/assets/Signup/f4aecef/bundles/upworkvscomponents/logo-bar-light/images/airbnb.svg"/>
                         </div>
-                        <div className="ml-5 mr-3">
+                    </div>
+                    <div className="col-sm-12 col-md-3 col-lg-2">
+                        <div className="ml-5 mr-3 d-flex justify-content-center">
                             <img src="https://www.upwork.com/ab/assets/Signup/f4aecef/bundles/upworkvscomponents/logo-bar-light/images/ge.svg"/>
                         </div>
-                        <div className="ml-5 mr-3">
+                    </div>
+                    <div className="col-sm-12 col-md-3 col-lg-2">
+                        <div className="ml-5 mr-3 d-flex justify-content-center">
                             <img src="https://www.upwork.com/ab/assets/Signup/f4aecef/bundles/upworkvscomponents/logo-bar-light/images/automatic.svg"/>
                         </div>
-                        <div className="ml-5 mr-3">
+                    </div>
+                    <div className="col-sm-12 col-md-3 col-lg-2">
+                        <div className="ml-5 mr-3 d-flex justify-content-center">
                             <img src="https://www.upwork.com/ab/assets/Signup/f4aecef/bundles/upworkvscomponents/logo-bar-light/images/bissell.svg"/>
                         </div>
-                        <div className="ml-5 mr-3">
+                    </div>
+                    <div className="col-sm-12 col-md-3 col-lg-2">
+                        <div className="ml-5 mr-3 d-flex justify-content-center">
                             <img src="https://www.upwork.com/ab/assets/Signup/f4aecef/bundles/upworkvscomponents/logo-bar-light/images/coty.svg"/>
                         </div>
                     </div>
