@@ -47,6 +47,7 @@
 
 #find-work:hover #sub-menu {
   display: block !important;
+  z-index: 1;
 }
 
 #find-work ul {

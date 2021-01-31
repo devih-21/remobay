@@ -15,6 +15,24 @@
   }
 }
 
+// .edit-icon {
+//   width: 30px;
+//   height: 30px;
+//   background-color: white;
+//   border-radius: 50%;
+//   border: 1px solid;
+//   text-align: center;
+//   color: #D1D1D1;
+//   &:hover {
+//     cursor: pointer;
+//     opacity: .8;
+//   }
+//   & svg {
+//     font-size: 0.8em;
+//     color: #656565;
+//   }
+// }
+
 .portfolio-item {
   color: darken($color: $tertiary-color, $amount: 5%);
 }

@@ -1,11 +1,15 @@
 import './UploadProfileImage.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import $ from "jquery";
 
 const UploadProfileImage = () => {
-  // let [imgSrc, setImgSrc] = useState();
+  let [imgSrc, setImgSrc] = useState("");
   
-  let imgSrc;
+  let xy = (st) => {
+    setImgSrc(st);
+  }
+
+  // let imgSrc;
   let imgFile;
 
   $(document).on('hide.bs.modal','#uploadProfileImage', function () {
@@ -14,27 +18,55 @@ const UploadProfileImage = () => {
 
   $(document).on('shown.bs.modal','#uploadProfileImage', function () {
     console.log("Shown");
-    imgSrc = "";
+    // imgSrc = "";
   });
+
+  // function asyncFileReader (image) {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  
+  //     try {
+  //       reader.readAsDataURL(image);
+  //       reader.onloadend = () => {
+  //         resolve(reader.result);
+  //         console.log(reader.result);
+  //       }
+  //     } catch(e) {
+  //       reject(e);
+  //     }
+  //   });
+  // }
+
+  // async function uploadImage(image) {
+  //   const readerResult = await asyncFileReader(image);
+  
+  //   setImgSrc(readerResult);
+  // }
 
 
   let showFileName = (e) => {
+    e.preventDefault();
     let uploadButton = document.getElementById("confirmUploadBtn");
     imgFile = e.target.files[0];
     let image = document.getElementById("profileImage");
+    
     const reader = new FileReader();
     reader.onload = () => {
-      imgSrc = reader.result;
-      // let result = reader.result;
-      // setImgSrc(result);
-      console.log(imgSrc);
+      // imgSrc = reader.result;
+      let result = reader.result;
+      // console.log(result);
+      // console.log(imgSrc);
       image.innerHTML = `<img src=${imgSrc} width="300px" height="300px" style="border-radius: 50%;" />`;
+      if (typeof result == "string") {
+        xy(result)
+      } debugger;
+      // setImgSrc(result);
       uploadButton.textContent = "Save Photo";
     }
     if (imgFile) {
       reader.readAsDataURL(imgFile);
     }
-    console.log(e);
+    console.log(imgSrc);
   }
 
 

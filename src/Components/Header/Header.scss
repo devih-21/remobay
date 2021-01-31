@@ -34,6 +34,7 @@
   &:hover {
     #sub-menu {
       display: block !important;
+      z-index: 1;
     }
   }
   & ul {
