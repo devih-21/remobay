@@ -43,6 +43,23 @@
   }
 }
 
+#nextBtnDisabled {
+  // border: 1px solid darken($color: $primary-color, $amount: 5%);
+  background-color: darken($color: $primary-color, $amount: 5%);
+  color: lighten($color: black, $amount: 50%);
+  font-weight: bold;
+  padding-left: 3.5em;
+  padding-right: 3.5em;
+  padding-top: .6em;
+  padding-bottom: .6em;
+  &:hover {
+    cursor:unset
+  }
+  @media screen and (max-width: 768px) {
+    width: 50%; 
+  }
+}
+
 .jobTitleInput {
   border: 1px solid;
   &:hover {

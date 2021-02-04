@@ -9,12 +9,24 @@ import "../node_modules/popper.js/dist/popper-utils";
 import "../node_modules/bootstrap/js/src/modal";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import '../node_modules/bootstrap/dist/js/bootstrap';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import promiseMW from 'redux-promise';
+import reducers from './Reducers/combinedReducers';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+const createStoreWithMW = applyMiddleware(promiseMW)(createStore);
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={createStoreWithMW(reducers)} >
+    <Router>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Router>
+  </Provider>
+  ,
   document.getElementById('root')
 );
 

@@ -1,3 +1,6 @@
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { logIn } from '../../../Actions/userData';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -42,6 +45,12 @@ class SigninForm extends Component {
                     };
                     console.log(`email: ${this.state.email}`);
                     console.log(`password: ${this.state.password}`);
+
+                    this.props.logIn({
+                      email: "mohamedali@gmail.com",
+                      password: "12345678"
+                    });
+                    console.log(`Hello ${this.props.userToken}`);
 
 
                     axios.post('http://localhost:8080/api/user/login', data)
@@ -181,5 +190,13 @@ class SigninForm extends Component {
          );
     }
 }
+
+const mapStateToProps = (state) => {
+  return {userToken: state.userReducer.token};
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({logIn}, dispatch)
+}
  
-export default SigninForm;
+export default connect(mapStateToProps, mapDispatchToProps) (SigninForm);

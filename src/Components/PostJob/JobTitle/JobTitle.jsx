@@ -1,6 +1,14 @@
 import "./JobTitle.css";
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+// import { checkJobPostTitle } from '../../../Actions/jobPost';
 
-const JobTitle = () => {
+const JobTitle = (props) => {
+
+  let checkTitleLength = (e) => {
+    props.checkJobPostTitle(e.target.value)
+  }
+
   return (
     <div>
       <div className="bg-white mb-2 mb-lg-5">
@@ -14,7 +22,7 @@ const JobTitle = () => {
           <div className="container col p-0 px-lg-3">
             <div className="h6">Enter the name of your job post</div>
             <div className="mb-2">
-              <input className="col-11 col-lg-10 py-2 jobTitleInput" />
+              <input onChange={checkTitleLength} className="col-11 col-lg-10 py-2 jobTitleInput" />
             </div>
             <div>
               <div className="h6">Here are some good examples:</div>
@@ -46,7 +54,11 @@ const JobTitle = () => {
           <div className="container col p-0 px-lg-3">
             <div>
               <button id="exitBtn" className="btn rounded mr-lg-4">Exit</button>
-              <button id="nextBtn" className="btn rounded">Next</button>
+              {
+                props.isJobTitleValid ?
+                <button  id="nextBtn" className="btn rounded">Next</button> :
+                <button disabled id="nextBtnDisabled" className="btn rounded">Next</button>
+              }
             </div>
           </div>
         </div>
@@ -54,5 +66,13 @@ const JobTitle = () => {
     </div>
   )
 }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators({checkJobPostTitle}, dispatch);
+// }
+
+// const mapStateToProps = (state) => {
+//   return {isJobTitleValid: state.jobPostReducer.jobPostTitleValid}
+// }
 
 export default JobTitle;
