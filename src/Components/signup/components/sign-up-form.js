@@ -8,6 +8,8 @@ import {faLock } from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
 import validator from 'validator';
 import axios from 'axios';
+import { Redirect } from  "react-router-dom";
+
 
 class SignupForm extends Component {
     constructor(props) {
@@ -22,7 +24,8 @@ class SignupForm extends Component {
             country:'',
             userType:'',
             ternarycolor: "#37A000",
-            white : "#fff"
+            white : "#fff",
+            isSignedup: false
          }
          this.form = new ReactFormInputValidation(this);
          this.form.onformcontinue = (event) => {
@@ -54,7 +57,15 @@ class SignupForm extends Component {
             };
             console.log(newUser);
             axios.post('http://localhost:8080/api/user/register', newUser)
-                .then(res => console.log(res.data));
+                .then(res => 
+                
+                {
+                                
+                    if (res.status === 200) {
+                      this.setState({ isSignedup: true }); // after signing up, set the state to true. This will trigger a re-render
+                    }
+                }
+               );
 
             this.setState({
                 email: '',
@@ -98,6 +109,8 @@ class SignupForm extends Component {
         console.log(this.state.userType);
       }
     getForm = () => {
+
+
         if(this.state.flag == 0){
             return(
                 <div>
@@ -465,6 +478,10 @@ class SignupForm extends Component {
         }
     } 
     render() { 
+        if (this.state.isSignedin) {
+            // redirect to home if signed up
+            return <Redirect to = {{ pathname: "/" }} />;
+          }
         return ( 
             <div className="row d-flex justify-content-center mt-5 mb-4 p-0 mx-0">
                 <div className="col-md-12 col-lg-7">

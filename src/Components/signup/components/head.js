@@ -14,7 +14,7 @@ const Head = () => {
                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                             <li className="nav-item">
                                 <div className="nav-link">
-                                    <span>Already have an account? <a className="px-2 secondColor">Log in</a></span>
+                                    <span>Already have an account? <a  href="/signin" className="px-2 secondColor">Log in</a></span>
                                 </div>
                             </li>
                         </ul>

@@ -93,9 +93,17 @@
         {
           float: left;
         }
+        #signup {
+          text-align: center;
+          align-content: center;
+        }
+        #signup #anchor{
+          color:#050c01;
 
+        }
+           
       
-      a {
+      #forgot-password {
           color:#37a000;
           text-decoration: none;
           font-weight: 500;
@@ -128,7 +136,7 @@
         border:1px solid #d46c57;
     }
     .error:hover {  background-color: #d46c57; }
-       
+ 
 
 /*# sourceMappingURL=signin.css.map */
 
