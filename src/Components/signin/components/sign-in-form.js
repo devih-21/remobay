@@ -3,22 +3,27 @@ import Input from 'react-validation/build/input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import React, { Component } from 'react';
-//import validator from 'validator';
 import axios from 'axios';
+import { Redirect } from  "react-router-dom";
+
+
 
 
 class SigninForm extends Component {
+    
     constructor(props) {
         super(props);
+        
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
 
+
         this.state = {
         email:' ' ,
          password:'',
-        Errflag:1}
+        isSignedin: false}
         }
          onChangeEmail(e) {
              this.setState({
@@ -44,48 +49,53 @@ class SigninForm extends Component {
                     console.log(`password: ${this.state.password}`);
 
 
-                    axios.post('http://localhost:8080/api/user/login', data)
+                    axios.post('http://localhost:3000/api/user/login', data)
+
+                   
                         .then(
                             
                             res => {
-                                console.log("hdhdhdhdhdh")
-
-
-                                try{
-                                    console.log(this.state.Errflag)
-                                    
-                                    this.setState({Errflag:0});
-                                    console.log(this.state.Errflag)
-
-                                    console.log(res.data);
-  
+                                
+                                    if (res.status === 200) {
+                                      this.setState({ isSignedin: true }); // after signing up, set the state to true. This will trigger a re-render
+                                    }
+                               
                                    
-                                }
-                                catch(err){
-                                    console.log("hdhdhdhdhdh")
-
-                                    console.log(`err: ${err}`);
-                                }  
-                              
                           
-                        });
-                      
+                        }).catch(error => {
+                            console.log(error)
+                            console.log("sjhhshsh")
+                                 var errElement =document.getElementById("error");
+                                console.log(errElement);
+                                errElement.style.display="block";
+
+                           })
+    
+                        
+
+                       
+                    
+
                 }
 
 
     
     render() { 
+        if (this.state.isSignedin) {
+            // redirect to home if signed up
+            return <Redirect to = {{ pathname: "/" }} />;
+          }
         return ( 
             <div className="my-4">
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                        <div className="alert-box error" id="error"><span>error: </span>The Email or password is not available.</div>
                             <div className="container">
                                 <div className="row d-flex justify-content-center">
                                     <div className="col-7">
                                         <div className="text-center bg-white mb-5 py-4 px-5 border rounded">
-                                            
+                                        <div className="alert-box error" id="error"><span>error: </span>The Email or password is not available.</div>
+  
                                     <h3 className="font-weight-bolder head-font my-4">Log in and get to work</h3>
                                             <Form className="mt-4 text-dark"
                                             
@@ -129,7 +139,7 @@ class SigninForm extends Component {
 
                                                     
                                                     <div className="continue-btn my-3">
-                                                        <button type="submit" className="continue-button btn btn-success btn-lg btn-block" onClick={this.onSubmit} >Log in</button>
+                                                        <button type="submit" className="continue-button btn btn-success btn-lg btn-block" onClick={this.onSubmit} href="/">Log in</button>
                                                     </div>
                                                 </div>
                                                 <div class="text-center text-dark my-3">
@@ -167,7 +177,7 @@ class SigninForm extends Component {
                                                         <p className="new">New to Upwork?</p>
                                                     </div>
                                                     <div className="form-group">
-            <button  className="btn btn-outline-success btn-lg btn-block login-btn">Sign up</button>
+            <button  className="btn btn-outline-success btn-lg btn-block login-btn" id="signup"> <a href="/signup" id="anchor">Sign up</a></button>
         </div>
                                             </Form>
                                         </div>
