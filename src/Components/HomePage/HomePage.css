@@ -10,6 +10,7 @@
 .Home-container{
     background-color: #F1F2F4;
     padding: 5vh 0px;
+    min-height: 89vh;
 }
 .container-home{
     /* padding: 5vh 13vw; */
