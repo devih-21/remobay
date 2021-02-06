@@ -1,8 +1,14 @@
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { setFreelancerHourlyRate } from "../../Actions/userData";
 import "./FreelancerProfile.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UploadProfileImage from '../Modals/Upload Profile Image/UploadProfileImage.jsx';
+import EditTitleModal from '../Modals/EditTitleModal/EditTitleModal.jsx';
+import EditHourlyRate from '../Modals/EditHourlyRate/EditHourlyRate';
+import EditIcon from '../FontAwesomeIcons/EditIcon/EditIcon';
 
-const FreelancerProfile = () => {
+const FreelancerProfile = (props) => {
   return (
     <div id="freelancer-profile-body" className="p-lg-4">
       <div className="container bg-white pb-5 col-12 col-lg-10 rounded">
@@ -10,10 +16,10 @@ const FreelancerProfile = () => {
           <div className="my-4 mr-0 col-3 col-md-2 col-lg-1 p-0">
             <div id="profile-img-div" className="offset-3">
               <img src="https://via.placeholder.com/60" alt="profile pic" className="rounded-circle"/>
-              <span id="edit-profile-img" role="button" data-toggle="modal" data-target="#uploadProfileImage" >
-                <FontAwesomeIcon icon="pencil-alt" />
-              </span>
-              <UploadProfileImage />
+              <div id="edit-profile-img" role="button" data-toggle="modal" data-target="#uploadProfileImage" >
+                <EditIcon/>
+              </div>
+              {/* <UploadProfileImage /> */}
             </div>
           </div>
           <div className="col-9 col-lg-11 p-0 d-flex mt-4 flex-wrap">
@@ -31,11 +37,9 @@ const FreelancerProfile = () => {
             <div className="row p-2 col-12">
               <span className="h5 pr-4">View Profile</span>
               <span className="pr-3" role="button">
-                <FontAwesomeIcon icon="plus" size="lg" />
+                <FontAwesomeIcon icon="plus" />
               </span>
-              <span role="button">
-                <FontAwesomeIcon icon="pencil-alt" size="lg" />
-              </span>
+              <EditIcon/>
             </div>
             <div className="row p-2 col-12">
               Front-End Development
@@ -44,31 +48,25 @@ const FreelancerProfile = () => {
             <div className="row p-2 col-12">
               <span className="h5 pr-4">Languages</span>
               <span className="pr-3" role="button">
-                <FontAwesomeIcon icon="plus" size="lg" />
+                <FontAwesomeIcon icon="plus" />
               </span>
-              <span role="button">
-                <FontAwesomeIcon icon="pencil-alt" size="lg" />
-              </span>
+              <EditIcon/>
             </div>
             <div className="row p-2 col-12 mb-3">
               <p><span className="h5">English:</span> Fluent</p>
             </div>
             <div className="row p-2 col-12">
               <span className="h5 pr-4">Education</span>
-              <span role="button">
-                <FontAwesomeIcon icon="pencil-alt" size="lg" />
-              </span>
+              <EditIcon/>
             </div>
             <div className="row px-2 pt-2 col-12">
               <div className="col-8 pl-0">
                 <div className="row h5 col-12">Information Technology Institute</div>
               </div>
               <div className="col-4">
-                <span className="pr-4" role="button">
-                  <FontAwesomeIcon icon="pencil-alt" size="lg" />
-                </span>
-                <span role="button">
-                  <FontAwesomeIcon icon="trash-alt" size="lg" />
+                <EditIcon/>
+                <span role="button" className="ml-3">
+                  <FontAwesomeIcon icon="trash-alt" />
                 </span>
               </div>
             </div>
@@ -81,18 +79,19 @@ const FreelancerProfile = () => {
           <div className="col-12 col-lg-8 px-0 px-lg-3">
             <div className="row p-3 col-12">
               <div className="col-12 col-lg-7 p-0">
-                <p className="h5">
+                <div className="h5">
                   Frontend Web Developer
-                  <span className="pl-3" role="button">
-                    <FontAwesomeIcon icon="pencil-alt" size="lg" />
-                  </span>
-                </p>
+                  <div className="pl-3 d-inline-block" data-toggle="modal" data-target="#edit-title">
+                    <EditIcon/>
+                    {/* <EditTitleModal/> */}
+                  </div>
+                </div>
               </div>
               <div className="col-12 col-lg-5 h5 text-lg-right p-0">
-                $10.00/hr
-                <span className="pl-3" role="button">
-                  <FontAwesomeIcon icon="pencil-alt" size="lg" />
-                </span>
+                ${props.hourlyRate}.00/hr
+                <div className="pl-3 d-inline-block" data-toggle="modal" data-target="#edit-hourly-rate">
+                  <EditIcon/>
+                </div>
               </div>
             </div>
             <div className="row col-12 p-0 m-0">
@@ -100,16 +99,16 @@ const FreelancerProfile = () => {
                 lorem ipsum sadkf jiwe asdkflj ioawef aaskldjf ioasdfw lorem ipsum sadkf jiwe asdkflj ioawef aaskldjf ioasdfw lorem ipsum sadkf jiwe asdkflj ioawef aaskldjf ioasdfw lorem ipsum sadkf jiwe asdkflj ioawef aaskldjf ioasdfw.
               </div>
               <div className="col-1 p-0">
-                <span className="pl-1 pl-lg-3" role="button">
-                  <FontAwesomeIcon icon="pencil-alt" size="lg" />
-                </span>
+                <div className="pl-1 pl-lg-3 d-inline-block">
+                  <EditIcon/>
+                </div>
               </div>
             </div>
             <hr/>
             <div className="row col-12 h5">
               Portfolio
               <span className="pl-3" role="button">
-                <FontAwesomeIcon icon="plus" size="lg" />
+                <FontAwesomeIcon icon="plus" />
               </span>
             </div>
             <div className="row col-12">
@@ -123,8 +122,23 @@ const FreelancerProfile = () => {
           </div>
         </div>
       </div>
+      <UploadProfileImage {...props} />
+      <EditTitleModal {...props} />
+      <EditHourlyRate {...props} />
     </div>
   )
 }
 
-export default FreelancerProfile;
+const mapStateToProps = (state) => {
+  return {
+    hourlyRate: state.userReducer.freelancerHourlyRate
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    setFreelancerHourlyRate
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (FreelancerProfile);
