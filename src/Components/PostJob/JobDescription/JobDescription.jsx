@@ -1,13 +1,23 @@
 import "./JobDescription.css";
 
-const JobDescription = () => {
+const JobDescription = (props) => {
+  let checkDescriptionLength = (e) => {
+    props.checkJobPostDescription(e.target.value, 50);
+    props.setJobPostDescription(e.target.value);
+  }
+  let handleNextBtnClick = () => {
+    props.setJobPostProgress(3);
+  }
+  let handleBackBtnClick = () => {
+    props.setJobPostProgress(1);
+  }
   return (
     <div>
-      <div className="bg-white mb-2 mb-lg-5">
+      <div className="bg-white mb-2 mb-lg-5 rounded">
         <div className="container py-3 p-lg-3 borderBottomPrimary">
           <div className="container col p-0 px-lg-3">
             <div className="h4 mb-0">Description</div>
-            <div>Step 2 of 7</div>
+            <div>Step 2 of 6</div>
           </div>
         </div>
         <div className="container py-3 py-lg-0 p-lg-3">
@@ -25,7 +35,7 @@ const JobDescription = () => {
         <div className="container py-3 pt-lg-0">
           <div className="container col p-0 px-lg-3">
             <div className="mb-4">
-              <textarea className="col-12 py-2 largeInput" />
+              <textarea value={props.jobPostDescription} onChange={checkDescriptionLength} className="col-12 py-2 largeInput" />
               <div className="col-12 px-0 text-right primary-color">0/5000 characters (minimum 50)</div>
             </div>
             <div>
@@ -43,8 +53,12 @@ const JobDescription = () => {
         </div>
         <div className="container py-3 pt-lg-3 border-top">
           <div className="container col p-0 px-lg-3">
-            <button id="exitBtn" className="btn rounded mr-lg-4 disabled">Back</button>
-            <button  id="nextBtn" className="btn rounded">Next</button>
+            <button onClick={handleBackBtnClick} id="exitBtn" className="btn rounded mr-lg-4 disabled">Back</button>
+            {
+              props.isJobPostDescriptionValid ?
+              <button onClick={handleNextBtnClick}  id="nextBtn" className="btn rounded">Next</button> :
+              <button id="nextBtnDisabled" disabled className="btn rounded">Next</button>
+            }
           </div>
         </div>
       </div>

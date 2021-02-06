@@ -52,3 +52,10 @@ export async function checkProfileOwner (userID, profileID) {
     profileID
   }
 }
+
+export async function setFreelancerHourlyRate (hourlyRate) {
+  return {
+    type: "SET_FREELANCER_HOURLY_RATE",
+    hourlyRate
+  }
+}

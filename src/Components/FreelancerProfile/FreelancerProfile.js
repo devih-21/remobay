@@ -1,3 +1,6 @@
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { setFreelancerHourlyRate } from "../../Actions/userData";
 import "./FreelancerProfile.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UploadProfileImage from '../Modals/Upload Profile Image/UploadProfileImage.jsx';
@@ -5,7 +8,7 @@ import EditTitleModal from '../Modals/EditTitleModal/EditTitleModal.jsx';
 import EditHourlyRate from '../Modals/EditHourlyRate/EditHourlyRate';
 import EditIcon from '../FontAwesomeIcons/EditIcon/EditIcon';
 
-const FreelancerProfile = () => {
+const FreelancerProfile = (props) => {
   return (
     <div id="freelancer-profile-body" className="p-lg-4">
       <div className="container bg-white pb-5 col-12 col-lg-10 rounded">
@@ -34,7 +37,7 @@ const FreelancerProfile = () => {
             <div className="row p-2 col-12">
               <span className="h5 pr-4">View Profile</span>
               <span className="pr-3" role="button">
-                <FontAwesomeIcon icon="plus" size="lg" />
+                <FontAwesomeIcon icon="plus" />
               </span>
               <EditIcon/>
             </div>
@@ -45,7 +48,7 @@ const FreelancerProfile = () => {
             <div className="row p-2 col-12">
               <span className="h5 pr-4">Languages</span>
               <span className="pr-3" role="button">
-                <FontAwesomeIcon icon="plus" size="lg" />
+                <FontAwesomeIcon icon="plus" />
               </span>
               <EditIcon/>
             </div>
@@ -62,8 +65,8 @@ const FreelancerProfile = () => {
               </div>
               <div className="col-4">
                 <EditIcon/>
-                <span role="button">
-                  <FontAwesomeIcon icon="trash-alt" size="lg" />
+                <span role="button" className="ml-3">
+                  <FontAwesomeIcon icon="trash-alt" />
                 </span>
               </div>
             </div>
@@ -85,7 +88,7 @@ const FreelancerProfile = () => {
                 </div>
               </div>
               <div className="col-12 col-lg-5 h5 text-lg-right p-0">
-                $10.00/hr
+                ${props.hourlyRate}.00/hr
                 <div className="pl-3 d-inline-block" data-toggle="modal" data-target="#edit-hourly-rate">
                   <EditIcon/>
                 </div>
@@ -105,7 +108,7 @@ const FreelancerProfile = () => {
             <div className="row col-12 h5">
               Portfolio
               <span className="pl-3" role="button">
-                <FontAwesomeIcon icon="plus" size="lg" />
+                <FontAwesomeIcon icon="plus" />
               </span>
             </div>
             <div className="row col-12">
@@ -119,11 +122,23 @@ const FreelancerProfile = () => {
           </div>
         </div>
       </div>
-      <UploadProfileImage/>
-      <EditTitleModal/>
-      <EditHourlyRate/>
+      <UploadProfileImage {...props} />
+      <EditTitleModal {...props} />
+      <EditHourlyRate {...props} />
     </div>
   )
 }
 
-export default FreelancerProfile;
+const mapStateToProps = (state) => {
+  return {
+    hourlyRate: state.userReducer.freelancerHourlyRate
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    setFreelancerHourlyRate
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (FreelancerProfile);
