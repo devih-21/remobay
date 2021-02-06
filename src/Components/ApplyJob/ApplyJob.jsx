@@ -1,5 +1,6 @@
 import { faEllipsisH, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { event } from 'jquery';
 import React, { Component } from 'react';
 import './ApplyJob.css'
 
@@ -36,6 +37,10 @@ class Apply extends Component {
 
     handleProfile = (title)=>{
         this.setState({profile : title});
+    }
+
+    handleprice= (e) =>{
+
     }
 
     render = ()=>{
@@ -126,7 +131,7 @@ class Apply extends Component {
                                                 <p>Total amount the client will see on your proposal</p>
                                             </div>
                                             <div>
-                                                <input className="input-proposal" type="text"/>
+                                                <input className="input-proposal" type="text" onChange={()=>this.handleprice(event)}/>
                                             </div>
                                         </div>
                                         <div className="d-flex justify-content-between box-border">
