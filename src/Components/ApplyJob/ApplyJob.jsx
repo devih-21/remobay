@@ -1,8 +1,13 @@
-import { faEllipsisH, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import {  faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { event } from 'jquery';
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { postProposal } from "../../Actions/sumbitProbosal";
+import {getOneJob} from "../../Actions/jobPost"
 import './ApplyJob.css'
+import '../HomePage/HomePage.css'
+import '../hiring/homeHire/homeHiring.css'
 
 class Apply extends Component {
     constructor(){
@@ -31,17 +36,57 @@ class Apply extends Component {
                 dislike: false,
                 dislikeTitle:"",
                 budget:400.00,
-            }
+            },
+            bid : 0.00,
+            fee : 0.00,
+            recived : 0.00,
+            cover : ""
         }
     }
+
+    componentDidMount=()=>{
+        this.props.getOneJob("601b17526334d955348ecebe","601c1e9be624576144d2bf8e")
+        console.log(this.props.jobDetails);
+    }
+
+    handleSubmit = ()=>{
+        console.log("props",this.props);
+        this.props.postProposal("601b17526334d955348ecebe","601c1e9be624576144d2bf8e",this.state.bid,this.state.fee,this.state.recived,this.state.cover)
+    }
+    
 
     handleProfile = (title)=>{
         this.setState({profile : title});
     }
 
-    handleprice= (e) =>{
-
+    handleCoverLetter = async(e)=>{
+        await this.setState({cover: e.target.value})
     }
+
+    handleprice= (e) =>{
+            const re = /^[0-9\b]+$/;
+            if (e.target.value === '' || re.test(e.target.value)) {
+               this.setState({bid: e.target.value})
+            console.log(e.target.value);
+            }
+            let fee = e.target.value * 0.2 
+            this.setState({fee})
+            let recived = e.target.value * 0.8
+            this.setState({recived})
+    }
+
+    handleRecived= async(e) =>{
+        const re = /^[0-9\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+           this.setState({recived: e.target.value})
+        console.log(e.target.value);
+        let bid = e.target.value / 0.8
+        await this.setState({bid})
+        console.log(this.state.bid);
+        let fee = this.state.bid - e.target.value
+        this.setState({fee})
+        }
+}
 
     render = ()=>{
         return(
@@ -131,7 +176,7 @@ class Apply extends Component {
                                                 <p>Total amount the client will see on your proposal</p>
                                             </div>
                                             <div>
-                                                <input className="input-proposal" type="text" onChange={()=>this.handleprice(event)}/>
+                                                <input className="input-proposal" type="text" onChange={this.handleprice} value={this.state.bid}/>
                                             </div>
                                         </div>
                                         <div className="d-flex justify-content-between box-border">
@@ -139,7 +184,7 @@ class Apply extends Component {
                                                 <p className="font-weight-bold mb-1">Upwork Service Fee</p>
                                             </div>
                                             <div>
-                                                <p>380.00</p>
+                                                <p>{this.state.fee}</p>
                                             </div>
                                         </div>
                                         <div className="d-flex justify-content-between box-border">
@@ -148,7 +193,7 @@ class Apply extends Component {
                                                 <p>The estimated amount you'll receive after service fees</p>
                                             </div>
                                             <div>
-                                                <input className="input-proposal" type="text"/>
+                                                <input className="input-proposal" type="text" onChange={this.handleRecived} value={this.state.recived}/>
                                             </div>
                                         </div>
                                     </div>
@@ -178,7 +223,7 @@ class Apply extends Component {
                             <div className="posting-hire-home question-boarder ">
                                 <div>
                                         <p className="font-weight-bold">Cover Letter</p>
-                                        <textarea name="" id="" cols="120" rows="10"></textarea>
+                                        <textarea name="" id="" cols="120" rows="10" onChange={this.handleCoverLetter}></textarea>
                                 </div>
                                 <div>
                                         <p className="font-weight-bold">Attachments</p>
@@ -189,7 +234,7 @@ class Apply extends Component {
                             
                             </div> 
                             <div className="posting-hire-home question-boarder footer-proposal-page">
-                                <button className="submit">Submit a Proposal</button>
+                                <button className="submit" onClick={this.handleSubmit}>Submit a Proposal</button>
                                 <button className="cancel">Cancel</button>
                             </div>
 
@@ -204,4 +249,17 @@ class Apply extends Component {
     }
 }
 
-export default Apply ;
+const mapStateToProps = (state) => {
+    console.log("hhhhhhhh", state);
+    return {
+        jobDetails : state.jobPostReducer.jobDetails
+    }
+  }
+  
+ const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        postProposal,
+        getOneJob
+    }, dispatch)
+  }
+export default connect(mapStateToProps, mapDispatchToProps) (Apply) ;

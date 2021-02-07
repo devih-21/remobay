@@ -11,6 +11,8 @@ import Signin from "./Components/signin/components/signin";
 import Signup from "./Components/signup/components/signup";
 import { checkLoggingStatus } from "./Actions/userData";
 import { getOneJob } from "./Actions/jobPost";
+import Apply from './Components/ApplyJob/ApplyJob';
+
 
 
 
@@ -24,7 +26,7 @@ class App extends React.Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Apply} />
           <Route path="/profile/freelancer/:id" component={FreelancerProfilePage} />
           <Route path="/job-post/job-title" component={JobPostPage} />
           <Route path="/signin" component={Signin} />
