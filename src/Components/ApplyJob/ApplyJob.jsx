@@ -46,7 +46,7 @@ class Apply extends Component {
 
     componentDidMount=()=>{
         this.props.getOneJob("601b17526334d955348ecebe","601c1e9be624576144d2bf8e")
-        console.log(this.props.jobDetails);
+        console.log("data",this.props.jobDetails);
     }
 
     handleSubmit = ()=>{
