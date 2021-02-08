@@ -10,6 +10,8 @@ import JobPostPage from './Components/PostJob/JobPostPage/jobPostPage';
 import Signin from "./Components/signin/components/signin";
 import Signup from "./Components/signup/components/signup";
 import { checkLoggingStatus } from "./Actions/userData";
+import  jobpage from "./Components/JobDetails/jobpage";
+
 
 
 
@@ -26,6 +28,8 @@ class App extends React.Component {
           <Route path="/job-post/job-title" component={JobPostPage} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
+          <Route path="/job/:id" component={jobpage} />
+
         </Switch>
       </div>
     );
