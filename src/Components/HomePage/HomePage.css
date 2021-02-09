@@ -86,11 +86,15 @@
     color: #656565;
 }
 .Home-posts{
+    cursor: pointer;
     border: 1px #E0E0E0 solid;
     border-top: 0px;
     background-color: white;
     padding: 4vh 2vw;
     width: 99%;
+}
+.Home-posts:hover .title-container{
+    color: #37a000;
 }
 .title-container{
     display: flex;
