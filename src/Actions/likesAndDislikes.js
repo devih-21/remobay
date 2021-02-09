@@ -1,38 +1,65 @@
 import baseURL from "./baseURL";
 import axios from "axios";
-export async function getAllJobs(userId) {
+export async function likeJobPost(userId, jobId) {
   let payload;
   let data = {
     userId: userId,
+    jobId: jobId,
   };
   try {
     let response = await axios
-      .post(`${baseURL}/api/job/getalljobs`, data)
+      .post(`${baseURL}/api/job/like`, data)
       .then((response) => {
         if (response.data.length > 0) {
           payload = response.data;
         } else {
           payload = null;
         }
-        console.log(payload)
       });
+    console.log(payload);
   } catch (err) {
     console.log(err);
   }
   return {
-    type: "GET_ALL_JOBS",
+    type: "LIKE_JOB_POST",
     payload,
   };
 }
-export async function getOneJob(jobId, userId) {
-  const data = {
+export async function dislikeJobPost(userId, jobId, reason) {
+  let payload;
+  let data = {
+    userId: userId,
+    jobId: jobId,
+    reason: reason,
+  };
+  try {
+    let response = await axios
+      .post(`${baseURL}/api/job/dislike`, data)
+      .then((response) => {
+        if (response.data.length > 0) {
+          payload = response.data;
+        } else {
+          payload = null;
+        }
+      });
+    console.log(payload);
+  } catch (err) {
+    console.log(err);
+  }
+  return {
+    type: "DISLIKE_JOB_POST",
+    payload,
+  };
+}
+export async function unlikeJobPost(userId, jobId) {
+  let payload;
+  let data = {
     userId: userId,
     jobId: jobId,
   };
-  let payload;
   try {
     let response = await axios
-      .post(`${baseURL}/api/job/getonejob`, data)
+      .post(`${baseURL}/api/job/unlike`, data)
       .then((response) => {
         if (response.data.length > 0) {
           payload = response.data;
@@ -45,19 +72,19 @@ export async function getOneJob(jobId, userId) {
     console.log(err);
   }
   return {
-    type: "GET_A_JOB",
+    type: "UNLIKE_JOB_POST",
     payload,
   };
 }
-export async function getClientJobs(jobId, userId) {
-  const data = {
+export async function undislikeJobPost(userId, jobId) {
+  let payload;
+  let data = {
     userId: userId,
-    jobId: jobId,
+    jobId: jobId
   };
-  let payload;
   try {
     let response = await axios
-      .get(`${baseURL}/api/job/getclientjobs`)
+      .post(`${baseURL}/api/job/undislike`, data)
       .then((response) => {
         if (response.data.length > 0) {
           payload = response.data;
@@ -70,37 +97,7 @@ export async function getClientJobs(jobId, userId) {
     console.log(err);
   }
   return {
-    type: "GET_CLIENT_JOBS",
-    payload,
-  };
-}
-
-export async function getClientJobData(clientId) {
-  const data = {
-    clientId: clientId,
-  };
-  let payload;
-  try {
-    let response = await axios
-      .post(`${baseURL}/api/job/getclientjobdata`,data)
-      .then((response) => {
-        if(response){
-          console.log(response)
-        }
-        if (response.data) {
-          payload = response.data;
-          console.log(response.data)
-        } else {
-          payload = null;
-        }
-      });
-    console.log(payload);
-    console.log(data.clientId)
-  } catch (err) {
-    console.log(err);
-  }
-  return {
-    type: "GET_CLIENT_JOB_DATA",
+    type: "UNDISLIKE_JOB_POST",
     payload,
   };
 }

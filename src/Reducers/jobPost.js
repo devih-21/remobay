@@ -1,5 +1,3 @@
-
-
 export function jobPostReducer (state = {}, action) {
   switch (action.type) {
     case "SAVE_JOB": {

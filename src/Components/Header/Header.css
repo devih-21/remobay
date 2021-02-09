@@ -3,7 +3,8 @@
 
 #searchBar {
   background-color: #245267;
-  padding-left: 1.2em; }
+  padding-left: 1.2em;
+  border: none; }
   #searchBar::placeholder {
     color: white; }
   #searchBar:focus {

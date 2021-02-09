@@ -4,6 +4,7 @@ export function userReducer (state = {}, action) {
       return {...state, profile: action.payload};
     }
     case "LOGIN": {
+      console.log(action.payload)
       return {...state, userID: action.payload.user._id, userData: action.payload}
     }
     case "CHECK_LOGGING_STATUS": {
