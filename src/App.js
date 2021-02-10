@@ -10,7 +10,9 @@ import JobPostPage from './Components/PostJob/JobPostPage/jobPostPage';
 import FreelancerJobsPage from './Components/FreelancerJobsPage/FreelancerJobsPage.jsx';
 import Signin from "./Components/signin/components/signin";
 import Signup from "./Components/signup/components/signup";
+import ErrorComponent from './Components/Error/Error';
 import { checkLoggingStatus } from "./Actions/userData";
+import  jobpage from "./Components/JobDetails/jobpage";
 import { getOneJob } from "./Actions/jobPost";
 
 
@@ -31,11 +33,14 @@ class App extends React.Component {
       <div>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/home" component={Home} />
           <Route path="/profile/freelancer/:id" component={FreelancerProfilePage} />
           <Route path="/job-post" component={JobPostPage} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
           <Route path="/freelancer/myjobs" component={FreelancerJobsPage} />
+          <Route path="/job/:id" component={jobpage} />
+          <Route path="*" component={ErrorComponent} />
         </Switch>
       </div>
     );

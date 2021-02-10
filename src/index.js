@@ -17,7 +17,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 const createStoreWithMW = applyMiddleware(promiseMW)(createStore);
 
-
 ReactDOM.render(
   <Provider store={createStoreWithMW(reducers)} >
     <Router>
