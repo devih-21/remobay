@@ -1,7 +1,13 @@
 import './EditHourlyRate.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const EditHourlyRate = () => {
+const EditHourlyRate = (props) => {
+
+  let handleSaveBtnClick = () => {
+    let getHourlyRateValue = document.getElementById("editHourlyRate").value;
+    props.setFreelancerHourlyRate(getHourlyRateValue);
+  }
+
   return (
     <div>
       
@@ -19,7 +25,7 @@ const EditHourlyRate = () => {
               <div className="col-12 py-3">
                 Please note that your new hourly rate will only apply to new contracts. The Upwork Service Fee is 20% when you begin a contract with a new client. Once you bill over $500 with your client, the fee will be 10%.
               </div>
-              <div className="col-12 mb-3">Your profile rate: <strong>$10/hr</strong></div>
+              <div className="col-12 mb-3">Your profile rate: <strong>${props.hourlyRate}/hr</strong></div>
               <div className="col-10 d-flex justify-content-between flex-wrap">
                 <div className="col-12 col-lg-6 px-0">
                   <strong className="col-12 px-0">Hourly Rate</strong>
@@ -27,7 +33,7 @@ const EditHourlyRate = () => {
                 </div>
                 <div className="px-0">
                   <div className="col-10 px-0 d-flex">
-                    <input className="mt-2 text-right py-1 rounded pr-2 editTitleInput" />
+                    <input id="editHourlyRate" className="mt-2 text-right py-1 rounded pr-2 editTitleInput" />
                     <div className="positionDollarSign">
                       <FontAwesomeIcon icon="dollar-sign"/>
                     </div>
@@ -38,7 +44,7 @@ const EditHourlyRate = () => {
             </div>
             <div className="modal-footer">
               <button id="exitHourlyRateModal" type="button" className="btn" data-dismiss="modal">Cancel</button>
-              <button id="editHourlyRateModal" type="button" className="btn px-4">Save</button>
+              <button onClick={handleSaveBtnClick} id="editHourlyRateModal" data-dismiss="modal" type="button" className="btn px-4">Save</button>
             </div>
           </div>
         </div>

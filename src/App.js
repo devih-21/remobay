@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import {  connect } from 'react-redux';
-import { Switch, Route, withRouter} from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect} from 'react-router-dom';
 import './Components/FontAwesomeIcons/index';
 import './App.css';
 import FreelancerProfilePage from './Components/FreelancerProfilePage/FreelancerProfilePage';
@@ -12,12 +12,16 @@ import Signup from "./Components/signup/components/signup";
 import ErrorComponent from './Components/Error/Error';
 import { checkLoggingStatus } from "./Actions/userData";
 import  jobpage from "./Components/JobDetails/jobpage";
+import { getOneJob } from "./Actions/jobPost";
+
 
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.checkLoggingStatus(localStorage.getItem('token'))
+    this.props.checkLoggingStatus(localStorage.getItem('token'));
+    // this.props.getOneJob();
   }
+
   render() {
     return (
       <div>
@@ -37,7 +41,7 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({checkLoggingStatus}, dispatch);
+  return bindActionCreators({checkLoggingStatus, getOneJob}, dispatch);
 }
 
 export default withRouter(connect(null, mapDispatchToProps) (App));

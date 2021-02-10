@@ -25,6 +25,12 @@ export function userReducer (state = {}, action) {
       }
       return {...state, isProfileOwner: profileOwner};
     }
+
+    case "SET_FREELANCER_HOURLY_RATE": {
+      return {...state, freelancerHourlyRate: action.hourlyRate}
+    }
+
+
     default: return state;
   }
 }

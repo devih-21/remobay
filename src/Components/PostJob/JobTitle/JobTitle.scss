@@ -44,7 +44,6 @@
 }
 
 #nextBtnDisabled {
-  // border: 1px solid darken($color: $primary-color, $amount: 5%);
   background-color: darken($color: $primary-color, $amount: 5%);
   color: lighten($color: black, $amount: 50%);
   font-weight: bold;
