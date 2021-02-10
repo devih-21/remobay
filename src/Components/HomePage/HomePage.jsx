@@ -19,6 +19,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import Header from "./../Header/Header";
 import { bindActionCreators } from "redux";
@@ -96,15 +97,18 @@ class Home extends Component {
       likeState:false,
       dislikeState:false,
       thumbDown: "faThumbsUp",
-      
+      myFlaaaaag: "true"
     };
   }
   componentDidMount = () => {
     this.props.getAllJobs(localStorage.getItem("id"));
   };
+  componentDidUpdate = () => {
+    this.props.getAllJobs(localStorage.getItem("id"));
+  }
   handleNoReactions = (job) => {
     let likeState = false;
-    let myHeart;
+    let dislikeState = false;
     return (
       <div className="title-icons-posts">
         <div className="dropdown">
@@ -114,121 +118,152 @@ class Home extends Component {
             data-toggle="dropdown"
             aria-expanded="false"
           >
-            <FontAwesomeIcon icon={faThumbsUp} className="text-primary"/>
+            {(() => {
+            let myThumb;
+            if(dislikeState){
+              myThumb = fullThumbsUp;
+            }
+            else{
+              myThumb = faThumbsUp;
+            }
+            return (
+              <FontAwesomeIcon icon={myThumb} className="text-primary"/>
+              )
+          })()}
           </div>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Just not interested");
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Just not interested
               </Link>
             </li>
             <li>
-              <Link className="dropdown-item" to='/' onClick={() => {
+              <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Vague Description");
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Vague Description
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Unrealistic Expectations")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Unrealistic Expectations
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Too Many Applications")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Too Many Applications
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Job posted too long ago")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Job posted too long ago
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Doesn't Match Skills")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Doesn't Match Skills
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"I am overqualified")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 I am overqualified
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Budget too low")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Budget too low
               </Link>
             </li>
           </ul>
         </div>
-        <div className="title-faHeart" onClick={()=>{
-          if(likeState){
-            likeState = false;
-            this.props.unlikeJobPost(localStorage.getItem('id'),job._id);
-          }
-          else{
-            likeState = true;
-            this.props.likeJobPost(localStorage.getItem('id'),job._id);
-            this.props.undislikeJobPost(localStorage.getItem('id'),job._id);
-            if(likeState){
-              myHeart = fullHeart; 
-            }
-            else{
-              myHeart = faHeart;
-            }
-          }
-        }}>
-          {(() =>{
-            console.log(likeState)
+        {(() => {
+            let myHeart;
             if(likeState){
               myHeart = fullHeart;
             }
             else{
               myHeart = faHeart;
             }
-              return(
-                <div>
-                  <FontAwesomeIcon icon={myHeart} className="text-danger"/>
-                </div>
-              )
+            return (
+              <div>
+                <Link to='/home' className="title-faHeart" onClick={()=>{
+                  if(likeState){
+                    likeState = false;
+                    this.props.unlikeJobPost(localStorage.getItem('id'),job._id);
+                  }
+                  else{
+                    likeState = true;
+                    if(dislikeState){
+                      dislikeState = false;
+                    }
+                    this.props.likeJobPost(localStorage.getItem('id'),job._id);
+                    this.props.undislikeJobPost(localStorage.getItem('id'),job._id);
+                  }
+                  if(likeState){
+                    myHeart = fullHeart; 
+                  }
+                  else{
+                    myHeart = faHeart;
+                  }
+                  this.setState({myFlaaaaag: likeState});
+                }}>
+                  <FontAwesomeIcon  icon={myHeart} className="text-danger heeeeeeart"/>
+                </Link>
+              </div>
+            )
           })()}
-        </div>
       </div>
     );
   };
   handleLikeState = (job) => {
-    let myHeart;
     let likeState =  true;
+    let dislikeState = false;
       return (
         <div className="title-icons-posts">
         <div className="dropdown">
@@ -238,77 +273,104 @@ class Home extends Component {
             data-toggle="dropdown"
             aria-expanded="false"
           >
-            <FontAwesomeIcon icon={faThumbsUp} className="text-primary"/>
+            {(() => {
+            let myThumb;
+            if(dislikeState){
+              myThumb = fullThumbsUp;
+            }
+            else{
+              myThumb = faThumbsUp;
+            }
+            return (
+              <FontAwesomeIcon icon={myThumb} className="text-primary"/>
+              )
+              })()}
           </div>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Just not interested");
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Just not interested
               </Link>
             </li>
             <li>
-              <Link className="dropdown-item" to='/' onClick={() => {
+              <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Vague Description");
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Vague Description
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Unrealistic Expectations")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Unrealistic Expectations
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Too Many Applications")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Too Many Applications
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Job posted too long ago")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Job posted too long ago
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Doesn't Match Skills")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Doesn't Match Skills
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"I am overqualified")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 I am overqualified
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Budget too low")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Budget too low
               </Link>
@@ -325,26 +387,29 @@ class Home extends Component {
             }
             return (
               <div>
-                <div className="title-faHeart" onClick={()=>{
+                <Link to='/home' className="title-faHeart" onClick={()=>{
                   if(likeState){
                     likeState = false;
                     this.props.unlikeJobPost(localStorage.getItem('id'),job._id);
                   }
                   else{
                     likeState = true;
+                    if(dislikeState){
+                      dislikeState = false;
+                    }
                     this.props.likeJobPost(localStorage.getItem('id'),job._id);
                     this.props.undislikeJobPost(localStorage.getItem('id'),job._id);
                   }
                   if(likeState){
                     myHeart = fullHeart; 
-                    console.log("myheart",myHeart);
                   }
                   else{
                     myHeart = faHeart;
                   }
+                  this.setState({myFlaaaaag: likeState});
                 }}>
                   <FontAwesomeIcon icon={myHeart} className="text-danger"/>
-                </div>
+                </Link>
               </div>
             )
           })()}
@@ -353,7 +418,7 @@ class Home extends Component {
   }
   handleDislikeState = (job) => {
     let likeState = false;
-    let myHeart
+    let dislikeState = true;
       return (
         <div className="title-icons-posts">
         <div className="dislike-reason">{job.reason}</div>
@@ -363,77 +428,104 @@ class Home extends Component {
             id="dropdownMenuButton"
             data-toggle="dropdown"
             aria-expanded="false">
-            <FontAwesomeIcon icon={fullThumbsUp} className="text-primary"/>
+            {(() => {
+            let myThumb;
+            if(dislikeState){
+              myThumb = fullThumbsUp;
+            }
+            else{
+              myThumb = faThumbsUp;
+            }
+            return (
+              <FontAwesomeIcon icon={myThumb} className="text-primary"/>
+              )
+          })()}
           </div>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Just not interested");
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Just not interested
               </Link>
             </li>
             <li>
-              <Link className="dropdown-item" to='/' onClick={() => {
+              <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Vague Description");
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Vague Description
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Unrealistic Expectations")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Unrealistic Expectations
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Too Many Applications")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Too Many Applications
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Job posted too long ago")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Job posted too long ago
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Doesn't Match Skills")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Doesn't Match Skills
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"I am overqualified")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 I am overqualified
               </Link>
             </li>
             <li>
-            <Link className="dropdown-item" to='/' onClick={() => {
+            <Link className="dropdown-item" to='/home' onClick={() => {
                 this.props.dislikeJobPost(localStorage.getItem('id'), job._id,"Budget too low")
                 this.props.unlikeJobPost(localStorage.getItem('id'), job._id);
                 likeState = false;
+                dislikeState = true;
+                this.setState({myFlaaaaag: likeState});
               }}>
                 Budget too low
               </Link>
@@ -450,26 +542,28 @@ class Home extends Component {
             }
             return (
               <div>
-                <div className="title-faHeart" onClick={()=>{
+                <Link to='/home' className="title-faHeart" onClick={()=>{
                   if(likeState){
                     likeState = false;
                     this.props.unlikeJobPost(localStorage.getItem('id'),job._id);
                   }
                   else{
                     likeState = true;
+                    if(dislikeState){
+                      dislikeState = false;
+                    }
                     this.props.likeJobPost(localStorage.getItem('id'),job._id);
                     this.props.undislikeJobPost(localStorage.getItem('id'),job._id);
                   }
                   if(likeState){
                     myHeart = fullHeart; 
-                    console.log("myheart",myHeart);
                   }
                   else{
                     myHeart = faHeart;
                   }
                 }}>
                   <FontAwesomeIcon icon={myHeart} className="text-danger"/>
-                </div>
+                </Link>
               </div>
             )
           })()}
@@ -477,7 +571,6 @@ class Home extends Component {
       )
   }
   handleReactions = (job) => {
-      console.log(job.status)
       if (job.status === 0) {
         return (
             <div>
@@ -499,86 +592,88 @@ class Home extends Component {
       }
   };
   getJobs = () => {
-    console.log(this.props)
     if (this.props.getJobs) {
       let data = [];
       if (this.props.getJobs.length > 0) {
-        console.log(this.props.getJobs);
           this.props.getJobs.map((job) => {
             if(job.postStatus === 1){
-            data.push(
-              <Link to={`/jobs/${job._id}`}>
+            data.push(             
               <div className="Home-posts" key={job._id}>
-                <div className="title-container">
-                  <p>{job.postName}</p>
-                  {this.handleReactions(job)}
+                <div className="reaction-section float-right">
+                    {this.handleReactions(job)}
                 </div>
-                <div className="Home-posts-status">
-                  <p>
-                    <span className="bold grey">{job.category}</span> -
-                    {job.experienceLevel}
-                  </p>
-                </div>
-                <div className="Home-posts-description">
-                  <p>{job.description}</p>
-                </div>
-                <div className="Home-posts-tags">
-                  {job.skills.map((skill) => {
-                    return (
-                      <div className="Home-posts-tag">
-                        <p>{skill}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="Home-posts-proposals">
-                  <p>
-                    Proposals:
-                    <span className="bold grey mx-2">{job.proposals.length}</span>
-                  </p>
-                </div>
-                <div className="Home-posts-proposals d-inline mx-4">
-                  <p>
-                    number of freelancers needed:
-                    <span className="bold grey mx-2">{job.freelancersNo}</span>
-                  </p>
-                </div>
-                <div className="Home-posts-footer">
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    className="faCheckCircle-footer mb-2"
-                  />
-                  <p className="payment mb-2">Payment verified</p>
-                  <div className="allstars mb-2">
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      className="star-footer text-warning"
-                    />
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      className="star-footer text-warning"
-                    />
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      className="star-footer text-warning"
-                    />
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      className="star-footer text-warning"
-                    />
-                    <FontAwesomeIcon
-                      icon={faStar}
-                      className="star-footer text-warning"
-                    />
+                <Link to={`/job/${job._id}`}>
+                  <div className="title-container color-black">
+                    <p>{job.postName}</p>
                   </div>
-                  <FontAwesomeIcon
-                    icon={faMapMarkerAlt}
-                    className="location mb-2"
-                  />
-                  <p className="payment mb-2">{job.clientCountry}</p>
-                </div>
+                  <div className="Home-posts-status">
+                    <p>
+                      <span className="bold grey">{job.category}</span> -
+                      {job.experienceLevel}
+                    </p>
+                  </div>
+                  <div className="Home-posts-description">
+                    <p className="color-black">{job.description}</p>
+                  </div>
+                  <div className="Home-posts-tags">
+                    {job.skills.map((skill) => {
+                      return (
+                        <div className="Home-posts-tag">
+                          <p className="skill-color">{skill}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                 <div className="d-flex justify-content-start">
+                 <div className="Home-posts-proposals d-inline mx-3">
+                    <p className="text-muted">
+                      Proposals:
+                      <span className="bold color-black mx-2">{job.proposals.length}</span>
+                    </p>
+                  </div>
+                  <div className="Home-posts-proposals d-inline mx-3">
+                    <p className="text-muted">
+                      number of freelancers needed:
+                      <span className="bold color-black mx-2">{job.freelancersNo}</span>
+                    </p>
+                  </div>
+                 </div>
+                  <div className="Home-posts-footer">
+                    <FontAwesomeIcon
+                      icon={faCheckCircle}
+                      className="faCheckCircle-footer mb-2"
+                    />
+                    <p className="payment mb-2 color-black">Payment verified</p>
+                    <div className="allstars mb-2">
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="star-footer text-warning"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="star-footer text-warning"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="star-footer text-warning"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="star-footer text-warning"
+                      />
+                      <FontAwesomeIcon
+                        icon={faStar}
+                        className="star-footer text-warning"
+                      />
+                    </div>
+                    <FontAwesomeIcon
+                      icon={faMapMarkerAlt}
+                      className="location mb-2"
+                    />
+                    <p className="payment mb-2 color-black">{job.clientCountry}</p>
+                  </div>
+                </Link>
               </div>
-              </Link>
             );
           }
         });
@@ -779,7 +874,6 @@ const mapDispatchToProps = (dispatch) => {
       likeJobPost,
       unlikeJobPost,
       dislikeJobPost,
-      unlikeJobPost,
       undislikeJobPost,
     },
     dispatch

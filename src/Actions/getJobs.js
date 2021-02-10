@@ -14,7 +14,6 @@ export async function getAllJobs(userId) {
         } else {
           payload = null;
         }
-        console.log(payload)
       });
   } catch (err) {
     console.log(err);

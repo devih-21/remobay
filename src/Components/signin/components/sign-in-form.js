@@ -53,7 +53,7 @@ class SigninForm extends Component {
 
   render() {
     if(this.props.checkLoggingStatus(localStorage.getItem('token'))){
-      this.props.history.push(`/home/${localStorage.getItem('id')}`);
+      this.props.history.push(`/home`);
     }
     
     return (

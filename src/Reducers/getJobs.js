@@ -1,7 +1,6 @@
 export function getJobsReducer(state = {}, action) {
   switch (action.type) {
     case "GET_ALL_JOBS": {
-      console.log(action.payload)
       return { ...state, getJobs: action.payload };
     }
     case "GET_A_JOB": {

@@ -92,10 +92,27 @@
     background-color: white;
     padding: 4vh 2vw;
     width: 99%;
+    transition: all 1;
 }
-.Home-posts:hover .title-container{
-    color: #37a000;
+.Home-posts:hover{
+    background-color: #f9f9f9;
 }
+.Home-posts:hover .title-container p{
+    color: #37a000; 
+}
+.Home-posts:hover a {
+    text-decoration: none;
+}
+.reaction-section{
+    z-index: 50;
+}
+.color-black{
+    color: #000000!important;
+}
+.skill-color{
+    color: #1d4354;
+}
+
 .title-container{
     display: flex;
     justify-content: space-between;
@@ -116,9 +133,13 @@
     border: 1px solid #9c9c9c;
     border-radius: 50%;
     padding: 10px 12px;
-    margin: 0px 15px;
+    margin: -10px 15px;
     cursor: pointer;
 
+}
+
+.class-display-none{
+    display: none;
 }
 .title-icons-posts .title-faThumbsDown svg{
     color: #4e4e4e;
