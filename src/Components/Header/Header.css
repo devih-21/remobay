@@ -53,4 +53,12 @@
 #find-work ul {
   position: absolute;
 }
+
+.navbar-icon {
+  font-size: 1.3em;
+}
+
+.dropdown-menu-items:focus {
+  background-color: #37a000 !important;
+}
 /*# sourceMappingURL=Header.css.map */

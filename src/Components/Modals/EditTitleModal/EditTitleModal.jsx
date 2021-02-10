@@ -1,6 +1,13 @@
 import "./EditTitleModal.scss";
 
-const EditTitleModal = () => {
+const EditTitleModal = (props) => {
+
+  let handleSaveChangesBtn = () => {
+    let freelancerTitle = document.getElementById("freelancerTitleInput").value;
+    props.editProfileJobTitle(localStorage.getItem('token'), freelancerTitle);
+    // props.setFreelancerTitle(freelancerTitle);
+  }
+
   return (
     <div>
       
@@ -15,17 +22,17 @@ const EditTitleModal = () => {
               </button>
             </div>
             <div className="modal-body ml-3">
-              <div className="modalSmallTitle">Your title</div>
+              <div className="modalSmallTitle">{props.profileTitle}</div>
               <div className="modalSmallText mb-3">
                 Enter a single sentence description of your professional skills/experience (e.g. Expert Web Designer with Ajax experience)
               </div>
               <div>
-                <input className="col-12 rounded py-1 editTitleInput" />
+                <input id="freelancerTitleInput" className="col-12 rounded py-1 editTitleInput" />
               </div>
             </div>
             <div className="modal-footer">
               <button id="editTitleExitButton" type="button" className="btn" data-dismiss="modal">Cancel</button>
-              <button id="editTitleSucessButton" type="button" className="btn">Save changes</button>
+              <button onClick={handleSaveChangesBtn} data-dismiss="modal" id="editTitleSucessButton" type="button" className="btn">Save changes</button>
             </div>
           </div>
         </div>

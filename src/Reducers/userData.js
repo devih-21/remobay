@@ -3,8 +3,17 @@ export function userReducer (state = {}, action) {
     case "PROFILE_DATA": {
       return {...state, profile: action.payload};
     }
+
+    case "EDIT_HOURLY_RATE": {
+      return {...state, hourlyRate: action.payload}
+    }
+
     case "LOGIN": {
-      return {...state, userID: action.payload.user._id, userData: action.payload}
+      if (action.payload) {
+        return {...state, userID: action.payload.user._id, userData: action.payload}
+      } else {
+        return {...state}
+      }
     }
     case "CHECK_LOGGING_STATUS": {
       if (action.token) {
@@ -27,6 +36,39 @@ export function userReducer (state = {}, action) {
 
     case "SET_FREELANCER_HOURLY_RATE": {
       return {...state, freelancerHourlyRate: action.hourlyRate}
+    }
+
+    case "SET_FREELANCER_TITLE": {
+      return {...state, freelancerTitle: action.title}
+    }
+
+    case "SET_PROFILE_PIC": {
+      return {...state, profilePicture: action.pic}
+    }
+
+    case "GET_USER_JOBS": {
+      return {...state, userJobs: action.payload}
+    }
+
+    case "EDIT_PROFILE_PRICE": {
+      return {...state, profileHourlyRate: action.payload.price}
+    }
+
+    case "EDIT_PROFILE_JOB_TITLE": {
+      return {...state, profileTitle: action.payload.jobtitle}
+    }
+
+    case "GET_PROFILE_INFO": {
+      return {
+        ...state,
+        profileInfo: action.payload,
+        profileHourlyRate: action.payload.price || 0,
+        profileTitle: action.payload.jobtitle || "Add your job title"
+      }
+    }
+
+    case "GET_REGISTRATION_INFO": {
+      return {...state, registrationInfo: action.payload || {}}
     }
 
 

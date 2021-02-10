@@ -7,6 +7,7 @@ import './App.css';
 import FreelancerProfilePage from './Components/FreelancerProfilePage/FreelancerProfilePage';
 import Home from './Components/HomePage/HomePage';
 import JobPostPage from './Components/PostJob/JobPostPage/jobPostPage';
+import FreelancerJobsPage from './Components/FreelancerJobsPage/FreelancerJobsPage.jsx';
 import Signin from "./Components/signin/components/signin";
 import Signup from "./Components/signup/components/signup";
 import { checkLoggingStatus } from "./Actions/userData";
@@ -16,7 +17,12 @@ import { getOneJob } from "./Actions/jobPost";
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.checkLoggingStatus(localStorage.getItem('token'));
+    if (this.props.history.location.pathname !== "/signup") {
+      if (!localStorage.getItem('token')) {
+        this.props.history.push("/signin");
+      }
+    }
+    console.log(this.props.history.location.pathname);
     // this.props.getOneJob();
   }
 
@@ -26,9 +32,10 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/profile/freelancer/:id" component={FreelancerProfilePage} />
-          <Route path="/job-post/job-title" component={JobPostPage} />
+          <Route path="/job-post" component={JobPostPage} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
+          <Route path="/freelancer/myjobs" component={FreelancerJobsPage} />
         </Switch>
       </div>
     );

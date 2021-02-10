@@ -41,3 +41,13 @@
     position: absolute;
   }
 }
+
+.navbar-icon {
+  font-size: 1.3em;
+}
+
+.dropdown-menu-items {
+  &:focus {
+    background-color: $tertiary-color !important;
+  }
+}

@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { setFreelancerHourlyRate } from "../../Actions/userData";
+import { setFreelancerHourlyRate, setFreelancerTitle, createProfileDetails, editProfileDescription, editProfilePrice, editProfileJobTitle, editProfileEducation, editProfileLanguage, getProfileInfo, getRegistrationInfo } from "../../Actions/userData";
 import "./FreelancerProfile.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UploadProfileImage from '../Modals/Upload Profile Image/UploadProfileImage.jsx';
@@ -9,6 +10,15 @@ import EditHourlyRate from '../Modals/EditHourlyRate/EditHourlyRate';
 import EditIcon from '../FontAwesomeIcons/EditIcon/EditIcon';
 
 const FreelancerProfile = (props) => {
+
+  useEffect(() => {
+    props.getRegistrationInfo(localStorage.getItem('token'));
+    props.getProfileInfo(localStorage.getItem('token'));
+    if (!props.profileInfo) {
+      props.createProfileDetails(localStorage.getItem('token'));
+    }
+  }, [])
+
   return (
     <div id="freelancer-profile-body" className="p-lg-4">
       <div className="container bg-white pb-5 col-12 col-lg-10 rounded">
@@ -23,11 +33,11 @@ const FreelancerProfile = (props) => {
             </div>
           </div>
           <div className="col-9 col-lg-11 p-0 d-flex mt-4 flex-wrap">
-            <div className="col-12 col-lg-6 h4 mb-0">User Name</div>
+            <div className="col-12 col-lg-6 h4 mb-0">{props.registrationInfo ? props.registrationInfo.firstName : ""} {props.registrationInfo ? props.registrationInfo.lastName : ""}</div>
             <div className="col-6 text-right d-none d-lg-block">
               <button id="profile-settings-btn">Profile Settings</button>
             </div>
-            <div className="col-6">Cairo, Egypt</div>
+            <div className="col-6">{props.registrationInfo ? props.registrationInfo.country : ""}</div>
           </div>
         </div>
         <hr/>
@@ -42,7 +52,7 @@ const FreelancerProfile = (props) => {
               <EditIcon/>
             </div>
             <div className="row p-2 col-12">
-              Front-End Development
+              {props.profileTitle}
             </div>
             <hr className="" />
             <div className="row p-2 col-12">
@@ -80,7 +90,7 @@ const FreelancerProfile = (props) => {
             <div className="row p-3 col-12">
               <div className="col-12 col-lg-7 p-0">
                 <div className="h5">
-                  Frontend Web Developer
+                  {props.profileTitle}
                   <div className="pl-3 d-inline-block" data-toggle="modal" data-target="#edit-title">
                     <EditIcon/>
                     {/* <EditTitleModal/> */}
@@ -88,7 +98,7 @@ const FreelancerProfile = (props) => {
                 </div>
               </div>
               <div className="col-12 col-lg-5 h5 text-lg-right p-0">
-                ${props.hourlyRate}.00/hr
+                ${props.profileHourlyRate}.00/hr
                 <div className="pl-3 d-inline-block" data-toggle="modal" data-target="#edit-hourly-rate">
                   <EditIcon/>
                 </div>
@@ -131,13 +141,27 @@ const FreelancerProfile = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    hourlyRate: state.userReducer.freelancerHourlyRate
+    hourlyRate: state.userReducer.freelancerHourlyRate,
+    freelancerTitle: state.userReducer.freelancerTitle,
+    profileInfo: state.userReducer.profileInfo,
+    profileHourlyRate: state.userReducer.profileHourlyRate,
+    profileTitle: state.userReducer.profileTitle,
+    registrationInfo: state.userReducer.registrationInfo
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    setFreelancerHourlyRate
+    setFreelancerHourlyRate,
+    setFreelancerTitle,
+    createProfileDetails,
+    editProfileDescription,
+    editProfilePrice,
+    editProfileJobTitle,
+    editProfileEducation,
+    editProfileLanguage,
+    getProfileInfo,
+    getRegistrationInfo
   }, dispatch)
 }
 

@@ -1,7 +1,9 @@
+import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./JobBudget.css";
 
 const JobBudget = (props) => {
+  let history = useHistory();
 
   let handleSubmitBtn = () => {
     let jobPost = {
@@ -18,7 +20,9 @@ const JobBudget = (props) => {
       freelancersNo: 1
     }
 
-    props.createJobPost(jobPost)
+    props.createJobPost(jobPost);
+
+    history.push("/");
   }
 
   let handleBackBtnClick = () => {

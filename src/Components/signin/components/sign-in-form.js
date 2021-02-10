@@ -10,6 +10,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class SigninForm extends Component {
+
   constructor(props) {
     super(props);
     this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -22,6 +23,7 @@ class SigninForm extends Component {
       Errflag: 1,
     };
   }
+
   onChangeEmail(e) {
     this.setState({
       email: e.target.value,
@@ -42,11 +44,8 @@ class SigninForm extends Component {
     console.log(`email: ${this.state.email}`);
     console.log(`password: ${this.state.password}`);
 
-    this.props.logIn({
-      email: "mohamedali@gmail.com",
-      password: "12345678",
-    });
-    console.log(`Hello ${this.props.userToken}`);
+    this.props.logIn(data);
+    // console.log(this.props.userToken);
 
     axios.post("http://localhost:8080/api/user/login", data).then((res) => {
       console.log("hdhdhdhdhdh");

@@ -5,7 +5,10 @@ const EditHourlyRate = (props) => {
 
   let handleSaveBtnClick = () => {
     let getHourlyRateValue = document.getElementById("editHourlyRate").value;
-    props.setFreelancerHourlyRate(getHourlyRateValue);
+    if (localStorage.getItem('token')) {
+      props.editProfilePrice(localStorage.getItem('token'), getHourlyRateValue);
+    }
+    // props.setFreelancerHourlyRate(getHourlyRateValue);
   }
 
   return (
@@ -25,7 +28,7 @@ const EditHourlyRate = (props) => {
               <div className="col-12 py-3">
                 Please note that your new hourly rate will only apply to new contracts. The Upwork Service Fee is 20% when you begin a contract with a new client. Once you bill over $500 with your client, the fee will be 10%.
               </div>
-              <div className="col-12 mb-3">Your profile rate: <strong>${props.hourlyRate}/hr</strong></div>
+              <div className="col-12 mb-3">Your profile rate: <strong>${props.profileHourlyRate}/hr</strong></div>
               <div className="col-10 d-flex justify-content-between flex-wrap">
                 <div className="col-12 col-lg-6 px-0">
                   <strong className="col-12 px-0">Hourly Rate</strong>

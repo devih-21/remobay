@@ -16,12 +16,20 @@
 
 #uploadFileInput {
   position: absolute;
+  top: 0;
+  left: 0;
   display: inline-block;
   width: 125px;
-  opacity: 0;
+  opacity: 100;
 }
 
 #confirmUploadBtn {
+  background-color: #37a000;
+  color: white;
+  font-weight: bold;
+}
+
+#attachPhotoBtn {
   background-color: #37a000;
   color: white;
   font-weight: bold;
