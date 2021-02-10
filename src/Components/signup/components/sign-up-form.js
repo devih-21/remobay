@@ -56,11 +56,10 @@ class SignupForm extends Component {
                 type: this.state.userType,
             };
             console.log(newUser);
-            axios.post('http://localhost:8080/api/user/register', newUser)
+            axios.post('http://localhost:3000/api/user/register', newUser)
                 .then(res => 
-                
-                {
-                                
+
+                {                                
                     if (res.status === 200) {
                       this.setState({ isSignedup: true }); // after signing up, set the state to true. This will trigger a re-render
                     }
@@ -104,7 +103,6 @@ class SignupForm extends Component {
         hireBtn.style.color = "#000";
         freelanceBtn.style.backgroundColor = this.state.ternarycolor;
         freelanceBtn.style.color = this.state.white;
-
         this.setState({userType:"freelancer"});
         console.log(this.state.userType);
       }

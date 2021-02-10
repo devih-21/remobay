@@ -1,26 +1,26 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { logIn } from "../../../Actions/userData";
+import { checkLoggingStatus,logIn } from "./../../../Actions/userData";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import React, { Component } from "react";
-//import validator from 'validator';
-import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class SigninForm extends Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
     this.state = {
       email: " ",
       password: "",
-      Errflag: 1,
+      isLoggedIn:false
     };
+    console.log(this.props.isLoggedIn)
   }
   onChangeEmail(e) {
     this.setState({
@@ -43,43 +43,35 @@ class SigninForm extends Component {
     console.log(`password: ${this.state.password}`);
 
     this.props.logIn({
-      email: "mohamedali@gmail.com",
-      password: "12345678",
-    });
-    console.log(`Hello ${this.props.userToken}`);
-
-    axios.post("http://localhost:8080/api/user/login", data).then((res) => {
-      console.log("hdhdhdhdhdh");
-
-      try {
-        console.log(this.state.Errflag);
-
-        this.setState({ Errflag: 0 });
-        console.log(this.state.Errflag);
-
-        console.log(res.data);
-      } catch (err) {
-        console.log("hdhdhdhdhdh");
-
-        console.log(`err: ${err}`);
-      }
-    });
+      email: this.state.email,
+      password: this.state.password,
+    })
+    if(this.props.userId){
+      this.setState({isLoggedIn: true});
+    }
   };
 
   render() {
+    if(this.props.checkLoggingStatus(localStorage.getItem('token'))){
+      this.props.history.push(`/home`);
+    }
+    
     return (
       <div className="my-4">
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <div className="alert-box error" id="error">
-                <span>error: </span>The Email or password is not available.
-              </div>
               <div className="container">
                 <div className="row d-flex justify-content-center">
                   <div className="col-7">
                     <div className="text-center bg-white mb-5 py-4 px-5 border rounded">
+                      <div className="alert-box error" id="error">
+                        
+                        <span> error: </span>The Email or password is not
+                        available.
+                      </div>
                       <h3 className="font-weight-bolder head-font my-4">
+                        
                         Log in and get to work
                       </h3>
                       <Form className="mt-4 text-dark">
@@ -99,7 +91,6 @@ class SigninForm extends Component {
                               onChange={this.onChangeEmail}
                             />
                           </div>
-
                           <div class="input mb-4">
                             <div className="msg-icon d-flex justify-content-center align-items-center">
                               <FontAwesomeIcon
@@ -122,7 +113,7 @@ class SigninForm extends Component {
                               id="exampleCheck1"
                             />
                             <label class="form-check-label" for="exampleCheck1">
-                              {" "}
+                              
                               Keep me logged in
                             </label>
                           </div>
@@ -131,23 +122,24 @@ class SigninForm extends Component {
                             target="_self"
                             href="/ab/account-security/reset-password?from=login&amp;redir=/ab/find-work/&amp;login=hebayehya1111%40gmail.com"
                           >
-                            Forgot password?
+                            
+                            Forgot password ?
                           </a>
-
                           <div className="continue-btn my-3">
                             <button
                               type="submit"
                               className="continue-button btn btn-success btn-lg btn-block"
                               onClick={this.onSubmit}
+                              href="/"
                             >
+                              
                               Log in
                             </button>
                           </div>
                         </div>
                         <div class="text-center text-dark my-3">
-                          <p className="or">or</p>
+                          <p className="or"> or </p>
                         </div>
-
                         <div className="google-btn mb-4">
                           <div className="google-icon d-flex justify-content-center align-items-center px-2 border rounded">
                             <svg
@@ -221,11 +213,15 @@ class SigninForm extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { userToken: state.userReducer.token };
+  return {
+    isLoggedIn: state.userReducer.isLoggedIn,
+    userId: state.userReducer.userID,
+    userData: state.userReducer.userData
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ logIn }, dispatch);
+  return bindActionCreators({checkLoggingStatus, logIn},dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SigninForm);

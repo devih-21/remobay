@@ -1,5 +1,3 @@
-
-
 export function jobPostReducer (state = {}, action) {
   switch (action.type) {
     case "GET_ALL_JOBS": {
