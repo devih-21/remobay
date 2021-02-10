@@ -56,7 +56,7 @@ class SignupForm extends Component {
                 type: this.state.userType,
             };
             console.log(newUser);
-            axios.post('http://localhost:3000/api/user/register', newUser)
+            axios.post('http://localhost:8080/api/user/register', newUser)
                 .then(res => 
 
                 {                                

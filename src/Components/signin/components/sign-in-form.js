@@ -54,9 +54,9 @@ class SigninForm extends Component {
   };
 
   render() {
-    if(this.props.checkLoggingStatus(localStorage.getItem('token'))){
-      this.props.history.push(`/home`);
-    }
+    // if(this.props.checkLoggingStatus(localStorage.getItem('token'))){
+    //   this.props.history.push(`/home`);
+    // }
     
     return (
       <div className="my-4">

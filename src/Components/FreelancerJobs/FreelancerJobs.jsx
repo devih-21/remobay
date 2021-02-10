@@ -16,9 +16,9 @@ const MyJobs = (props) => {
     if (props.userJobs) {
       return props.userJobs.map((job) => {
         return (
-          <div key={job._id} className="column col-12 py-3 mx-0 one-job-container">
-            <div className="h5">{job.postName}</div>
-            <div>{job.description} </div>
+          <div key={job.myjob._id} className="column col-12 py-3 mx-0 one-job-container">
+            <div className="h5">{job.myjob.postName}</div>
+            <div>{job.myjob.description}</div>
           </div>
         )
       })

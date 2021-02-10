@@ -1,24 +1,46 @@
 #header-container {
-  background-color: #1d4354; }
+  background-color: #1d4354;
+}
 
 #searchBar {
   background-color: #245267;
   padding-left: 1.2em;
-  border: none; }
-  #searchBar::placeholder {
-    color: white; }
-  #searchBar:focus {
-    outline: none;
-    color: white; }
+  border: none;
+}
+
+#searchBar::-webkit-input-placeholder {
+  color: white;
+}
+
+#searchBar:-ms-input-placeholder {
+  color: white;
+}
+
+#searchBar::-ms-input-placeholder {
+  color: white;
+}
+
+#searchBar::placeholder {
+  color: white;
+}
+
+#searchBar:focus {
+  outline: none;
+  color: white;
+}
 
 #mobile-nav-bar {
-  display: none; }
+  display: none;
+}
 
 #navbar li {
-  margin-right: 1em; }
-  #navbar li:hover {
-    cursor: pointer;
-    color: #49d300; }
+  margin-right: 1em;
+}
+
+#navbar li:hover {
+  cursor: pointer;
+  color: #49d300;
+}
 
 #find-work {
   color: #49d300;
