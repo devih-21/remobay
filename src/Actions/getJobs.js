@@ -48,15 +48,12 @@ export async function getOneJob(jobId, userId) {
     payload,
   };
 }
-export async function getClientJobs(jobId, userId) {
-  const data = {
-    userId: userId,
-    jobId: jobId,
-  };
+export async function getClientJobs(clientId) {
+
   let payload;
   try {
-    let response = await axios
-      .get(`${baseURL}/api/job/getclientjobs`)
+    await axios
+      .get(`${baseURL}/api/job/getclientjobs/${clientId}`)
       .then((response) => {
         if (response.data.length > 0) {
           payload = response.data;
