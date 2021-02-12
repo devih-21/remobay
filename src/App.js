@@ -17,8 +17,7 @@ import { getOneJob } from "./Actions/jobPost";
 import Apply from './Components/ApplyJob/ApplyJob';
 import HomeHiring from './Components/hiring/homeHire/homeHiring';
 import JobProposals from './Components/jobProposals/jobProposals';
-
-
+import ShowProposal from './Components/ShowProposal/showProposal';
 
 
 
@@ -43,6 +42,7 @@ class App extends React.Component {
           <Route path="/job-post" component={JobPostPage} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
+          <Route path="/freelancer/myjobs/:jobId" component={ShowProposal} />
           <Route path="/freelancer/myjobs" component={FreelancerJobsPage} />
           <Route path="/job/:id" component={jobpage} />
           <Route path="*" component={ErrorComponent} />

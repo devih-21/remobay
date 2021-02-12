@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getOneJob, getClientJobData } from "./../../Actions/getJobs";
+import { getOneJob } from "./../../Actions/getJobs";
 import { checkLoggingStatus, logIn } from "../../Actions/userData";
 
 class JobDetails extends Component {
@@ -316,13 +316,9 @@ const mapStateToProps = (state) => {
     isLoggedIn: state.userReducer.isLoggedIn,
     userId: state.userReducer.userID,
     getJob: state.getJobsReducer.getJob,
-    getclientdata: state.getJobsReducer.getClientJobData,
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    { checkLoggingStatus, logIn, getOneJob, getClientJobData },
-    dispatch
-  );
+  return bindActionCreators({ checkLoggingStatus, logIn, getOneJob }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(JobDetails);

@@ -6,7 +6,7 @@ export async function getAllJobs(userId) {
     userId: userId,
   };
   try {
-    let response = await axios
+    await axios
       .post(`${baseURL}/api/job/getalljobs`, data)
       .then((response) => {
         if (response.data.length > 0) {
@@ -28,9 +28,10 @@ export async function getOneJob(jobId, userId) {
     userId: userId,
     jobId: jobId,
   };
+  console.log(data)
   let payload;
   try {
-    let response = await axios
+    await axios
       .post(`${baseURL}/api/job/getonejob`, data)
       .then((response) => {
         if (response.data.length > 0) {
@@ -49,7 +50,6 @@ export async function getOneJob(jobId, userId) {
   };
 }
 export async function getClientJobs(clientId) {
-
   let payload;
   try {
     await axios
@@ -71,14 +71,15 @@ export async function getClientJobs(clientId) {
   };
 }
 
-export async function getClientJobData(clientId) {
+export async function getOneProposal(userId, jobId) {
   const data = {
-    clientId: clientId,
+    userId : userId,
+    jobId: jobId
   };
   let payload;
   try {
-    let response = await axios
-      .post(`${baseURL}/api/job/getclientjobdata`,data)
+    await axios
+      .post(`${baseURL}/api/job/getoneofmyproposals`,data)
       .then((response) => {
         if(response){
           console.log(response)
@@ -91,12 +92,72 @@ export async function getClientJobData(clientId) {
         }
       });
     console.log(payload);
-    console.log(data.clientId)
   } catch (err) {
     console.log(err);
   }
   return {
-    type: "GET_CLIENT_JOB_DATA",
+    type: "GET_ONE_PROPOSAL",
     payload,
   };
+}
+export async function receiveJob(userId, jobId, message) {
+  let payload;
+  let data = {
+    userId: userId,
+    jobId: jobId,
+    message: message
+  }
+  try {
+    await axios
+      .post(`${baseURL}/api/job/receivejob`, data)
+      .then((response) => {
+        if(response){
+          console.log(response)
+        }
+        if (response.data) {
+          payload = response.data;
+          console.log(response.data)
+        } else {
+          payload = null;
+        }
+      });
+    console.log(payload);
+  } catch (err) {
+    console.log(err);
+  }
+  return {
+    type: "RECEIVE_JOB",
+    payload,
+  };
+}
+export async function downloadJobFiles(filename) {
+  let payload;
+  try {
+    await axios
+      .get(`${baseURL}/api/job/downloadjobfiles/:${filename}`)
+      .then((response) => {
+        if(response){
+          console.log(response)
+        }
+        if (response.data) {
+          payload = response.data;
+          console.log(response.data)
+        } else {
+          payload = null;
+        }
+      });
+    console.log(payload);
+  } catch (err) {
+    console.log(err);
+  }
+  return {
+    type: "GET_ONE_PROPOSAL",
+    payload,
+  };
+}
+export async function setProposalStatus(status){
+  return {
+    type: "CHANGE_STATUS",
+    status
+  }
 }
