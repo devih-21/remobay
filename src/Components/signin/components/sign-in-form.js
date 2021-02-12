@@ -6,7 +6,10 @@ import Input from "react-validation/build/input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import baseURL from "./../../../Actions/baseURL";
+
 
 class SigninForm extends Component {
 
@@ -35,12 +38,19 @@ class SigninForm extends Component {
     });
   }
 
-  onSubmit = (e) => {
+   onSubmit = async( e) => {
     e.preventDefault();
+   
     const data = {
       email: this.state.email,
       password: this.state.password,
     };
+    let payload;
+    try{
+    let response = await axios.post(`${baseURL}/api/user/login`, data)
+    payload = response.data
+    console.log(payload);
+  
     console.log(`email: ${this.state.email}`);
     console.log(`password: ${this.state.password}`);
 
@@ -51,12 +61,26 @@ class SigninForm extends Component {
     if(this.props.userId){
       this.setState({isLoggedIn: true});
     }
+     if(payload.user.type=="freelancer"){
+       this.props.allProps.history.push(`/home`)
+     }
+    //  else{
+    //   this.props.allProps.history.push(`/clienthome`)
+
+
+
+    // }
+  }catch(err){
+ 
+    var errElement = document.getElementById("error");
+    console.log(errElement);
+    errElement.style.display = "block";
+  }
+    
   };
 
   render() {
-    // if(this.props.checkLoggingStatus(localStorage.getItem('token'))){
-    //   this.props.history.push(`/home`);
-    // }
+   
     
     return (
       <div className="my-4">
@@ -197,9 +221,11 @@ class SigninForm extends Component {
                           <p className="new">New to Upwork?</p>
                         </div>
                         <div className="form-group">
+                        <Link to ="/signup" >
                           <button className="btn btn-outline-success btn-lg btn-block login-btn">
                             Sign up
                           </button>
+                          </Link>
                         </div>
                       </Form>
                     </div>

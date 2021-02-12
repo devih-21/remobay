@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getOneJob,getClientJobData } from "./../../Actions/getJobs";
+import { getOneJob, getClientJobData } from "./../../Actions/getJobs";
 import { checkLoggingStatus, logIn } from "../../Actions/userData";
 
 class JobDetails extends Component {
-   constructor(props) {
+  constructor(props) {
     super(props);
-     
-    console.log("constrctor")
-    
+
+    console.log("constrctor");
   }
-  componentDidMount = async() => {
+  componentDidMount = async () => {
     if (!this.props.checkLoggingStatus(localStorage.getItem("token"))) {
       this.props.history.push("/signin");
     }
@@ -19,123 +18,104 @@ class JobDetails extends Component {
       this.props.allprops.match.params.id,
       localStorage.getItem("id")
     );
-    console.log("Did mount")
-  
-    
-  
-   
-   
+    console.log("Did mount");
+
     console.log(this.props);
   };
 
-  
-
-
-  
-handleExperienceLevel(){
-  if(this.props.getJob[0].experienceLevel==="Entry") {
-    return(
+  handleExperienceLevel() {
+    if (this.props.getJob[0].experienceLevel === "Entry") {
+      return (
         <div>
-    <strong className="color-black">
-    {this.props.getJob[0].experienceLevel}
+          <strong className="color-black">
+            {this.props.getJob[0].experienceLevel}
+          </strong>
 
-    </strong>
-    
-    <p className="text-muted">
-    I am looking for freelancers with the lowest rates
-    </p>
-    </div>
-);
-
-  }
-  if(this.props.getJob[0].experienceLevel==="intermediate") {
-    return(
-        <div>
-    <strong className="color-black">
-    {this.props.getJob[0].experienceLevel}
-
-    </strong>
-    
-    <p className="text-muted">
-      I am looking for a mix of experience
-      and value
-    </p>
-    </div>
-);
-
-  }
-  if(this.props.getJob[0].experienceLevel==="Expert") {
-    return(
-        <div>
-    <strong className="color-black">
-    {this.props.getJob[0].experienceLevel}
-
-    </strong>
-    
-    <p className="text-muted">
-    I am willing to pay higher rates for the most experienced freelancers
-    </p>
-    </div>
-);
-
-  }
-  else {
-    return(
-        <div>
-    <strong className="color-black">
-    {this.props.getJob[0].experienceLevel}
-
-    </strong>
-    
-    <p className="text-muted">
-    experienceLevel is not available
-    </p>
-    </div>
-);
-
-  }
-
-}
-handleSubmitbutton(){
-  if(this.props.getJob[0].postStatus===2){
-    return(
-      <p>This job is closed</p>
-    )
-
-  }
-  else{
-    let flag=0;
-    for(let i=0;i<this.props.getJob[0].proposals.proposalsList.length;i++){
-    if(this.props.getJob[0].proposals.proposalsList[i].userId==localStorage.getItem('id')){
-      flag=1;
+          <p className="text-muted">
+            I am looking for freelancers with the lowest rates
+          </p>
+        </div>
+      );
     }
+    if (this.props.getJob[0].experienceLevel === "intermediate") {
+      return (
+        <div>
+          <strong className="color-black">
+            {this.props.getJob[0].experienceLevel}
+          </strong>
 
-  }
-  if(flag===0){
-    return(
-      <button className="btn btn-success submit-proposal-btn px-5 mb-4 py-2">
-                                  Submit proposal
-                                </button>
-    );
-  }
-  else{
-    return(
-      <button className="btn btn-success submit-proposal-btn px-5 mb-4 py-2 " disabled="true">
-                                  Submit proposal
-                                </button>
+          <p className="text-muted">
+            I am looking for a mix of experience and value
+          </p>
+        </div>
+      );
+    }
+    if (this.props.getJob[0].experienceLevel === "Expert") {
+      return (
+        <div>
+          <strong className="color-black">
+            {this.props.getJob[0].experienceLevel}
+          </strong>
 
-    );
+          <p className="text-muted">
+            I am willing to pay higher rates for the most experienced
+            freelancers
+          </p>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <strong className="color-black">
+            {this.props.getJob[0].experienceLevel}
+          </strong>
+
+          <p className="text-muted">experienceLevel is not available</p>
+        </div>
+      );
+    }
   }
-}
-}
+  handleSubmitbutton() {
+    if (this.props.getJob[0].postStatus === 2) {
+      return <p>This job is closed</p>;
+    } else {
+      let flag = 0;
+      for (
+        let i = 0;
+        i < this.props.getJob[0].proposals.proposalsList.length;
+        i++
+      ) {
+        if (
+          this.props.getJob[0].proposals.proposalsList[i].userId ==
+          localStorage.getItem("id")
+        ) {
+          flag = 1;
+        }
+      }
+      if (flag === 0) {
+        return (
+          <button className="btn btn-success submit-proposal-btn px-5 mb-4 py-2">
+            Submit proposal
+          </button>
+        );
+      } else {
+        return (
+          <button
+            className="btn btn-success submit-proposal-btn px-5 mb-4 py-2 "
+            disabled="true"
+          >
+            Submit proposal
+          </button>
+        );
+      }
+    }
+  }
   Showjob() {
     if (this.props.getJob) {
-        console.log(this.props.getJob[0].postName)
-        console.log(this.props.getJob[0].status)
-        console.log(this.props.getJob.status)
-        console.log(this.props.getclientdata)
-
-
+      console.log(this.props.getJob[0].postName);
+      console.log(this.props.getJob[0].status);
+      console.log(this.props.getJob.status);
+      console.log(this.props.getclientdata);
 
       return (
         <div className="Job-container  py-5 ">
@@ -150,21 +130,19 @@ handleSubmitbutton(){
                         <div className="border border-bottom-0 border-left-0 border-top-0 border-muted">
                           <div className="header-section border border-right-0 border-left-0 border-top-0 border-muted">
                             <h3 className="color-black p-4 ">
-                                {this.props.getJob[0].postName}
+                              {this.props.getJob[0].postName}
                             </h3>
                           </div>
                           <div className=" p-4">
                             <h5 className="color-green ">
-                            {this.props.getJob[0].category}
-
+                              {this.props.getJob[0].category}
                             </h5>
                             <p className="text-muted">Posted one hour ago</p>
                           </div>
 
                           <div className=" border  border-left-0 border-right-0 border-muted color-black">
                             <p className="p-4 ">
-                            {this.props.getJob[0].description}
-
+                              {this.props.getJob[0].description}
                             </p>
                           </div>
 
@@ -193,8 +171,7 @@ handleSubmitbutton(){
 
                                     <div className="col-10">
                                       <div className="px-2">
-                                        
-                                      {this.handleExperienceLevel()}
+                                        {this.handleExperienceLevel()}
                                       </div>
                                     </div>
                                   </div>
@@ -218,9 +195,9 @@ handleSubmitbutton(){
 
                                     <div className="col-10">
                                       <div className="px-2">
-                                        
                                         <strong className="color-black">
-                                          ${this.props.getJob[0].estimatedBudget}
+                                          $
+                                          {this.props.getJob[0].estimatedBudget}
                                         </strong>
                                         <p className="text-muted">
                                           Fixed price
@@ -249,16 +226,13 @@ handleSubmitbutton(){
                                 Skills and Expertise
                               </h4>
                               <div>
-                                  {this.props.getJob[0].skills.map((skill)=>{
-                                      return(
-                                          
-                                    
-                            <span className="badge badge-pill badge-light py-3 px-3 job-page-skill mx-3">
-                                {skill}
-                                </span>
-                                  )})}
-                                  
-            
+                                {this.props.getJob[0].skills.map((skill) => {
+                                  return (
+                                    <span className="badge badge-pill badge-light py-3 px-3 job-page-skill mx-3">
+                                      {skill}
+                                    </span>
+                                  );
+                                })}
                               </div>
                             </div>
                           </div>
@@ -270,7 +244,8 @@ handleSubmitbutton(){
                               </h4>
                               <div>
                                 <p className="text-muted">
-                                  Propsals: {this.props.getJob[0].proposals.length}
+                                  Propsals:{" "}
+                                  {this.props.getJob[0].proposals.length}
                                 </p>
                               </div>
                             </div>
@@ -293,15 +268,18 @@ handleSubmitbutton(){
                                   </h4>
                                   <div className="pb-2">
                                     <strong className="color-black">
-                                       {this.props.getJob[0].country} 
+                                      {this.props.getJob[0].country}
                                     </strong>
                                   </div>
                                   <div>
                                     <strong className="color-black">
-                                      {this.props.getJob[0].allJobsPosted} job posted
+                                      {this.props.getJob[0].allJobsPosted} job
+                                      posted
                                     </strong>
                                     <p className="text-muted pt-0 mt-0">
-                                      0% hire rate, {this.props.getJob[0].currentOpenJobs} open job
+                                      0% hire rate,{" "}
+                                      {this.props.getJob[0].currentOpenJobs}{" "}
+                                      open job
                                     </p>
                                   </div>
                                 </div>
@@ -338,10 +316,13 @@ const mapStateToProps = (state) => {
     isLoggedIn: state.userReducer.isLoggedIn,
     userId: state.userReducer.userID,
     getJob: state.getJobsReducer.getJob,
-    getclientdata:state.getJobsReducer.getClientJobData
+    getclientdata: state.getJobsReducer.getClientJobData,
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ checkLoggingStatus, logIn, getOneJob,getClientJobData }, dispatch);
+  return bindActionCreators(
+    { checkLoggingStatus, logIn, getOneJob, getClientJobData },
+    dispatch
+  );
 };
 export default connect(mapStateToProps, mapDispatchToProps)(JobDetails);
