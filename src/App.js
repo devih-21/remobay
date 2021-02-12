@@ -14,6 +14,7 @@ import ErrorComponent from './Components/Error/Error';
 import { checkLoggingStatus } from "./Actions/userData";
 import  jobpage from "./Components/JobDetails/jobpage";
 import { getOneJob } from "./Actions/jobPost";
+import ShowProposal from './Components/ShowProposal/showProposal';
 
 
 
@@ -38,6 +39,7 @@ class App extends React.Component {
           <Route path="/job-post" component={JobPostPage} />
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} />
+          <Route path="/freelancer/myjobs/:jobId" component={ShowProposal} />
           <Route path="/freelancer/myjobs" component={FreelancerJobsPage} />
           <Route path="/job/:id" component={jobpage} />
           <Route path="*" component={ErrorComponent} />
