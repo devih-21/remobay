@@ -1,8 +1,6 @@
 import baseURL from './baseURL';
 import axios from 'axios';
 
-let upworkUserID = "601b17526334d955348ecebe";
-let upworkJobID = "6018b31fb872e704e4657091";
 
 export async function postProposal(userID, jobID,bid,upworkFees,received,coverLetter) {
     let payload;
@@ -17,6 +15,40 @@ export async function postProposal(userID, jobID,bid,upworkFees,received,coverLe
   
     return {
       type: "POST_PROPOSAL",
+      payload
+    }
+  }
+
+  export async function getProposal(jobId) {
+    let payload;
+    try {
+      let response = axios.post(`${baseURL}/api/job/getproposals/${jobId}` , {jobId});
+      payload = (await response).data
+      console.log("allProposals",payload);
+    }
+    catch (err) {
+      console.log(err);
+    }
+  
+    return {
+      type: "GET_PROPOSAL",
+      payload
+    }
+  }
+
+  export async function acceptProposal(jobId,userId) {
+    let payload;
+    try {
+      let response = axios.post(`${baseURL}/api/job/acceptproposal` , {jobId , userId});
+      payload = (await response).data
+      console.log("acceptedProposals",payload);
+    }
+    catch (err) {
+      console.log(err);
+    }
+  
+    return {
+      type: "ACCEPT_PROPOSAL",
       payload
     }
   }

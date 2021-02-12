@@ -14,6 +14,9 @@ import { checkLoggingStatus } from "./Actions/userData";
 import  jobpage from "./Components/JobDetails/jobpage";
 import { getOneJob } from "./Actions/jobPost";
 import Apply from './Components/ApplyJob/ApplyJob';
+import HomeHiring from './Components/hiring/homeHire/homeHiring';
+import JobProposals from './Components/jobProposals/jobProposals';
+
 
 
 

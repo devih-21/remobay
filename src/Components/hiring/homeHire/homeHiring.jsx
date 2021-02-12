@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './homeHiring.css';
 import '../../HomePage/HomePage.css';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {getClientJobs} from "../../../Actions/getJobs"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faEllipsisH, faQuestionCircle, faUserPlus, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,6 +11,7 @@ class HomeHiring extends Component {
     constructor(){
         super();
         this.state = {
+                datas : undefined,
                 data : {
                     name:"Yasser Mohamed",
                     post: [
@@ -35,6 +39,7 @@ class HomeHiring extends Component {
         }
     }
 
+
     handleAction = ()=>{
         this.state.action === "expand" ? this.setState({action : "collapse" , actionState : "d-none"}) : this.setState({action : "expand" , actionState : "d-block"})
     }
@@ -43,11 +48,17 @@ class HomeHiring extends Component {
         this.state.data.draft.length > 0 ? this.setState({draftState : "d-block"}) : this.setState({draftState : "d-none"})
     }
 
-    componentDidMount = ()=>{
-        this.checkDraft();
+    componentDidMount = async()=>{
+        // this.checkDraft();
+         this.props.getClientJobs("601f744bb931d71894eb5966")
+         console.log("yasser",this.props.getClient);
+         await this.setState({datas :this.props.getClient})
+        // console.log("done",this.props.getJobsReducer.getClientJobs);
+        // console.log("props",this.props);
     }
 
     render = ()=>{
+        console.log("yasr",this.state.datas);
         return(
             <div className="Home-container ">
                 <div className="container hiring-page-header px-lg-5 px-1 ">
@@ -67,11 +78,12 @@ class HomeHiring extends Component {
                                 <p className="h4 font-weight-bold ">My Postings</p>
                                 <a href="" className="header-hiring-allPosting">All Posting</a>
                             </div>
-                            {this.state.data.post.map((p)=>{
+                            {this.props.getClient ? 
+                            this.props.getClient.map((p)=>{
                                 return(
                                     <div className="posting-hire-home">
                                         <div className="d-flex justify-content-between">
-                                            <p className="font-weight-bold">{p.title}</p>
+                                            <p className="font-weight-bold">{p.postName}</p>
                                             <div class="dropdown">
                                                 <div className="ellipsish-hiring-header " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <FontAwesomeIcon icon={faEllipsisH}/>
@@ -91,24 +103,24 @@ class HomeHiring extends Component {
                                         </div>
                                         <div className="d-flex flex-wrap justify-content-between">
                                             <div>
-                                                <p className="m-0 ">{p.typePrice}</p>
+                                                <p className="m-0 ">Fixed-price</p>
                                                 <div className="d-flex">
-                                                    <p className="m-0 edit-font-small">{p.hiringType}</p>
-                                                    <p className="m-0 edit-font-small">- Created {p.created}</p>
+                                                    <p className="m-0 edit-font-small">Invite-only</p>
+                                                    <p className="m-0 edit-font-small">- Created {p.updatedAt}</p>
                                                 </div>
                                             </div>
                                             <div>
                                                 <div className="d-flex justify-content-around mt-2">
                                                     <div className="mr-4">
-                                                        <p className="m-0 font-weight-bold ">{p.proposals}</p>
+                                                        <p className="m-0 font-weight-bold ">{p.proposals.length}</p>
                                                         <p className="edit-font-small m-0">Proposals</p>
                                                     </div>
                                                     <div className="mx-4">
-                                                        <p className="m-0 font-weight-bold ">{p.message}</p>
+                                                        <p className="m-0 font-weight-bold ">0</p>
                                                         <p className="edit-font-small m-0">Messaged</p>
                                                     </div>
                                                     <div className="ml-4">
-                                                        <p className="m-0 font-weight-bold ">{p.hired}</p>
+                                                        <p className="m-0 font-weight-bold ">{p.hiring.length}</p>
                                                         <p className="edit-font-small m-0">Hired</p>
                                                     </div>
                                                 </div>
@@ -116,8 +128,10 @@ class HomeHiring extends Component {
                                         </div>
                                     </div>
                                 )
-                            })}
-                            <div className={this.state.draftState}>
+                            })
+                            : ""
+                            }
+                            {/* <div className={this.state.draftState}>
                             <div className="d-flex flex-wrap  justify-content-between posting-hiring-home mt-4">
                                 <p className="h4 font-weight-bold ">My Drafts</p>
                                 <a href="" className="header-hiring-allPosting">All drafts</a>
@@ -148,7 +162,7 @@ class HomeHiring extends Component {
                                 )
                             }) 
                         }
-                            </div>
+                            </div> */}
                             <div className="d-flex justify-content-between posting-hiring-home m-0 mt-5">
                                 <p className="font-weight-bold h4 ">How it Works</p>
                                 <FontAwesomeIcon icon={this.state.action === "expand" ? faChevronUp : faChevronDown } onClick={this.handleAction} /> 
@@ -246,4 +260,17 @@ class HomeHiring extends Component {
     }
 }
 
-export default HomeHiring ; 
+const mapStateToProps = (state) => {
+    console.log("hhhhhhhh", state);
+    return {
+        getClient : state.getJobsReducer.getClientJobs
+    }
+  }
+  
+ const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        getClientJobs
+    }, dispatch)
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps) (HomeHiring) ; 

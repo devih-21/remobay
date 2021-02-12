@@ -44,14 +44,15 @@ class Apply extends Component {
         }
     }
 
-    componentDidMount=()=>{
-        this.props.getOneJob("601b17526334d955348ecebe","601c1e9be624576144d2bf8e")
-        console.log("data",this.props.jobDetails);
+    componentDidMount= async ()=> {
+        await this.props.getOneJob("601894f146509e3418e9cbc8","601c22bbe624576144d2bf8f")
+        console.log("data",this.props.jobDetails[0]);
+        console.log("done",this.props);
     }
 
     handleSubmit = ()=>{
         console.log("props",this.props);
-        this.props.postProposal("601b17526334d955348ecebe","601c1e9be624576144d2bf8e",this.state.bid,this.state.fee,this.state.recived,this.state.cover)
+        this.props.postProposal("601894f146509e3418e9cbc8","601c22bbe624576144d2bf8f",this.state.bid,this.state.fee,this.state.recived,this.state.cover)
     }
     
 
@@ -91,6 +92,8 @@ class Apply extends Component {
     render = ()=>{
         return(
             <div className="Home-container ">
+                { 
+                this.props.jobDetails? 
                 <div className="container  ">
                     <div className="row justify-content-center">
                         <div className="col-11">
@@ -100,14 +103,14 @@ class Apply extends Component {
                             </div>
                             <div className="posting-hire-home question-boarder mb-4">
                                 <p className="font-weight-bold">Propose with a Specialized profile</p>
-                                <div class="dropdown mb-3">
-                                <button class="btn btn-outline-secondary px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div className="dropdown mb-3">
+                                <button className="btn btn-outline-secondary px-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {this.state.profile}
                                     </button>
                                    
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <p class="dropdown-item" onClick={()=>this.handleProfile("General profile")} >General profile</p>
-                                      <p class="dropdown-item" onClick={()=>this.handleProfile("Full Stack Development")} >Full Stack Development</p>
+                                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <p className="dropdown-item" onClick={()=>this.handleProfile("General profile")} >General profile</p>
+                                      <p className="dropdown-item" onClick={()=>this.handleProfile("Full Stack Development")} >Full Stack Development</p>
                                     </div>
                                 </div>
                                 <div className="d-flex ">
@@ -120,16 +123,14 @@ class Apply extends Component {
                             <div className="posting-hiring-home mt-0">
                                 <p className="h4  font-weight-bold">Job details</p>
                             </div>
-                            <div className="posting-hire-home question-boarder mb-4">
+
+                             
+                             <div className="posting-hire-home question-boarder mb-4">
                                 <div className="d-flex">
                                     <div className="col-9">
-                                        <p className="font-weight-bold h5 mb-4">{this.state.data.title}</p>
+                                        <p className="font-weight-bold h5 mb-4">{this.props.jobDetails[0].postName}</p>
                                         <p>
-                                        We need to contract someone who specializes in 3D rendering in a browser. The project requires knowledge in Three.js.<br></br>
-                                        Developer should know how:<br></br>
-                                        - Load 3D models using Three.js<br></br>
-                                        - Create a slider that will exploded and contract the models interior/children objects<br></br>
-                                        - Produce Infographics over each exploded object<br></br>
+                                        {this.props.jobDetails[0].description}
                                         </p>
                                         <p ><a className="help-one-link font-weight-bold" href="">view job posting</a></p>
                                     </div>
@@ -138,7 +139,7 @@ class Apply extends Component {
                                     </div>
                                     <div className="col-2">
                                         <div>
-                                            <p className="font-weight-bold mb-2">{this.state.data.level}</p>
+                                            <p className="font-weight-bold mb-2">{this.props.jobDetails[0].experienceLevel}</p>
                                             <p className="mb-2">Experience Level</p>
                                         </div>
                                         <div>
@@ -149,21 +150,24 @@ class Apply extends Component {
                                 <div className="skills-border">
                                     <p className="font-weight-bold">Skills and expertise</p>
                                     <div className="Home-posts-tags">
-                                        {this.state.data.tags.map((t)=>{
+                                        {this.props.jobDetails[0].skills?
+                                        this.props.jobDetails[0].skills.map((t)=>{
+                                            
                                             return(
-                                                <div className="Home-posts-tag">
+                                                <div className="Home-posts-tag" >
                                                             <p>{t}</p>
                                                         </div>
                                             )
-                                        })}
+                                        }):""}
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                             {/* -------------------------------------------------------------- */}
 
                             <div className="posting-hiring-home mt-0 d-flex justify-content-between ">
                                 <p className="h4  font-weight-bold">Terms</p>
-                                <p className="font-weight-bold">Client's budget: ${this.state.data.budget} USD</p>
+                                
+                                <p className="font-weight-bold">Client's budget: ${this.props.jobDetails[0].estimatedBudget} USD</p>
                             </div>
 
                             <div className="posting-hire-home question-boarder mb-4">
@@ -243,7 +247,7 @@ class Apply extends Component {
 
                         </div>
                     </div>
-                </div>
+                </div> : ""}
             </div>
         )
     }
