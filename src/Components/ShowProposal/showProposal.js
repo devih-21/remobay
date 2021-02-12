@@ -25,8 +25,7 @@ class ShowProposal extends Component {
         console.log(localStorage.getItem('id'))
         this.props.getOneProposal(localStorage.getItem("id"),this.props.match.params.jobId)
     }
-    handleFiles = (i) => {
-        console.log(this.props.proposals.proposalsList[i].receiveJob.jobFiles.length)
+    handleFiles = () => {
         if(this.props.getProposal.myProposal[0].receiveJob.jobFiles.length > 0){
             console.log("ah malkesh da3wa")
         let files = [];
@@ -93,6 +92,7 @@ class ShowProposal extends Component {
                                             this.props.setProposalStatus(3);
                                             this.props.getOneProposal(localStorage.getItem('id'),this.props.match.params.jobId)
                                             console.log(this.props.proposalStatus)
+                                            window.location.reload();
                                         }}>Send Job</button>
                                         <button type="button" className="btn color-black close-modal-btn btn-outline-success" data-dismiss="modal">Close</button>
                                     </div>
@@ -108,32 +108,13 @@ class ShowProposal extends Component {
             return (
                 <div className="">
                     <button disabled className="btn btn-outline-success px-4 my-3 py-3 font-weight-bold color-black">You finished this job <FontAwesomeIcon icon={faCheckCircle}className="ml-4 text-success check-circle"/></button>
-                    {
-                        (() => {
-                            if(this.props.proposals){
-                                if(this.props.proposals.length > 0){
-                                    for(let i = 0; i < this.props.proposals.length; i++){
-                                        if(this.props.proposals.proposalsList[i].userID == this.localStorage.getItem('id') ){
-                                            return(
-                                                <div className="py-2 border border-right-0 border-left-0 border-muted">
-                                                    <h5 className="font-weight-bold my-3 py-3 border border-right-0 border-left-0 border-top-0 border-muted">Your received work</h5>
-                                                    <h6 className="font-weight-bold">Message:</h6>
-                                                    <p className="mb-4">{this.props.getProposal.myProposal[0].receiveJob.message}</p>
-                                                    <h5 className="font-weight-bold">Files:</h5>
-                                                    {this.handleFiles(i)}
-                                                </div>
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-                            else{
-                                return(
-                                    <div></div>
-                                )
-                            }
-                        })()
-                    }
+                    <div className="py-2 border border-right-0 border-left-0 border-muted">
+                        <h5 className="font-weight-bold my-3 py-3 border border-right-0 border-left-0 border-top-0 border-muted">Your received work</h5>
+                        <h6 className="font-weight-bold">Message:</h6>
+                        <p className="mb-4">{this.props.getProposal.myProposal[0].receiveJob.message}</p>
+                        <h5 className="font-weight-bold">Files:</h5>
+                        {this.handleFiles()}
+                    </div>
                 </div>
                 )
         }
