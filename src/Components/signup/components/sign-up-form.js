@@ -1,3 +1,6 @@
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { checkLoggingStatus,logIn } from "./../../../Actions/userData";
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import ReactFormInputValidation from "react-form-input-validation";
@@ -62,9 +65,16 @@ class SignupForm extends Component {
                 {                                
                     if (res.status === 200) {
                       this.setState({ isSignedup: true }); // after signing up, set the state to true. This will trigger a re-render
+                      this.props.logIn({
+                        email: newUser.email,
+                        password: newUser.password
+                      })
+                      this.props.history.push("/home");
                     }
                 }
                );
+
+
 
             this.setState({
                 email: '',
@@ -93,7 +103,7 @@ class SignupForm extends Component {
          freelanceBtn.style.color = "#000";
          hireBtn.style.backgroundColor = this.state.ternarycolor;
          hireBtn.style.color = this.state.white;
-         this.setState({userType:"hiring"});
+         this.setState({userType:"client"});
          console.log(this.state.userType);
       }
       freelanceClick = () =>{
@@ -491,5 +501,9 @@ class SignupForm extends Component {
          );
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({checkLoggingStatus, logIn},dispatch);
+};
  
-export default SignupForm;
+export default connect(null, mapDispatchToProps) (SignupForm);

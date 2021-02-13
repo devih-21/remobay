@@ -26,6 +26,7 @@ class App extends React.Component {
     if (this.props.history.location.pathname !== "/signup") {
       if (!localStorage.getItem('token')) {
         this.props.history.push("/signin");
+        console.log(localStorage.getItem('type'));
       }
     }
     console.log(this.props.history.location.pathname);
@@ -33,22 +34,50 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/home" component={Home} />
-          <Route path="/profile/freelancer/:id" component={FreelancerProfilePage} />
-          <Route path="/job-post" component={JobPostPage} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/freelancer/myjobs/:jobId" component={ShowProposal} />
-          <Route path="/freelancer/myjobs" component={FreelancerJobsPage} />
-          <Route path="/job/:id" component={jobpage} />
-          <Route path="*" component={ErrorComponent} />
-        </Switch>
-      </div>
-    );
+    if (localStorage.getItem('type') === "Freelancer" || localStorage.getItem('type') === "freelancer") {
+      return (
+        <div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/home" component={Home} />
+            <Route path="/profile/freelancer/:id" component={FreelancerProfilePage} />
+            <Route path="/signin" component={Signin} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/freelancer/myjobs/:jobId" component={ShowProposal} />
+            <Route exact path="/freelancer/myjobs" component={FreelancerJobsPage} />
+            <Route path="/sumbit-proposal/:id" component={Apply} />
+            <Route path="/job/:id" component={jobpage} />
+            <Route path="*" component={ErrorComponent} />
+          </Switch>
+        </div>
+      );
+    } else if (localStorage.getItem('type') === "client") {
+      return (
+        <div>
+          <Switch>
+            <Route exact path="/" component={HomeHiring} />
+            <Route path="/home" component={HomeHiring} />
+            <Route path="/profile/freelancer/:id" component={FreelancerProfilePage} />
+            <Route path="/job-post" component={JobPostPage} />
+            <Route path="/job-proposals/:id" component={JobProposals} />
+            <Route path="/signin" component={Signin} />
+            <Route path="/signup" component={Signup} />
+            <Route path="*" component={ErrorComponent} />
+          </Switch>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Switch>
+            <Route exact path="/" component={localStorage.getItem('token') ? Home : Signin} />
+            <Route path="/signin" component={Signin} />
+            <Route path="/signup" component={Signup} />
+            <Route path="*" component={ErrorComponent} />
+          </Switch>
+        </div>
+      );
+    }
   }
 }
 

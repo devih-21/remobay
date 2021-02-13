@@ -61,8 +61,8 @@ class SigninForm extends Component {
     if(this.props.userId){
       this.setState({isLoggedIn: true});
     }
-     if(payload.user.type=="freelancer"){
-       this.props.allProps.history.push(`/home`)
+     if(payload.user.type=="Freelancer"){
+       this.props.allProps.history.push(`/`)
      }
     //  else{
     //   this.props.allProps.history.push(`/clienthome`)

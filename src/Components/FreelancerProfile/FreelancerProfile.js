@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UploadProfileImage from '../Modals/Upload Profile Image/UploadProfileImage.jsx';
 import EditTitleModal from '../Modals/EditTitleModal/EditTitleModal.jsx';
 import EditHourlyRate from '../Modals/EditHourlyRate/EditHourlyRate';
+import EditDescriptionModal from '../Modals/EditDescriptionModal/EditDescriptionModal.jsx';
 import EditIcon from '../FontAwesomeIcons/EditIcon/EditIcon';
 
 const FreelancerProfile = (props) => {
@@ -106,10 +107,10 @@ const FreelancerProfile = (props) => {
             </div>
             <div className="row col-12 p-0 m-0">
               <div className="col-11 p-0">
-                lorem ipsum sadkf jiwe asdkflj ioawef aaskldjf ioasdfw lorem ipsum sadkf jiwe asdkflj ioawef aaskldjf ioasdfw lorem ipsum sadkf jiwe asdkflj ioawef aaskldjf ioasdfw lorem ipsum sadkf jiwe asdkflj ioawef aaskldjf ioasdfw.
+                {props.profileDescription}
               </div>
               <div className="col-1 p-0">
-                <div className="pl-1 pl-lg-3 d-inline-block">
+                <div className="pl-1 pl-lg-3 d-inline-block" data-toggle="modal" data-target="#edit-description">
                   <EditIcon/>
                 </div>
               </div>
@@ -135,6 +136,7 @@ const FreelancerProfile = (props) => {
       <UploadProfileImage {...props} />
       <EditTitleModal {...props} />
       <EditHourlyRate {...props} />
+      <EditDescriptionModal {...props} />
     </div>
   )
 }
@@ -146,7 +148,8 @@ const mapStateToProps = (state) => {
     profileInfo: state.userReducer.profileInfo,
     profileHourlyRate: state.userReducer.profileHourlyRate,
     profileTitle: state.userReducer.profileTitle,
-    registrationInfo: state.userReducer.registrationInfo
+    profileDescription: state.userReducer.profileDescription,
+    registrationInfo: state.userReducer.registrationInfo,
   }
 }
 

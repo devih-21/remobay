@@ -3,7 +3,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { uploadMultipleFiles } from '../../../Actions/utils';
-import { setProfilePic } from '../../../Actions/userData';
+import { setProfilePic, setProfileImage } from '../../../Actions/userData';
 import { useState, useEffect } from 'react';
 import $ from "jquery";
 
@@ -53,6 +53,7 @@ const UploadProfileImage = (props) => {
     const reader = new FileReader();
     reader.onload = () => {
       let result = reader.result;
+      // setProfileImage(localStorage.getItem('id'), reader.result);
       let fileName = e.target.files[0].name;
       image.innerHTML = `<img src=${result} filename=${fileName} width="300px" height="300px" style="border-radius: 50%;" />`;
       // console.log(image.children[0].attributes[1].nodeValue);
@@ -110,14 +111,16 @@ const UploadProfileImage = (props) => {
 const mapStateToProps = (state) => {
   return {
     uploadedFiles: state.utilsReducer.uploadedFiles,
-    profilePicture: state.userReducer.profilePicture
+    profilePicture: state.userReducer.profilePicture,
+    profielImage: state.userReducer.profileImage
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     uploadMultipleFiles,
-    setProfilePic
+    setProfilePic,
+    setProfileImage
   }, dispatch);
 }
 

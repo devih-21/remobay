@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { postProposal } from "../../Actions/sumbitProbosal";
 import {getOneJob} from "../../Actions/jobPost"
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import './ApplyJob.css'
 import '../HomePage/HomePage.css'
 import '../hiring/homeHire/homeHiring.css'
@@ -45,14 +47,15 @@ class Apply extends Component {
     }
 
     componentDidMount= async ()=> {
-        await this.props.getOneJob("601894f146509e3418e9cbc8","601c22bbe624576144d2bf8f")
+        await this.props.getOneJob(localStorage.getItem('id'),this.props.match.params.id)
         console.log("data",this.props.jobDetails[0]);
         console.log("done",this.props);
     }
 
     handleSubmit = ()=>{
         console.log("props",this.props);
-        this.props.postProposal("601894f146509e3418e9cbc8","601c22bbe624576144d2bf8f",this.state.bid,this.state.fee,this.state.recived,this.state.cover)
+        this.props.postProposal(localStorage.getItem('id'),this.props.match.params.id,this.state.bid,this.state.fee,this.state.recived,this.state.cover)
+        this.props.history.push("/");
     }
     
 
@@ -91,7 +94,10 @@ class Apply extends Component {
 
     render = ()=>{
         return(
-            <div className="Home-container ">
+            <div>
+              <Header />
+
+              <div className="Home-container ">
                 { 
                 this.props.jobDetails? 
                 <div className="container  ">
@@ -248,6 +254,9 @@ class Apply extends Component {
                         </div>
                     </div>
                 </div> : ""}
+            </div>
+
+              <Footer />
             </div>
         )
     }

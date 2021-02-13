@@ -11,6 +11,9 @@ const JobVisibility = (props) => {
 
     if (props.freelancersNeeded) {
       document.getElementById(props.freelancersNeeded).checked = true;
+      if (props.freelancersNeeded === "many-freelancers") {
+        document.getElementById('numberOfFreelancersInput').style.display = "block";
+      }
     }
   })
 
@@ -30,8 +33,20 @@ const JobVisibility = (props) => {
 
   let handleFreelancersNeededSelection = (e, freelancersNeeded) => {
     let optionSelectedElement = document.getElementById(freelancersNeeded);
+    let freelancersNumberInput = document.getElementById('numberOfFreelancersInput');
     optionSelectedElement.checked = true;
     props.setFreelancersNeeded(freelancersNeeded);
+    if (freelancersNeeded === "one-freelancer") {
+      props.setNumberOfFreelancersForJob(1);
+      freelancersNumberInput.style.display = "none";
+    } else if (freelancersNeeded === "many-freelancers") {
+      props.setNumberOfFreelancersForJob("")
+      freelancersNumberInput.style.display = "block";
+    }
+  }
+
+  let handleFreelancersNumberInputChange = (e) => {
+    props.setNumberOfFreelancersForJob(e.target.value);
   }
 
   return (
@@ -110,6 +125,10 @@ const JobVisibility = (props) => {
                   <div className="text-center project-card-title">More than one freelancer</div>
                 </div>
               </div>
+              <div id="numberOfFreelancersInput" className="col-12 col-md-8 col-lg-6 mt-3">
+                <div className="h6">Number of Freelancers</div>
+                <input onChange={handleFreelancersNumberInputChange} value={props.numberOfFreelancersForJob} type="number" className="upwork-input col-8 rounded" />
+              </div>
             </div>
           </div>
         </div>
@@ -118,7 +137,7 @@ const JobVisibility = (props) => {
             <div>
               <button onClick={handleBackBtnClick} id="exitBtn" className="btn rounded mr-lg-4">Back</button>
               {
-                props.jobPostVisibility && props.freelancersNeeded ?
+                props.jobPostVisibility && props.numberOfFreelancersForJob ?
                 <button onClick={handleNextBtnClick}  id="nextBtn" className="btn rounded">Next</button> :
                 <button id="nextBtnDisabled" disabled className="btn rounded">Next</button>
               }

@@ -66,6 +66,10 @@ export function jobPostReducer (state = {}, action) {
       return {...state, jobPostBudget: action.budget}
     }
 
+    case "SET_NUMBER_OF_FREELANCERS_FOR_JOB": {
+      return {...state, numberOfFreelancersForJob: action.number}
+    }
+
 
     default: return state;
   }

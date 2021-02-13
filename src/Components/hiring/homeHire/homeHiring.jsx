@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import './homeHiring.css';
 import '../../HomePage/HomePage.css';
+import Header from "../../Header/Header";
+import Footer from "../../Footer/Footer";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {getClientJobs} from "../../../Actions/getJobs"
+import {getRegistrationInfo, getProfileInfo, createProfileDetails} from "../../../Actions/userData";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faChevronUp, faEllipsisH, faQuestionCircle, faUserPlus, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -39,6 +42,14 @@ class HomeHiring extends Component {
         }
     }
 
+    navigateToJobPostProposal = (id) => {
+      this.props.history.push(`/job-proposals/${id}`);
+    }
+
+    handlePostJobButton = () => {
+      this.props.history.push('/job-post');
+    }
+
 
     handleAction = ()=>{
         this.state.action === "expand" ? this.setState({action : "collapse" , actionState : "d-none"}) : this.setState({action : "expand" , actionState : "d-block"})
@@ -48,11 +59,18 @@ class HomeHiring extends Component {
         this.state.data.draft.length > 0 ? this.setState({draftState : "d-block"}) : this.setState({draftState : "d-none"})
     }
 
-    componentDidMount = async()=>{
+    componentDidMount = ()=>{
         // this.checkDraft();
-         this.props.getClientJobs("601f744bb931d71894eb5966")
-         console.log("yasser",this.props.getClient);
-         await this.setState({datas :this.props.getClient})
+         this.props.getClientJobs(localStorage.getItem('id'));
+        //  console.log("yasser",this.props.getClient);
+
+        this.props.getRegistrationInfo(localStorage.getItem('token'));
+        this.props.getProfileInfo(localStorage.getItem('token'));
+        if (!this.props.profileInfo) {
+          this.props.createProfileDetails(localStorage.getItem('token'));
+        }
+
+         this.setState({datas :this.props.getClient})
         // console.log("done",this.props.getJobsReducer.getClientJobs);
         // console.log("props",this.props);
     }
@@ -60,16 +78,19 @@ class HomeHiring extends Component {
     render = ()=>{
         console.log("yasr",this.state.datas);
         return(
-            <div className="Home-container ">
+            <div>
+              <Header />
+
+              <div className="Home-container ">
                 <div className="container hiring-page-header px-lg-5 px-1 ">
                     <div className="d-flex flex-wrap justify-content-between px-lg-5 px-1 ">
                         <div className="d-flex flex-wrap h3 font-weight-bold mt-4 mt-lg-0">
-                            <p className="mr-5 ml-3">{this.state.data.name}</p>
+                            <p className="mr-5 ml-3">{this.props.registrationInfo ? `${this.props.registrationInfo.firstName} ${this.props.registrationInfo.lastName}` : ""}</p>
                             <a href="" ><FontAwesomeIcon icon={faUserPlus} className="h5 mt-3 text-success stretched-link" /></a>
                         </div>
                         <div className="mt-4 mt-lg-0">
                             <button className="btn btn-outline-success bg-light mr-1  px-lg-4 px-1 font-weight-bold">Browse Pre-defined Projects</button>
-                            <button className="btn btn-success ml-1 mr-2 px-lg-4 px-1 font-weight-bold">Post a Job</button>
+                            <button onClick={this.handlePostJobButton} className="btn btn-success ml-1 mr-2 px-lg-4 px-1 font-weight-bold">Post a Job</button>
                         </div>
                     </div>
                     <div className="Home-row row px-lg-4 px-1">
@@ -81,7 +102,7 @@ class HomeHiring extends Component {
                             {this.props.getClient ? 
                             this.props.getClient.map((p)=>{
                                 return(
-                                    <div className="posting-hire-home">
+                                    <div onClick={() => this.navigateToJobPostProposal(p._id)} className="posting-hire-home">
                                         <div className="d-flex justify-content-between">
                                             <p className="font-weight-bold">{p.postName}</p>
                                             <div class="dropdown">
@@ -256,6 +277,9 @@ class HomeHiring extends Component {
                     </div>
                 </div>
             </div>
+
+              <Footer />
+            </div>
         )
     }
 }
@@ -263,13 +287,17 @@ class HomeHiring extends Component {
 const mapStateToProps = (state) => {
     console.log("hhhhhhhh", state);
     return {
-        getClient : state.getJobsReducer.getClientJobs
+        getClient : state.getJobsReducer.getClientJobs,
+        registrationInfo: state.userReducer.registrationInfo
     }
   }
   
  const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getClientJobs
+        getClientJobs,
+        getRegistrationInfo,
+        getProfileInfo,
+        createProfileDetails
     }, dispatch)
   }
 

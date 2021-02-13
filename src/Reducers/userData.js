@@ -58,17 +58,26 @@ export function userReducer (state = {}, action) {
       return {...state, profileTitle: action.payload.jobtitle}
     }
 
+    case "EDIT_PROFILE_DESCRIPTION": {
+      return {...state, profileDescription: action.payload.description}
+    }
+
     case "GET_PROFILE_INFO": {
       return {
         ...state,
         profileInfo: action.payload,
         profileHourlyRate: action.payload.price || 0,
-        profileTitle: action.payload.jobtitle || "Add your job title"
+        profileTitle: action.payload.jobtitle || "Add your job title",
+        profileDescription: action.payload.description || "Add description"
       }
     }
 
     case "GET_REGISTRATION_INFO": {
       return {...state, registrationInfo: action.payload || {}}
+    }
+
+    case "SET_PROFILE_IMAGE": {
+      return {...state, profileImage: action.payload}
     }
 
 

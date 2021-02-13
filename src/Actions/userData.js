@@ -39,6 +39,7 @@ export async function logIn (user) {
     console.log(payload);
     localStorage.setItem('token', payload.token);
     localStorage.setItem('id', payload.user._id);
+    localStorage.setItem('type', payload.user.type);
   } catch (err) {
     console.log(err);
   }
@@ -239,5 +240,20 @@ export async function getRegistrationInfo (token) {
   }
 }
 
+export async function setProfileImage (id, image) {
+  let payload;
+  try {
+    let response = await axios.post(`${baseURL}/api/job/saveimage`, {userId: id, image});
+    payload = response.data;
+    console.log(payload);
+  }
+  catch (err) {
+    console.log(err);
+  }
 
+  return {
+    type: "SET_PROFILE_IMAGE",
+    payload
+  }
+}
 

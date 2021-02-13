@@ -209,3 +209,10 @@ export function setJobPostBudget (budget) {
     budget
   }
 }
+
+export function setNumberOfFreelancersForJob (number) {
+  return {
+    type: "SET_NUMBER_OF_FREELANCERS_FOR_JOB",
+    number
+  }
+}

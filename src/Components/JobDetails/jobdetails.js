@@ -12,7 +12,7 @@ class JobDetails extends Component {
   }
   componentDidMount = async () => {
     if (!this.props.checkLoggingStatus(localStorage.getItem("token"))) {
-      this.props.history.push("/signin");
+      this.props.allprops.history.push("/signin");
     }
     this.props.getOneJob(
       this.props.allprops.match.params.id,
@@ -22,6 +22,10 @@ class JobDetails extends Component {
 
     console.log(this.props);
   };
+
+  handleSubmitButtonClick = () => {
+    this.props.allprops.history.push(`/sumbit-proposal/${this.props.allprops.match.params.id}`);
+  }
 
   handleExperienceLevel() {
     if (this.props.getJob[0].experienceLevel === "Entry") {
@@ -94,7 +98,7 @@ class JobDetails extends Component {
       }
       if (flag === 0) {
         return (
-          <button className="btn btn-success submit-proposal-btn px-5 mb-4 py-2">
+          <button onClick={this.handleSubmitButtonClick} className="btn btn-success submit-proposal-btn px-5 mb-4 py-2">
             Submit proposal
           </button>
         );

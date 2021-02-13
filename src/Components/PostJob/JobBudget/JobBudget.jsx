@@ -8,7 +8,7 @@ const JobBudget = (props) => {
   let handleSubmitBtn = () => {
     let jobPost = {
       clientId: localStorage.getItem("id"),
-      postName: props.jobTitle,
+      postName: props.jobPostTitle,
       category: props.jobCategory,
       description: props.jobPostDescription,
       projectType: props.projectType,
@@ -17,7 +17,8 @@ const JobBudget = (props) => {
       skills: [],
       experienceLevel: props.jobExperienceLevel,
       visibility: props.jobPostVisibility,
-      freelancersNo: 1
+      freelancersNo: props.numberOfFreelancersForJob,
+      estimatedBudget: props.jobPostBudget
     }
 
     props.createJobPost(jobPost);
