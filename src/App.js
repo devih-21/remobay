@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import {  connect } from 'react-redux';
-import { Switch, Route, withRouter, Redirect} from 'react-router-dom';
+import { Switch, Route, withRouter} from 'react-router-dom';
 import './Components/FontAwesomeIcons/index';
 import './App.css';
 import FreelancerProfilePage from './Components/FreelancerProfilePage/FreelancerProfilePage';
@@ -57,7 +57,6 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={HomeHiring} />
             <Route path="/home" component={HomeHiring} />
-            <Route path="/profile/freelancer/:id" component={FreelancerProfilePage} />
             <Route path="/job-post" component={JobPostPage} />
             <Route path="/job-proposals/:id" component={JobProposals} />
             <Route path="/signin" component={Signin} />
@@ -70,7 +69,7 @@ class App extends React.Component {
       return (
         <div>
           <Switch>
-            <Route exact path="/" component={localStorage.getItem('token') ? Home : Signin} />
+            <Route exact path="/" component={Signin} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <Route path="*" component={ErrorComponent} />

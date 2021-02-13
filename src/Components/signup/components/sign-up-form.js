@@ -41,7 +41,7 @@ class SignupForm extends Component {
                 event.preventDefault();
             }
         }
-        this.form.onformsubmit = (e) => {
+        this.form.onformsubmit = async (e) => {
             e.preventDefault();
             console.log(`Form submitted:`);
             console.log(`email: ${this.state.email}`);
@@ -59,17 +59,18 @@ class SignupForm extends Component {
                 type: this.state.userType,
             };
             console.log(newUser);
-            axios.post('http://localhost:8080/api/user/register', newUser)
-                .then(res => 
+            await axios.post('http://localhost:8080/api/user/register', newUser)
+                .then(async res => 
 
                 {                                
                     if (res.status === 200) {
                       this.setState({ isSignedup: true }); // after signing up, set the state to true. This will trigger a re-render
-                      this.props.logIn({
+                      await this.props.logIn({
                         email: newUser.email,
                         password: newUser.password
                       })
                       this.props.history.push("/home");
+                      window.location.reload();
                     }
                 }
                );

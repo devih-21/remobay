@@ -11,7 +11,11 @@ const Header = () => {
   }
 
   let navigateToMyProfile = () => {
-    history.push(`/profile/freelancer/${localStorage.getItem('id')}`)
+    if (localStorage.getItem('type') === "freelancer" || localStorage.getItem('type') === "Freelancer") {
+      history.push(`/profile/freelancer/${localStorage.getItem('id')}`)
+    } else if (localStorage.getItem('type') === "client") {
+      history.push('/');
+    }
   }
 
   let handleLogout = () => {
@@ -22,7 +26,11 @@ const Header = () => {
   }
 
   let onClickMyJobs = () => {
-    history.push("/freelancer/myjobs");
+    if (localStorage.getItem('type') === "freelancer" || localStorage.getItem('type') === "Freelancer") {
+      history.push("/freelancer/myjobs");
+    } else if (localStorage.getItem('type') === "client") {
+      history.push('/');
+    }
   }
 
   let clicked = false;

@@ -54,16 +54,19 @@ class SigninForm extends Component {
     console.log(`email: ${this.state.email}`);
     console.log(`password: ${this.state.password}`);
 
-    this.props.logIn({
+    await this.props.logIn({
       email: this.state.email,
       password: this.state.password,
     })
-    if(this.props.userId){
-      this.setState({isLoggedIn: true});
-    }
-     if(payload.user.type=="Freelancer"){
-       this.props.allProps.history.push(`/`)
-     }
+    // if(this.props.userId){
+    //   this.setState({isLoggedIn: true});
+    // }
+    this.props.checkLoggingStatus(localStorage.getItem('token'));
+    this.props.allProps.history.push(`/`);
+    window.location.reload();
+    //  if(payload.user.type=="Freelancer"){
+    //    this.props.allProps.history.push(`/`)
+    //  }
     //  else{
     //   this.props.allProps.history.push(`/clienthome`)
 
