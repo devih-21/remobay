@@ -19,7 +19,8 @@ const UploadProfileImage = (props) => {
     // setImgSrc("123");
   });
 
-  let triggerUploadFile = () => {
+  let triggerUploadFile = (e) => {
+    e.preventDefault();
     document.getElementById("uploadFileInput").click();
   }
 
@@ -34,9 +35,9 @@ const UploadProfileImage = (props) => {
 
   let submitProfilePic = () => {
     const data = new FormData()
-    data.append('file', props.profilePicture)
+    data.set('file', props.profilePicture)
     console.log(data);
-    props.uploadMultipleFiles(data)
+    props.uploadMultipleFiles(data, localStorage.getItem('id'))
     console.log(props.uploadedFiles);
   }
 
@@ -92,8 +93,8 @@ const UploadProfileImage = (props) => {
             </div>
             <div className="modal-footer">
               <button id="exitModal" type="button" className="btn" data-dismiss="modal">Cancel</button>
-              <form action="http://127.0.0.1:8080/api/job/multiple-upload" method="POST" encType="multipart/form-data" onSubmit={(e) => {e.preventDefault()}}>
-                <input type="file" multiple id="uploadFileInput" onChange={showFileName} className="d-none" />
+              <form>
+                <input name="file" type="file" id="uploadFileInput" onChange={showFileName} className="d-none" />
                 {
                   !props.profilePicture ?
                   <button onClick={triggerUploadFile} id="attachPhotoBtn" className="btn">Attach photo</button> :

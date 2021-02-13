@@ -89,7 +89,7 @@ const MyJobs = (props) => {
         <div className="col-12">
           <div className="col d-lg-flex mx-auto col-12 justify-content-between mb-2">
             <div className="h3">My Jobs</div>
-            <div className="h5">Earnings available now: <span className="text-tertiary">${props.registrationInfo.paymentAccount.availableAmount}.00</span></div>
+            <div className="h5">Earnings available now: <span className="text-tertiary">${props.registrationInfo ? props.registrationInfo.paymentAccount.availableAmount : ""}.00</span></div>
           </div>
           <div id="jobs-container" className="container col-12 bg-white px-0 rounded">
             <div id="active-contracts-title" className="row col-12 rounded py-3 mx-0">
