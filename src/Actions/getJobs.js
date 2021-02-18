@@ -100,12 +100,11 @@ export async function getOneProposal(userId, jobId) {
     payload,
   };
 }
-export async function receiveJob(userId, jobId, message) {
+export async function receiveJob(userId, jobId) {
   let payload;
   let data = {
     userId: userId,
     jobId: jobId,
-    message: message
   }
   try {
     await axios
@@ -129,35 +128,4 @@ export async function receiveJob(userId, jobId, message) {
     type: "RECEIVE_JOB",
     payload,
   };
-}
-export async function downloadJobFiles(filename) {
-  let payload;
-  try {
-    await axios
-      .get(`${baseURL}/api/job/downloadjobfiles/:${filename}`)
-      .then((response) => {
-        if(response){
-          console.log(response)
-        }
-        if (response.data) {
-          payload = response.data;
-          console.log(response.data)
-        } else {
-          payload = null;
-        }
-      });
-    console.log(payload);
-  } catch (err) {
-    console.log(err);
-  }
-  return {
-    type: "GET_ONE_PROPOSAL",
-    payload,
-  };
-}
-export async function setProposalStatus(status){
-  return {
-    type: "CHANGE_STATUS",
-    status
-  }
 }
