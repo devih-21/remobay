@@ -455,7 +455,7 @@ class SignupForm extends Component {
                             <div className="row my-5">
                                 <div className="col-md-12">
                                     <h4 className="text-center text-dark font-weight-bold">I want to:</h4>
-                                    <div className="btn-group">
+                                    <div className="btn-group w-100 d-flex justify-content-center">
                                         <a id="hire" className="btn btn-outline-dark border rounded user-type px-5 py-3" onClick={this.hiringClick}>Hire for a Project</a>
                                         <a id="freelance" className="btn btn-outline-dark border rounded user-type px-5 py-3" onClick={this.freelanceClick}>Work as a Freelancer</a>
                                     </div>

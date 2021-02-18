@@ -4,14 +4,14 @@ import { jobPostReducer } from './jobPost';
 import { utilsReducer } from './utils';
 import {postProposalReducer} from './postProposal'
 import { getJobsReducer } from './getJobs';
-import { jobReactionReducer } from './likesAndDislikes'
+import { jobReactionReducer } from './likesAndDislikes';
+
 
 export default combineReducers({
   userReducer,
   jobPostReducer,
   utilsReducer,
   postProposalReducer,
-
   getJobsReducer, 
-  jobReactionReducer
+  jobReactionReducer,
 })

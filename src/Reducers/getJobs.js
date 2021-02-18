@@ -11,14 +11,11 @@ export function getJobsReducer(state = {}, action) {
     }
     case "GET_ONE_PROPOSAL": {
       console.log(action.payload)
-      return { ...state, getOneProposal: action.payload, proposalStatus: action.payload.myProposal[0].proposal.status || 0 };
+      return { ...state, getOneProposal: action.payload };
     }
     case "RECEIVE_JOB": {
       console.log(action.payload)
-      return { ...state, receiveJob: action.payload, proposals: action.payload.proposals };
-    }
-    case "CHANGE_STATUS":{
-      return{...state, proposalStatus: action.status}
+      return { ...state, receiveJob: action.payload };
     }
     default:
       return state;

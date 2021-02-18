@@ -8,7 +8,7 @@ const Companies = () => {
                 <div className="row">
                     <div className="col-sm-12 col-md-3 col-lg-2">
                         <div className="ml-5 mr-3 d-flex justify-content-center">
-                            <img src="https://www.upwork.com/ab/assets/Signup/f4aecef/bundles/upworkvscomponents/logo-bar-light/images/microsoft.svg"/>
+                            <img src="https://www.upwork.com/ab/assets/Signup/208d5e7/bundles/upworkvscomponents/logo-bar-light/images/microsoft.svg"/>
                         </div>
                     </div>
                     <div className="col-sm-12 col-md-3 col-lg-2">

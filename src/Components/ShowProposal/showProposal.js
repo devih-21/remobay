@@ -3,12 +3,13 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './style/showProposal.css';
 import { Link } from 'react-router-dom';
-import {faTag, faUserCog, faCheckCircle, faStar, faFile} from "@fortawesome/free-solid-svg-icons";
+import {faTag, faUserCog, faCheckCircle, faStar, faPaperclip} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getOneProposal, downloadJobFiles, receiveJob, setProposalStatus } from "./../../Actions/getJobs";
-
+import { getOneProposal, receiveJob } from "./../../Actions/getJobs";
+import axios from "axios";
+import baseURL from "./../../Actions/baseURL";
 
 class ShowProposal extends Component {
     constructor(props) {
@@ -17,28 +18,49 @@ class ShowProposal extends Component {
             jobPage : `/job/${this.props.match.params.jobId}`, 
             message: "", 
             sendJob: false,
-            proposalStatus: 0
+            allFiles: []
         }
     }
     componentDidMount = () => {
-        console.log(localStorage.getItem('token'),this.props.match.params.jobId)
-        console.log(localStorage.getItem('id'))
         this.props.getOneProposal(localStorage.getItem("id"),this.props.match.params.jobId)
+        console.log(this.props);
+        console.log("ana ahoooooooo")
+    }
+    handleOnSubmit = (e) => {
+            try{
+                const data = {
+                    'Content-Type':'multipart/form-data',
+                    'userid' : localStorage.getItem('id'),
+                    'jobid' : this.props.match.params.jobId,
+                    'message': this.state.message
+                  };
+                e.preventDefault();
+                const formData = new FormData();
+                for(let i = 0; i <this.state.allFiles.length; i++){
+                    formData.append('fileList', this.state.allFiles[i]);
+                }
+                axios.post('http://localhost:8080/api/job/uploadjobfiles',formData, {headers: data})
+                .then(result => console.log(result))
+                } catch (error) {
+                    console.log(error);
+                }
+            window.location.reload();
     }
     handleFiles = () => {
-        if(this.props.getProposal.myProposal[0].receiveJob.jobFiles.length > 0){
-            console.log("ah malkesh da3wa")
+        if(this.props.getProposal.myProposal[0].receivedJob.receivedJobFiles.length > 0){
         let files = [];
             files.push (
                 <div>
-                    <div className="job-files border rounded px-3 py-2">
-                        <FontAwesomeIcon icon={faFile} className="-mx-3 d-inline"></FontAwesomeIcon>
-                    </div>
-                    {this.props.getProposal.myProposal[0].receiveJob.jobFiles.map(file =>{
-                        <span className="mx-2" onClick={()=>{
-                            this.props.downloadJobFiles(file)
-                            }}>{file}</span>
-                    })}
+                    { (() => {
+                        let data =  []
+                        this.props.getProposal.myProposal[0].receivedJob.receivedJobFiles.map((file) =>{
+                        data.push(<a id="proposljobfile" target="_blank" href={`${baseURL}/api/job/downloadfiles/${file}`} className="job-files color-upwork px-3 py-2 d-block">
+                        <FontAwesomeIcon icon={faPaperclip} className="-mx-3 d-inline"></FontAwesomeIcon>
+                        <span className="mx-2">{file}</span>
+                        </a>)
+                    }   )
+                    return data
+                    })()}
                 </div>
                 )
             return files;
@@ -57,12 +79,12 @@ class ShowProposal extends Component {
             </div>
             )
         }
-        else if(this.props.proposalStatus === 2){
+        else if(this.props.getProposal.myProposal[0].proposal.status === 2){
             return (
                 <div className="">
                     <button className="btn btn-success px-4 py-3 font-weight-bold receive-btn" data-toggle="modal" data-target="#recieveModal">Recieve proposal</button>
                     <div className="modal fade" id="recieveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-dialog modal-lg" role="document">
+                        <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title font-weight-bold">Recieve Work</h5>
@@ -71,47 +93,48 @@ class ShowProposal extends Component {
                                 </button>
                             </div>
                             <div className="container">
-                                <form>
                                     <div className="modal-body p-5">
-                                        <div className="form-group">
-                                            <label for="exampleFormControlTextarea1">Message</label>
-                                            <textarea required className="form-control" id="exampleFormControlTextarea1" rows="3" onChange={(e)=>{
-                                                this.setState({message: e.target.value});
-                                                console.log(this.state.message)
-                                            }}></textarea>
-                                        </div>
-                                        <div className="custom-file mt-4">
-                                            <input type="file" multiple className="custom-file-input" id="inputGroupFile01"/>
-                                            <label className="custom-file-label" for="inputGroupFile01">Choose files</label>
-                                        </div>
-                                        </div>
-                                    <div className="modal-footer">
-                                        <button type="submit" className="btn btn-success text-white btn-upwork" data-dismiss="modal" onClick={()=>{
-                                            console.log(this.state.message)
-                                            this.props.receiveJob(localStorage.getItem('id'), this.props.match.params.jobId, this.state.message)
-                                            this.props.setProposalStatus(3);
-                                            this.props.getOneProposal(localStorage.getItem('id'),this.props.match.params.jobId)
-                                            console.log(this.props.proposalStatus)
-                                            window.location.reload();
-                                        }}>Send Job</button>
-                                        <button type="button" className="btn color-black close-modal-btn btn-outline-success" data-dismiss="modal">Close</button>
+                                        <form onSubmit={this.handleOnSubmit} encType="multipart/form-data">
+                                            <div className="form-group d-flex" id="jobReceiveForm">
+                                                <label for="exampleFormControlTextarea1" className="color-black font-weight-bold mr-3">Message:</label>
+                                                <textarea required className="form-control message-textarea" id="exampleFormControlTextarea1" rows="3" onChange={(e)=>{
+                                                    this.setState({message: e.target.value});
+                                                }}></textarea>
+                                            </div>
+                                            <div className="custom-file mt-4">
+                                                <input type="file" name="fileList" enctype="multipart/form-data" multiple id="jobFile" className="form-control-file" onChange={(event) =>{
+                                                        this.setState({allFiles: event.target.files})
+                                                }}/>
+                                                <div id="uploadJobFiles" className="col-12 px-0 mb-2 d-flex justify-content-center align-items-center" onClick={()=>{
+                                                    document.getElementById('jobFile').click()
+                                                }}>
+                                                    <div className=" d-inline-block">
+                                                    drag or <span>upload</span> project images
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/* data-dismiss="modal" */}
+                                            <div className="modal-footer mt-5 d-flex justify-content-center">
+                                                <input type="submit" className="btn btn-success text-white btn-upwork" value="Send Job"/>
+                                            </div>
+                                        </form>
+                                        
                                     </div>
-                                </form>
-                            </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 )
         }
-        else if(this.props.proposalStatus === 3){
+        else if(this.props.getProposal.myProposal[0].proposal.status === 3){
             return (
                 <div className="">
                     <button disabled className="btn btn-outline-success px-4 my-3 py-3 font-weight-bold color-black">You finished this job <FontAwesomeIcon icon={faCheckCircle}className="ml-4 text-success check-circle"/></button>
                     <div className="py-2 border border-right-0 border-left-0 border-muted">
                         <h5 className="font-weight-bold my-3 py-3 border border-right-0 border-left-0 border-top-0 border-muted">Your received work</h5>
                         <h6 className="font-weight-bold">Message:</h6>
-                        <p className="mb-4">{this.props.getProposal.myProposal[0].receiveJob.message}</p>
+                        <p className="mb-4">{this.props.getProposal.myProposal[0].receivedJob.message}</p>
                         <h5 className="font-weight-bold">Files:</h5>
                         {this.handleFiles()}
                     </div>
@@ -127,7 +150,6 @@ class ShowProposal extends Component {
         }
     }
     show = () => {
-        console.log(this.props)
         if(this.props.getProposal){
             return (
                 <div className="proposal-details-container">
@@ -166,8 +188,8 @@ class ShowProposal extends Component {
                                                                 </div>
                                                             </div>
                                                             <div className="col-sm-9">
-                                                                <div>
-                                                                    <p className="font-weight-bold">{this.props.getProposal.myProposal[0].myJob.experienceLevel}</p>
+                                                                <div className="d-flex flex-wrap justify-content-center">
+                                                                    <p className="font-weight-bold w-100 text-wrap">{this.props.getProposal.myProposal[0].myJob.experienceLevel}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -179,7 +201,7 @@ class ShowProposal extends Component {
                                                             </div>
                                                             <div className="col-sm-9">
                                                                 <div>
-                                                                    <p className="font-weight-bold">{this.props.getProposal.myProposal[0].myJob.estimatedBudget}</p>
+                                                                    <p className="font-weight-bold text-wrap">{this.props.getProposal.myProposal[0].myJob.estimatedBudget}</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -226,6 +248,30 @@ class ShowProposal extends Component {
                                             <div className="cover-letter-content p-3 ml-3">
                                                 {this.props.getProposal.myProposal[0].proposal.coverLetter}
                                             </div>
+                                            {(() =>{
+                                                let data = [];
+                                                let comingData = this.props.getProposal.myProposal[0].myJob.proposals.proposalFiles;
+                                                if(comingData){
+                                                if(comingData.length > 0){
+                                                    for(let i = 0; i < comingData.length; i++){
+                                                            if(comingData[i].userId == localStorage.getItem('id')){
+                                                                console.log(comingData[i].userId)
+                                                                comingData[i].files.map(file =>{
+                                                                    data.push(
+                                                                        <div>
+                                                                            <a id="proposljobfile2" target="_blank" href={`${baseURL}/api/job/downloadproposalfiles/${file}`} className="job-files color-upwork px-3 py-2 d-block">
+                                                                                <FontAwesomeIcon icon={faPaperclip} className="-mx-3 d-inline"></FontAwesomeIcon>
+                                                                                <span className="mx-2 font-weight-bold font-size-small">{file}</span>
+                                                                            </a>
+                                                                        </div>
+                                                                    )
+                                                                })
+                                                            }
+                                                        } 
+                                                    }
+                                                }
+                                                return data;
+                                            })()}
                                         </div>
                                     </div>
                                 </div>
@@ -264,14 +310,13 @@ class ShowProposal extends Component {
         }
         else{
             return(
-                <div className="d-flex justify-content-center">
-                    <h3>This Proposal does  not found</h3>
+                <div className="d-flex justify-content-center my-5">
+                    <h3 className="my-5 py-5">This Proposal does  not found</h3>
                 </div>
             )
         }
     }
     render() { 
-        console.log(this.props.getProposal)
         return ( 
             <div>
                 <Header />
@@ -288,11 +333,9 @@ const mapStateToProps = (state) => {
       userId: state.userReducer.userID,
       getProposal: state.getJobsReducer.getOneProposal,
       receivedJob: state.getJobsReducer.receiveJob,
-      proposals: state.getJobsReducer.proposals,
-      proposalStatus: state.getJobsReducer.proposalStatus
     };
   };
   const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getOneProposal, downloadJobFiles, receiveJob, setProposalStatus},dispatch);
+    return bindActionCreators({getOneProposal, receiveJob},dispatch);
   };
   export default connect(mapStateToProps, mapDispatchToProps)(ShowProposal);
