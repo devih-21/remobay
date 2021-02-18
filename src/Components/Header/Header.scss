@@ -22,6 +22,21 @@
   display: none;
 }
 
+.mobile-nav-item {
+  &:hover {
+    cursor: pointer;
+    p {
+      color: $tertiary-color;
+    }
+    svg {
+      color: $tertiary-color;
+    }
+    span {
+      color: $tertiary-color;
+    }
+  }
+}
+
 #navbar li {
   margin-right: 1em;
   &:hover {

@@ -18,10 +18,12 @@ const JobBudget = (props) => {
       experienceLevel: props.jobExperienceLevel,
       visibility: props.jobPostVisibility,
       freelancersNo: props.numberOfFreelancersForJob,
-      estimatedBudget: props.jobPostBudget
+      estimatedBudget: props.jobPostBudget,
+      file: props.jobPostFiles
     }
 
     props.createJobPost(jobPost);
+    props.setJobPostProgress(1);
 
     history.push("/");
   }

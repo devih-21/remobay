@@ -33,6 +33,22 @@
   display: none;
 }
 
+.mobile-nav-item:hover {
+  cursor: pointer;
+}
+
+.mobile-nav-item:hover p {
+  color: #37a000;
+}
+
+.mobile-nav-item:hover svg {
+  color: #37a000;
+}
+
+.mobile-nav-item:hover span {
+  color: #37a000;
+}
+
 #navbar li {
   margin-right: 1em;
 }

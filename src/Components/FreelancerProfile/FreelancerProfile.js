@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { setFreelancerHourlyRate, setFreelancerTitle, createProfileDetails, editProfileDescription, editProfilePrice, editProfileJobTitle, editProfileEducation, editProfileLanguage, getProfileInfo, getRegistrationInfo } from "../../Actions/userData";
+import { getProfileImage } from "../../Actions/utils";
 import "./FreelancerProfile.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UploadProfileImage from '../Modals/Upload Profile Image/UploadProfileImage.jsx';
@@ -9,16 +10,20 @@ import EditTitleModal from '../Modals/EditTitleModal/EditTitleModal.jsx';
 import EditHourlyRate from '../Modals/EditHourlyRate/EditHourlyRate';
 import EditDescriptionModal from '../Modals/EditDescriptionModal/EditDescriptionModal.jsx';
 import EditIcon from '../FontAwesomeIcons/EditIcon/EditIcon';
+import baseURL from '../../Actions/baseURL';
 
 const FreelancerProfile = (props) => {
 
   useEffect(() => {
-    props.getRegistrationInfo(localStorage.getItem('token'));
+    // if (!props.profileInfo) {
+    //   props.createProfileDetails(localStorage.getItem('token'));
+    // }
+    // props.getRegistrationInfo(localStorage.getItem('token'));
     props.getProfileInfo(localStorage.getItem('token'));
-    if (!props.profileInfo) {
-      props.createProfileDetails(localStorage.getItem('token'));
-    }
+    // props.getProfileImage(localStorage.getItem('id'));
   }, [])
+
+  let profileImageSrc = `${baseURL}/api/job/getimage/${localStorage.getItem('id')}`
 
   return (
     <div id="freelancer-profile-body" className="p-lg-4">
@@ -26,7 +31,7 @@ const FreelancerProfile = (props) => {
         <div className="row col-12 d-flex">
           <div className="my-4 mr-0 col-3 col-md-2 col-lg-1 p-0">
             <div id="profile-img-div" className="offset-3">
-              <img src="https://via.placeholder.com/60" alt="profile pic" className="rounded-circle"/>
+              <img src={props.uploadedFiles ? props.uploadedFiles : "https://via.placeholder.com/60"} height="60" width="60" alt="profile pic" className="rounded-circle"/>
               <div id="edit-profile-img" role="button" data-toggle="modal" data-target="#uploadProfileImage" >
                 <EditIcon/>
               </div>
@@ -150,6 +155,8 @@ const mapStateToProps = (state) => {
     profileTitle: state.userReducer.profileTitle,
     profileDescription: state.userReducer.profileDescription,
     registrationInfo: state.userReducer.registrationInfo,
+    uploadedFiles: state.utilsReducer.uploadedFiles,
+    getProfileImageSrc: state.utilsReducer.getProfileImageSrc
   }
 }
 
@@ -164,7 +171,8 @@ const mapDispatchToProps = (dispatch) => {
     editProfileEducation,
     editProfileLanguage,
     getProfileInfo,
-    getRegistrationInfo
+    getRegistrationInfo,
+    getProfileImage
   }, dispatch)
 }
 

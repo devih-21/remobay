@@ -2,7 +2,7 @@ import './UploadProfileImage.css';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { uploadMultipleFiles } from '../../../Actions/utils';
+import { uploadMultipleFiles, getProfileImage } from '../../../Actions/utils';
 import { setProfilePic, setProfileImage } from '../../../Actions/userData';
 import { useState, useEffect } from 'react';
 import $ from "jquery";
@@ -11,7 +11,10 @@ const UploadProfileImage = (props) => {
   let imgFile;
 
   $(document).on('hide.bs.modal','#uploadProfileImage', function () {
-    console.log("Hidden");;
+    console.log("Hidden");
+    props.setProfilePic(null);
+    document.getElementById('profileImage').innerHTML = "Attach or Drop photo Here";
+    console.log(props.uploadedFiles);
   });
 
   $(document).on('shown.bs.modal','#uploadProfileImage', function () {
@@ -33,11 +36,13 @@ const UploadProfileImage = (props) => {
     console.log(document.getElementById("confirmUploadBtn"));
   }
 
-  let submitProfilePic = () => {
+  let submitProfilePic = (e) => {
+    e.preventDefault();
     const data = new FormData()
     data.set('file', props.profilePicture)
     console.log(data);
-    props.uploadMultipleFiles(data, localStorage.getItem('id'))
+    console.log(props.profilePicture);
+    props.uploadMultipleFiles(data, localStorage.getItem('id'));
     console.log(props.uploadedFiles);
   }
 
@@ -121,7 +126,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     uploadMultipleFiles,
     setProfilePic,
-    setProfileImage
+    setProfileImage,
+    getProfileImage
   }, dispatch);
 }
 

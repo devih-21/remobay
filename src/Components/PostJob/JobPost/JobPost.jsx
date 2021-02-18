@@ -1,7 +1,7 @@
 import "./JobPost.css";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { checkJobPostTitle, checkJobPostDescription, setJobPostProgress, setProjectType, setScreeningQuestionsCounter, setScreeningQuestions, setJobCategory, setJobExperienceLevel, setJobPostVisibility, setFreelancersNeeded, setJobPostBudget, setJobPostDescription, setJobPostTitle, createJobPost, setNumberOfFreelancersForJob } from '../../../Actions/jobPost';
+import { checkJobPostTitle, checkJobPostDescription, setJobPostProgress, setProjectType, setScreeningQuestionsCounter, setScreeningQuestions, setJobCategory, setJobExperienceLevel, setJobPostVisibility, setFreelancersNeeded, setJobPostBudget, setJobPostDescription, setJobPostTitle, createJobPost, setNumberOfFreelancersForJob, setJobPostFiles } from '../../../Actions/jobPost';
 import PostJobNavigation from "../PostJobNavigation/PostJobNavigation";
 import JobTitle from "../JobTitle/JobTitle";
 import JobDescription from "../JobDescription/JobDescription";
@@ -57,7 +57,8 @@ const mapDispatchToProps = (dispatch) => {
     setJobPostDescription,
     setJobPostTitle,
     createJobPost,
-    setNumberOfFreelancersForJob
+    setNumberOfFreelancersForJob,
+    setJobPostFiles
   }, dispatch);
 }
 
@@ -77,7 +78,8 @@ const mapStateToProps = (state) => {
     jobPostDescription: state.jobPostReducer.jobPostDescription,
     jobPostTitle: state.jobPostReducer.jobPostTitle,
     jobCreated: state.jobPostReducer.jobCreated,
-    numberOfFreelancersForJob: state.jobPostReducer.numberOfFreelancersForJob
+    numberOfFreelancersForJob: state.jobPostReducer.numberOfFreelancersForJob,
+    jobPostFiles: state.jobPostReducer.jobPostFiles
   }
 }
 
