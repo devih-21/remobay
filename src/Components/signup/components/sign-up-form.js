@@ -12,6 +12,7 @@ import React, { Component } from 'react';
 import validator from 'validator';
 import axios from 'axios';
 import { Redirect } from  "react-router-dom";
+import baseURL from "../../../Actions/baseURL";
 
 
 class SignupForm extends Component {
@@ -59,7 +60,7 @@ class SignupForm extends Component {
                 type: this.state.userType,
             };
             console.log(newUser);
-            await axios.post('http://localhost:8080/api/user/register', newUser)
+            await axios.post(`${baseURL}/api/user/register`, newUser)
                 .then(async res => 
 
                 {                                

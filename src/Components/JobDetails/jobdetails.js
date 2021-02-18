@@ -28,7 +28,7 @@ class JobDetails extends Component {
   }
 
   handleExperienceLevel() {
-    if (this.props.getJob[0].experienceLevel === "Entry") {
+    if (this.props.getJob[0].experienceLevel === "entry-level") {
       return (
         <div>
           <strong className="color-black">
@@ -41,7 +41,7 @@ class JobDetails extends Component {
         </div>
       );
     }
-    if (this.props.getJob[0].experienceLevel === "intermediate") {
+    if (this.props.getJob[0].experienceLevel === "intermediate-level") {
       return (
         <div>
           <strong className="color-black">
@@ -54,7 +54,7 @@ class JobDetails extends Component {
         </div>
       );
     }
-    if (this.props.getJob[0].experienceLevel === "Expert") {
+    if (this.props.getJob[0].experienceLevel === "expert-level") {
       return (
         <div>
           <strong className="color-black">
@@ -303,7 +303,7 @@ class JobDetails extends Component {
     } else {
       return (
         <div className="d-flex justify-content-center">
-          <h2>this Job is not exist</h2>
+          <h2>This Job does not exist</h2>
         </div>
       );
     }

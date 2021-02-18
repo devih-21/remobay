@@ -11,6 +11,7 @@ import './ApplyJob.css'
 import '../HomePage/HomePage.css'
 import '../hiring/homeHire/homeHiring.css'
 import axios from 'axios';
+import baseURL from '../../Actions/baseURL';
 
 
 class Apply extends Component {
@@ -72,7 +73,7 @@ class Apply extends Component {
                 formData.append('file', this.state.allFiles[i]);
             }
 
-             await axios.post('http://localhost:8080/api/job/uploadproposlsfiles',formData,{headers: data})
+             await axios.post(`${baseURL}/api/job/uploadproposlsfiles`,formData,{headers: data})
 
             .then(result => console.log(result))
        

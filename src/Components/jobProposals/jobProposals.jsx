@@ -4,6 +4,9 @@ import { bindActionCreators } from "redux";
 import {getProposal , acceptProposal} from '../../Actions/sumbitProbosal';
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import {faTag, faUserCog, faCheckCircle, faStar, faPaperclip} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import baseURL from "../../Actions/baseURL";
 
 class JobProposals extends Component{
     constructor(){
@@ -64,6 +67,32 @@ class JobProposals extends Component{
                                                     <p className="m-0 edit-font-small">Invite-only</p>
                                                     <p className="m-0 edit-font-small">- Created </p>
                                                 </div> */}
+                                            </div>
+                                            <div>
+                                            {(() =>{
+                                              let data = [];
+                                              let comingData = this.props.getpro.proposalFiles
+                                              if(comingData){
+                                              if(comingData.length > 0){
+                                                  for(let i = 0; i < comingData.length; i++){
+                                                          if(comingData[i].userId == p.userId){
+                                                              console.log(comingData[i].userId)
+                                                              comingData[i].files.map(file =>{
+                                                                  data.push(
+                                                                      <div>
+                                                                          <a id="proposljobfile2" target="_blank" href={`${baseURL}/api/job/downloadfiles/${file}`} className="job-files color-upwork px-3 py-2 d-block">
+                                                                              <FontAwesomeIcon icon={faPaperclip} className="-mx-3 d-inline"></FontAwesomeIcon>
+                                                                              <span className="mx-2 font-weight-bold font-size-small">{file}</span>
+                                                                          </a>
+                                                                      </div>
+                                                                  )
+                                                              })
+                                                          }
+                                                      } 
+                                                  }
+                                              }
+                                              return data;
+                                          })()}
                                             </div>
                                             <div className="mt-3">
                                             <button className="btn btn-success" onClick={()=>this.handleAccept(p.userId)}>Accept</button>

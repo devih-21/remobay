@@ -44,6 +44,7 @@ const UploadProfileImage = (props) => {
     console.log(props.profilePicture);
     props.uploadMultipleFiles(data, localStorage.getItem('id'));
     console.log(props.uploadedFiles);
+    $("#uploadProfileImage").modal("hide");
   }
 
 
@@ -89,7 +90,7 @@ const UploadProfileImage = (props) => {
             <div className="modal-body container">
               <div className="row col-12">
                 <div className="col-12 col-lg-6">
-                  <div id="previewImage"><div id="profileImage" className="h6">Attach or Drop photo Here</div></div>
+                  <div className="m-auto" id="previewImage"><div id="profileImage" className="h6">Attach or Drop photo Here</div></div>
                 </div>
                 <div className="col-6 d-none d-lg-block">
                   <div className="col-12 h3">Show clients the best version of yourself!</div>

@@ -39,7 +39,7 @@ class ShowProposal extends Component {
                 for(let i = 0; i <this.state.allFiles.length; i++){
                     formData.append('fileList', this.state.allFiles[i]);
                 }
-                axios.post('http://localhost:8080/api/job/uploadjobfiles',formData, {headers: data})
+                axios.post(`${baseURL}/api/job/uploadjobfiles`,formData, {headers: data})
                 .then(result => console.log(result))
                 } catch (error) {
                     console.log(error);
@@ -82,12 +82,12 @@ class ShowProposal extends Component {
         else if(this.props.getProposal.myProposal[0].proposal.status === 2){
             return (
                 <div className="">
-                    <button className="btn btn-success px-4 py-3 font-weight-bold receive-btn" data-toggle="modal" data-target="#recieveModal">Recieve proposal</button>
+                    <button className="btn btn-success px-4 py-3 font-weight-bold receive-btn" data-toggle="modal" data-target="#recieveModal">Submit Job</button>
                     <div className="modal fade" id="recieveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title font-weight-bold">Recieve Work</h5>
+                                <h5 className="modal-title font-weight-bold">Receive Work</h5>
                                 <button type="button" className="close color-upwork" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
@@ -259,7 +259,7 @@ class ShowProposal extends Component {
                                                                 comingData[i].files.map(file =>{
                                                                     data.push(
                                                                         <div>
-                                                                            <a id="proposljobfile2" target="_blank" href={`${baseURL}/api/job/downloadproposalfiles/${file}`} className="job-files color-upwork px-3 py-2 d-block">
+                                                                            <a id="proposljobfile2" target="_blank" href={`${baseURL}/api/job/downloadfiles/${file}`} className="job-files color-upwork px-3 py-2 d-block">
                                                                                 <FontAwesomeIcon icon={faPaperclip} className="-mx-3 d-inline"></FontAwesomeIcon>
                                                                                 <span className="mx-2 font-weight-bold font-size-small">{file}</span>
                                                                             </a>
@@ -311,7 +311,7 @@ class ShowProposal extends Component {
         else{
             return(
                 <div className="d-flex justify-content-center my-5">
-                    <h3 className="my-5 py-5">This Proposal does  not found</h3>
+                    <h3 className="my-5 py-5">This Proposal does not exist</h3>
                 </div>
             )
         }

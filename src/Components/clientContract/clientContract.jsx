@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import baseURL from "./../../Actions/baseURL"
-import { downloadJobFiles, receiveJob, setProposalStatus , getOneJob } from "./../../Actions/getJobs";
+import { receiveJob, getOneJob } from "./../../Actions/getJobs";
 
 
 class clientContract extends Component {
@@ -289,6 +289,6 @@ const mapStateToProps = (state) => {
     };
   };
   const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({getOneJob, downloadJobFiles, receiveJob, setProposalStatus},dispatch);
+    return bindActionCreators({getOneJob, receiveJob},dispatch);
   };
   export default connect(mapStateToProps, mapDispatchToProps)(clientContract);

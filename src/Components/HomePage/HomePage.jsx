@@ -682,7 +682,7 @@ class Home extends Component {
         return (
           <div>
             <h3 className="text-center text-dark">
-              There are no jobs available
+              No jobs available
             </h3>
           </div>
         );
@@ -690,7 +690,7 @@ class Home extends Component {
     } else {
       return (
         <div className="my-4 d-block">
-          <h3 className="text-center text-dark">There are no jobs exist </h3>
+          <h3 className="text-center text-dark">No jobs exist </h3>
         </div>
       );
     }

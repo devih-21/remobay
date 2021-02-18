@@ -1,4 +1,6 @@
 
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 import { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -20,7 +22,7 @@ const MyClientJobs = (props) => {
   let history = useHistory();
 
   let navigateToShowProposals = (jobId) => {
-    history.push(`/freelancer/myjobs/${jobId}`);
+    history.push(`/client/jobs/${jobId}`);
   }
 
   let activeContract = () => {
@@ -86,7 +88,10 @@ const MyClientJobs = (props) => {
 
 
   return (
-    <div id="freelancer-jobs-body" className="px-0 p-lg-4">
+    <div>
+      <Header />
+
+      <div id="freelancer-jobs-body" className="px-0 p-lg-4">
       <div className="container pb-5 col-12 col-lg-10 rounded">
         <div className="col-12">
           <div className="col d-lg-flex mx-auto col-12 justify-content-between mb-2">
@@ -124,6 +129,9 @@ const MyClientJobs = (props) => {
           </div>
         </div>
       </div>
+    </div>
+
+      <Footer />
     </div>
   )
 }

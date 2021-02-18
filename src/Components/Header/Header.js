@@ -48,7 +48,7 @@ const Header = (props) => {
     if (localStorage.getItem('type') === "freelancer" || localStorage.getItem('type') === "Freelancer") {
       history.push("/freelancer/myjobs");
     } else if (localStorage.getItem('type') === "client") {
-      history.push('/');
+      history.push('/client/jobs');
     }
   }
 
