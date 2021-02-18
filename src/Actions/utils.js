@@ -17,3 +17,19 @@ export async function uploadMultipleFiles (formData, userId) {
     payload
   }
 }
+
+export async function getProfileImage (id) {
+  // let payload;
+  // try {
+  //   let response = await axios.get(`${baseURL}/api/job/getimage/${id}`);
+  //   payload = response;
+  // }
+  // catch (err) {
+  //   console.log(err);
+  // }
+
+  return {
+    type: "GET_PROFILE_IMAGE",
+    getURL: `${baseURL}/api/job/getimage/${id}`
+  }
+}

@@ -216,3 +216,10 @@ export function setNumberOfFreelancersForJob (number) {
     number
   }
 }
+
+export function setJobPostFiles (files) {
+  return {
+    type: "SET_JOB_POST_FILES",
+    files
+  }
+}

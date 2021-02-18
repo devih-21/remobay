@@ -70,6 +70,10 @@ export function jobPostReducer (state = {}, action) {
       return {...state, numberOfFreelancersForJob: action.number}
     }
 
+    case "SET_JOB_POST_FILES": {
+      return {...state, jobPostFiles: action.files}
+    }
+
 
     default: return state;
   }

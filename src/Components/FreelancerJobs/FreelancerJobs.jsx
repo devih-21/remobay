@@ -91,7 +91,7 @@ const MyJobs = (props) => {
             <div className="h3">My Jobs</div>
             <div className="h5">Earnings available now: <span className="text-tertiary">${props.registrationInfo ? props.registrationInfo.paymentAccount.availableAmount : ""}.00</span></div>
           </div>
-          <div id="jobs-container" className="container col-12 bg-white px-0 rounded">
+          <div id="jobs-container" className="container col-12 bg-white px-0 rounded mb-3">
             <div id="active-contracts-title" className="row col-12 rounded py-3 mx-0">
               <div className="h4">Active contracts</div>
             </div>
@@ -100,7 +100,7 @@ const MyJobs = (props) => {
             </div>
             {activeContract()}
           </div>
-          <div id="jobs-container" className="container col-12 bg-white px-0 rounded">
+          <div id="jobs-container" className="container col-12 bg-white px-0 rounded mb-3">
             <div id="active-contracts-title" className="row col-12 rounded py-3 mx-0">
               <div className="h4">Active proposals</div>
             </div>
@@ -109,7 +109,7 @@ const MyJobs = (props) => {
             </div>
             {activeProposal()}
           </div>
-          <div id="jobs-container" className="container col-12 bg-white px-0 rounded">
+          <div id="jobs-container" className="container col-12 bg-white px-0 rounded mb-3">
             <div id="active-contracts-title" className="row col-12 rounded py-3 mx-0">
               <div className="h4">Finished contracts</div>
             </div>
@@ -118,7 +118,7 @@ const MyJobs = (props) => {
             </div>
             {finishedContract()}
           </div>
-          <div id="jobs-container" className="container col-12 bg-white px-0 rounded">
+          <div id="jobs-container" className="container col-12 bg-white px-0 rounded mb-3">
             <div id="active-contracts-title" className="row col-12 rounded py-3 mx-0">
               <div className="h4">Archived proposals</div>
             </div>

@@ -141,7 +141,7 @@ class HomeHiring extends Component {
                                                         <p className="edit-font-small m-0">Messaged</p>
                                                     </div>
                                                     <div className="ml-4">
-                                                        <p className="m-0 font-weight-bold ">{p.hiring.length}</p>
+                                                        <p className="m-0 font-weight-bold ">{p.proposals.hiringLength}</p>
                                                         <p className="edit-font-small m-0">Hired</p>
                                                     </div>
                                                 </div>
