@@ -68,7 +68,7 @@ class clientContract extends Component {
 
                     data.push(
                         <div className="">
-                            <button disabled className="btn btn-outline-success px-4 my-3 py-3 font-weight-bold color-black">You finished this job <FontAwesomeIcon icon={faCheckCircle}className="ml-4 text-success check-circle"/></button>
+                            <button disabled className="btn btn-outline-success px-4 my-3 py-3 font-weight-bold color-black">This freelancer finished his job <FontAwesomeIcon icon={faCheckCircle}className="ml-4 text-success check-circle"/></button>
                             <div className="py-2 border border-right-0 border-left-0 border-muted">
                                 <h5 className="font-weight-bold my-3 py-3 border border-right-0 border-left-0 border-top-0 border-muted">Your received work</h5>
                                 <h6 className="font-weight-bold">Message:</h6>
