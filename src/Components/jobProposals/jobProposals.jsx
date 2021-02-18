@@ -9,7 +9,8 @@ class JobProposals extends Component{
     constructor(){
         super()
         this.state={
-            data:""
+            data:"",
+            x:""
         }
     }
 
@@ -19,8 +20,9 @@ class JobProposals extends Component{
         await this.setState({data : this.props.getpro})
     }
 
-    handleAccept= ()=>{
-        this.props.acceptProposal(this.props.match.params.id,localStorage.getItem('id'))
+    handleAccept= (userId)=>{
+        this.props.acceptProposal(this.props.match.params.id,userId)
+        window.location.reload();
     }
 
     render=()=>{
@@ -47,6 +49,7 @@ class JobProposals extends Component{
                         {this.props.getpro ? 
                             this.props.getpro.proposalsList.map((p)=>{
                                 return(
+                                    p.proposal.status === 0 ? 
                                     <div className="col-12">
                                     <div className="posting-hire-home  ">
                                         <div className="d-flex justify-content-between">
@@ -63,11 +66,11 @@ class JobProposals extends Component{
                                                 </div> */}
                                             </div>
                                             <div className="mt-3">
-                                            <button className="btn btn-success" onClick={this.handleAccept()}>Accept</button>
+                                            <button className="btn btn-success" onClick={()=>this.handleAccept(p.userId)}>Accept</button>
                                             </div>
                                         </div>
                                     </div>
-                                    </div>
+                                    </div> : ""
                                 )
                             })
                             :<div className="col-12">

@@ -86,10 +86,10 @@ class HomeHiring extends Component {
                     <div className="d-flex flex-wrap justify-content-between px-lg-5 px-1 ">
                         <div className="d-flex flex-wrap h3 font-weight-bold mt-4 mt-lg-0">
                             <p className="mr-5 ml-3">{this.props.registrationInfo ? `${this.props.registrationInfo.firstName} ${this.props.registrationInfo.lastName}` : ""}</p>
-                            <a href="" ><FontAwesomeIcon icon={faUserPlus} className="h5 mt-3 text-success stretched-link" /></a>
+                            <a><FontAwesomeIcon icon={faUserPlus} className="h5 mt-3 text-success stretched-link" /></a>
                         </div>
                         <div className="mt-4 mt-lg-0">
-                            <button className="btn btn-outline-success bg-light mr-1  px-lg-4 px-1 font-weight-bold">Browse Pre-defined Projects</button>
+                            <button className="btn btn-outline-success bg-light mr-1  px-lg-4 px-1 font-weight-bold">{this.props.registrationInfo ? `$${this.props.registrationInfo.paymentAccount.totalAmount}` : ""}</button>
                             <button onClick={this.handlePostJobButton} className="btn btn-success ml-1 mr-2 px-lg-4 px-1 font-weight-bold">Post a Job</button>
                         </div>
                     </div>
@@ -97,7 +97,7 @@ class HomeHiring extends Component {
                         <div className="col-12 col-lg-8">
                             <div className="d-flex flex-wrap  justify-content-between posting-hiring-home">
                                 <p className="h4 font-weight-bold ">My Postings</p>
-                                <a href="" className="header-hiring-allPosting">All Posting</a>
+                                <a className="header-hiring-allPosting">All Posting</a>
                             </div>
                             {this.props.getClient ? 
                             this.props.getClient.map((p)=>{
@@ -110,15 +110,15 @@ class HomeHiring extends Component {
                                                     <FontAwesomeIcon icon={faEllipsisH}/>
                                                 </div>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                  <a class="dropdown-item" href="#">View proposals</a>
+                                                  <a class="dropdown-item" >View proposals</a>
                                                   <div class="dropdown-divider"></div>
-                                                  <a class="dropdown-item" href="#">Upgrade to Featured</a>
-                                                  <a class="dropdown-item" href="#">Make Public</a>
+                                                  <a class="dropdown-item" >Upgrade to Featured</a>
+                                                  <a class="dropdown-item" >Make Public</a>
                                                   <div class="dropdown-divider"></div>
-                                                  <a class="dropdown-item" href="#">View job posting</a>
-                                                  <a class="dropdown-item" href="#">Edit posting</a>
-                                                  <a class="dropdown-item" href="#">Reuse posting</a>
-                                                  <a class="dropdown-item" href="#">Remove posting</a>
+                                                  <a class="dropdown-item" >View job posting</a>
+                                                  <a class="dropdown-item" >Edit posting</a>
+                                                  <a class="dropdown-item" >Reuse posting</a>
+                                                  <a class="dropdown-item" >Remove posting</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -141,7 +141,7 @@ class HomeHiring extends Component {
                                                         <p className="edit-font-small m-0">Messaged</p>
                                                     </div>
                                                     <div className="ml-4">
-                                                        <p className="m-0 font-weight-bold ">{p.hiring.length}</p>
+                                                        <p className="m-0 font-weight-bold ">{p.proposals.hiringLength}</p>
                                                         <p className="edit-font-small m-0">Hired</p>
                                                     </div>
                                                 </div>
