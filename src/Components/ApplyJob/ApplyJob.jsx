@@ -10,10 +10,13 @@ import Footer from "../Footer/Footer";
 import './ApplyJob.css'
 import '../HomePage/HomePage.css'
 import '../hiring/homeHire/homeHiring.css'
+import axios from 'axios';
+
 
 class Apply extends Component {
     constructor(){
         super();
+        // const formData = new formData()
         this.state = {
             profile : "General profile",
             numberOfConnects : 4,
@@ -42,7 +45,8 @@ class Apply extends Component {
             bid : 0.00,
             fee : 0.00,
             recived : 0.00,
-            cover : ""
+            cover : "",
+            allFiles : [],
         }
     }
 
@@ -52,8 +56,41 @@ class Apply extends Component {
         console.log("done",this.props);
     }
 
-    handleSubmit = ()=>{
+    handleSubmit = async ()=>{
+    
+
+        try{
+            let data = {
+                'Content-Type' : 'multipart/form-data' ,
+                'userid' : localStorage.getItem('id'),
+                'jobid' : this.props.match.params.id,
+                'message' : this.state.message,
+            }
+            let formData = new FormData();
+
+            for(let i = 0; i <this.state.allFiles.length; i++){
+                formData.append('file', this.state.allFiles[i]);
+            }
+
+             await axios.post('http://localhost:8080/api/job/uploadproposlsfiles',formData,{headers: data})
+
+            .then(result => console.log(result))
+       
+        } 
+        catch(error){
+            console.log(error);
+        }
+        
         console.log("props",this.props);
+        let x = {
+            id: localStorage.getItem('id'),
+            job: this.props.match.params.id,
+            bid:this.state.bid,
+            fee:this.state.fee,
+            res : this.state.recived,
+            cover:this.state.cover
+        }
+        console.log("this======>",x);
         this.props.postProposal(localStorage.getItem('id'),this.props.match.params.id,this.state.bid,this.state.fee,this.state.recived,this.state.cover)
         this.props.history.push("/");
     }
@@ -238,7 +275,12 @@ class Apply extends Component {
                                 <div>
                                         <p className="font-weight-bold">Attachments</p>
                                         <div className="upload">
-                                            <input type="file" id="myfile" name="upload"></input>
+                                            <input type="file" id="myfile" name="file" onChange={(event)=>{
+                                                // for(let i = 0 ; i<event.target.files.length ; i++){
+                                                //     this.formData.append("file",event.target.files[i])
+                                                // }
+                                                this.setState({allFiles : event.target.files})
+                                            }}></input>
                                         </div>
                                 </div>
                             

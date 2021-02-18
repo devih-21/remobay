@@ -18,6 +18,10 @@ import Apply from './Components/ApplyJob/ApplyJob';
 import HomeHiring from './Components/hiring/homeHire/homeHiring';
 import JobProposals from './Components/jobProposals/jobProposals';
 import ShowProposal from './Components/ShowProposal/showProposal';
+import MyClientJobs from './Components/clientActiveJobs/clientActiveJobs';
+import clientContract from './Components/clientContract/clientContract';
+
+
 
 
 
@@ -59,6 +63,8 @@ class App extends React.Component {
             <Route path="/home" component={HomeHiring} />
             <Route path="/job-post" component={JobPostPage} />
             <Route path="/job-proposals/:id" component={JobProposals} />
+            <Route exact path="/client/jobs" component={MyClientJobs} />
+            <Route path="/client/jobs/:jobId" component={clientContract} />
             <Route path="/signin" component={Signin} />
             <Route path="/signup" component={Signup} />
             <Route path="*" component={ErrorComponent} />
