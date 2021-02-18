@@ -92,7 +92,7 @@ class SigninForm extends Component {
             <div className="col-12">
               <div className="container">
                 <div className="row d-flex justify-content-center">
-                  <div className="col-7">
+                  <div className="col-lg-7  col-md-12 col-sm-12 col-xs-12">
                     <div className="text-center bg-white mb-5 py-4 px-5 border rounded">
                       <div className="alert-box error" id="error">
                         

@@ -130,7 +130,7 @@ class JobDetails extends Component {
                   <h2 className="color-black p-3 m-2">Job details</h2>
                   <div className="bg-white rounded">
                     <div className="row">
-                      <div className="col-9  pr-0 ">
+                      <div className="col-lg-9 col-md-6 col-sm-6 pr-0 ">
                         <div className="border border-bottom-0 border-left-0 border-top-0 border-muted">
                           <div className="header-section border border-right-0 border-left-0 border-top-0 border-muted">
                             <h3 className="color-black p-4 ">
@@ -152,7 +152,7 @@ class JobDetails extends Component {
 
                           <div className="  border border-right-0 border-left-0 border-top-0 border-muted ">
                             <div className="row p-4">
-                              <div className="col-6">
+                              <div className="col-lg-6 col-md-12 col-sm-12 ">
                                 <div className="container">
                                   <div className="row">
                                     <div className="col-2">
@@ -181,7 +181,7 @@ class JobDetails extends Component {
                                   </div>
                                 </div>
                               </div>
-                              <div className="col-6">
+                              <div className="col-lg-6 col-md-12 col-sm-12">
                                 <div className="container">
                                   <div className="row">
                                     <div className="col-2">
@@ -256,7 +256,7 @@ class JobDetails extends Component {
                           </div>
                         </div>
                       </div>
-                      <div className="col-3 pl-0 ml-0 ">
+                      <div className="col-lg-3 col-md-6 col-sm-6 pl-0 ml-0 ">
                         <div className=" py-4 px-0 m-0  ">
                           <div className="p-0 m-0">
                             <div className="border border-right-0 border-left-0 border-top-0 border-muted ">
