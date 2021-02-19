@@ -26,6 +26,19 @@ const JobBudget = (props) => {
     props.setJobPostProgress(1);
 
     history.push("/");
+    props.setJobPostTitle("");
+    props.setJobCategory("Web Design");
+    props.setJobPostDescription("");
+    props.setProjectType("");
+    props.setScreeningQuestions(null);
+    props.setJobExperienceLevel("");
+    props.setJobPostVisibility("");
+    props.setNumberOfFreelancersForJob(null);
+    props.setJobPostBudget(null);
+    props.checkJobPostTitle("", 5);
+    props.checkJobPostDescription("", 50);
+    props.setFreelancersNeeded("");
+    props.setJobPostProgress(1);
   }
 
   let handleBackBtnClick = () => {

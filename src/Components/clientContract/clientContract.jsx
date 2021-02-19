@@ -131,7 +131,7 @@ class clientContract extends Component {
                     <div className="row d-flex justify-content-center">
                         <div className="col-md-10">
                             <div className="h5-proposal-details m-3">
-                                <h5 className="font-weight-bold ">Proposal Details</h5>
+                                <h5 className="font-weight-bold ">Contract Details</h5>
                             </div>
                             <div className="row">
                                 <div className="col-md-9">
@@ -261,7 +261,7 @@ class clientContract extends Component {
         else{
             return(
                 <div className="d-flex justify-content-center">
-                    <h3>This Proposal does  not found</h3>
+                    <h3>This Proposal does  not exist</h3>
                 </div>
             )
         }

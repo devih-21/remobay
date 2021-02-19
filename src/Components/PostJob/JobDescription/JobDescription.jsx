@@ -36,7 +36,7 @@ const JobDescription = (props) => {
           <div className="container col p-0 px-lg-3">
             <div className="mb-4">
               <textarea value={props.jobPostDescription} onChange={checkDescriptionLength} className="col-12 py-2 largeInput" />
-              <div className="col-12 px-0 text-right primary-color">0/5000 characters (minimum 50)</div>
+              <div className="col-12 px-0 text-right primary-color">(minimum 50)</div>
             </div>
             <div>
               <div className="h6">Additional project files (optional)</div>

@@ -22,7 +22,7 @@ export async function postProposal(userID, jobID,bid,upworkFees,received,coverLe
   export async function getProposal(jobId) {
     let payload;
     try {
-      let response = axios.post(`${baseURL}/api/job/getproposals/${jobId}` , {jobId});
+      let response = axios.post(`${baseURL}/api/job/getproposals` , {jobId});
       payload = (await response).data
       console.log("allProposals",payload);
     }

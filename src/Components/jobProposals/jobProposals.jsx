@@ -50,13 +50,13 @@ class JobProposals extends Component{
                             </div>
                         </div>
                         {this.props.getpro ? 
-                            this.props.getpro.proposalsList.map((p)=>{
+                            this.props.getpro.map((p)=>{
                                 return(
                                     p.proposal.status === 0 ? 
                                     <div className="col-12">
                                     <div className="posting-hire-home  ">
                                         <div className="d-flex justify-content-between">
-                                            <p className="font-weight-bold" key={p.userId}>{p.userId}</p>
+                                            <p className="font-weight-bold" key={p.userId}>{`${p.userFirstName} ${p.userLastName}`}</p>
                                             <p className="m-0 font-weight-bold ">${p.proposal.terms.bid}</p>
                                             
                                         </div>
