@@ -64,8 +64,7 @@ class Apply extends Component {
             let data = {
                 'Content-Type' : 'multipart/form-data' ,
                 'userid' : localStorage.getItem('id'),
-                'jobid' : this.props.match.params.id,
-                'message' : this.state.message,
+                'jobid' : this.props.match.params.id
             }
             let formData = new FormData();
 
