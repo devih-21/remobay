@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="col-12 col-lg-3">
               <div className="row col-12 justify-content-center justify-content-lg-start py-2 py-lg-1 footerItems"><span>Trust, Safety & Security</span></div>
               <div className="row col-12 justify-content-center justify-content-lg-start py-2 py-lg-1 footerItems"><span>Help & Support</span></div>
-              <div className="row col-12 justify-content-center justify-content-lg-start py-2 py-lg-1 footerItems"><span>Upwork Foundation</span></div>
+              <div className="row col-12 justify-content-center justify-content-lg-start py-2 py-lg-1 footerItems"><span>Remobay Foundation</span></div>
             </div>
             <div className="col-12 col-lg-3">
               <div className="row col-12 justify-content-center justify-content-lg-start py-2 py-lg-1 footerItems"><span>Terms of Service</span></div>
@@ -58,7 +58,7 @@ const Footer = () => {
               </div>
             </div>
             <div className="row col-12 text-center d-block mt-4">
-              &copy; 2015 - 2021 Upwork&trade; Global Inc.
+              &copy; 2021 - 2022 Remobay&trade; Global Inc.
             </div>
           </div>
         </div>

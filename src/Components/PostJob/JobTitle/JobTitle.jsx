@@ -44,9 +44,9 @@ const JobTitle = (props) => {
             <div>
               <div className="h6">Here are some good examples:</div>
               <ul className="pl-4" id="jobTitleExamples">
-                <li>Developer needed for creating a responsive WordPress Theme</li>
-                <li>CAD designer to create a 3D model of a residential building</li>
-                <li>Need a design for a new company logo</li>
+                <li>Developer CGI for video</li>
+                <li>Create 3D video</li>
+                <li>Video Edit</li>
               </ul>
             </div>
           </div>
@@ -59,10 +59,10 @@ const JobTitle = (props) => {
             <div>Let's categorize your job, which helps us personalize your job details and match your job to relevant freelancers and agencies.</div>
             <div className="mt-2">
               <select id="jobCategorySelection" onChange={handleJobCategorySelection} className="p-2 col-12 col-lg-auto jobTitleInput">
-                <option value="Web Design">Web Design</option>
-                <option value="FullStack Development">Full Stack Development</option>
-                <option value="Graphic Design">Graphic Design</option>
-                <option value="Translation">Translation</option>
+                <option value="CGI">CGI</option>
+                <option value="Full Video Edit">Full Video Edit</option>
+                <option value="Animation">Animation</option>
+                <option value="Visual effect">Visual effect</option>
               </select>
             </div>
           </div>

@@ -52,7 +52,7 @@ class JobExpertise extends React.Component {
                     </div>
                     <div className="skill-item">
                       <FontAwesomeIcon icon="plus" />
-                      <span className="ml-1">Web Design</span>
+                      <span className="ml-1">Design</span>
                     </div>
                     <div className="skill-item">
                       <FontAwesomeIcon icon="plus" />
@@ -64,20 +64,20 @@ class JobExpertise extends React.Component {
               <div className="mb-3 mb-lg-4 pt-2">
                 <div>
                   <legend className="legend-title">
-                    {this.props.jobCategory} Languages<span>(optional)</span>
+                    {this.props.jobCategory} Tool<span>(optional)</span>
                   </legend>
                   <div>
                     <div className="skill-item">
                       <FontAwesomeIcon icon="plus" />
-                      <span className="ml-1">CSS</span>
+                      <span className="ml-1">Adobe</span>
                     </div>
                     <div className="skill-item">
                       <FontAwesomeIcon icon="plus" />
-                      <span className="ml-1">HTML</span>
+                      <span className="ml-1">Quik</span>
                     </div>
                     <div className="skill-item">
                       <FontAwesomeIcon icon="plus" />
-                      <span className="ml-1">JavaScript</span>
+                      <span className="ml-1">Online tool</span>
                     </div>
                   </div>
                 </div>
@@ -90,15 +90,15 @@ class JobExpertise extends React.Component {
                   <div>
                     <div className="skill-item">
                       <FontAwesomeIcon icon="plus" />
-                      <span className="ml-1">React</span>
+                      <span className="ml-1">Effect</span>
                     </div>
                     <div className="skill-item">
                       <FontAwesomeIcon icon="plus" />
-                      <span className="ml-1">Angular JS</span>
+                      <span className="ml-1">Color</span>
                     </div>
                     <div className="skill-item">
                       <FontAwesomeIcon icon="plus" />
-                      <span className="ml-1">Node.js</span>
+                      <span className="ml-1">Actions</span>
                     </div>
                   </div>
                 </div>

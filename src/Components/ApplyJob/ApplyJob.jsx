@@ -153,7 +153,7 @@ class Apply extends Component {
                                    
                                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                       <p className="dropdown-item" onClick={()=>this.handleProfile("General profile")} >General profile</p>
-                                      <p className="dropdown-item" onClick={()=>this.handleProfile("Full Stack Development")} >Full Stack Development</p>
+                                      <p className="dropdown-item" onClick={()=>this.handleProfile("Full Development")} >Full Development</p>
                                     </div>
                                 </div>
                                 <div className="d-flex ">
@@ -228,7 +228,7 @@ class Apply extends Component {
                                         </div>
                                         <div className="d-flex justify-content-between box-border">
                                             <div>
-                                                <p className="font-weight-bold mb-1">Upwork Service Fee</p>
+                                                <p className="font-weight-bold mb-1">Remobay Service Fee</p>
                                             </div>
                                             <div>
                                                 <p>{this.state.fee}</p>

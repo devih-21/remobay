@@ -467,7 +467,7 @@ class SignupForm extends Component {
                                     <div className="form-check">
                                         <input required className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
                                         <label className="mx-3 form-check-label text-dark" for="flexCheckDefault">
-                                            Yes, I understand and agree to the Upwork Terms of Service, including the User Agreement and Privacy Policy.
+                                            Yes, I understand and agree to the Remobay Terms of Service, including the User Agreement and Privacy Policy.
                                         </label>
                                     </div>
                                 </div>

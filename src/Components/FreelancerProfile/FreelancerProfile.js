@@ -77,7 +77,7 @@ const FreelancerProfile = (props) => {
             </div>
             <div className="row px-2 pt-2 col-12">
               <div className="col-8 pl-0">
-                <div className="row h5 col-12">Information Technology Institute</div>
+                <div className="row h5 col-12">School of Art LA</div>
               </div>
               <div className="col-4">
                 <EditIcon/>
@@ -87,7 +87,7 @@ const FreelancerProfile = (props) => {
               </div>
             </div>
             <div className="row px-2 col-12">
-              <div className="row col-12">Full Stack Web Development using MEA/RN 2020-2021</div>
+              <div className="row col-12">Video maker</div>
             </div>
           </div>
 

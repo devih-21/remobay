@@ -217,10 +217,10 @@ class HomeHiring extends Component {
                                     <div className="">
                                         <p className="font-weight-bold m-0 mb-1">3. Work together</p>
                                         <p className="edit-font-small m-0 help-one-text mb-1 ">Use
-                                                Upwork Messages to securely chat, share files, and collaborate on projects.
+                                                Remobay Messages to securely chat, share files, and collaborate on projects.
                                                 View progress against project goals with the
                                                 Work Diary tool.</p>
-                                        <a href="" className="mb-5 help-one-link edit-font-small">Learn about Upwork pricing</a>
+                                        <a href="" className="mb-5 help-one-link edit-font-small">Learn about Remobay pricing</a>
 
                                     </div>
                                 </div>
@@ -229,8 +229,8 @@ class HomeHiring extends Component {
                                     <svg role="img" viewBox="0 0 145 130" xmlns="http://www.w3.org/2000/svg"><path d="M136.1 56.7L61.4 76.9c-1.4.4-2.8-.4-3.2-1.8L45.4 27.4c-.4-1.4.4-2.8 1.8-3.2L121.9 4c1.4-.4 2.8.4 3.2 1.8L138 53.4c.3 1.5-.5 2.9-1.9 3.3z" fill="#1d4354"></path><path d="M142.4 118.3H65c-1.4 0-2.6-1.2-2.6-2.6V66.4c0-1.4 1.2-2.6 2.6-2.6h77.4c1.4 0 2.6 1.2 2.6 2.6v49.4c0 1.4-1.2 2.5-2.6 2.5z" fill="#f2f2f2"></path><path d="M62.4 73.9H145v11.8H62.4z" fill="#1d4354"></path><path d="M70.1 92.8h49.5v14.3H70.1z" fill="#e0e0e0"></path><path d="M115.6 98.5h-7.3c-.4 0-.8-.4-.8-.8s.4-.8.8-.8h7.3c.4 0 .8.4.8.8s-.4.8-.8.8z" fill="#b2b2b2"></path><path d="M72.9 72.3H62.6V34.1c0-11.1-9.1-20.2-20.2-20.2S22.2 23 22.2 34.1v38.3H11.9V34.1c0-16.8 13.7-30.5 30.5-30.5s30.5 13.7 30.5 30.5v38.2z" fill="#e0e0e0"></path><path d="M82.2 126.4H2.6c-1.4 0-2.6-1.2-2.6-2.6v-72c0-1.4 1.2-2.6 2.6-2.6h79.7c1.4 0 2.6 1.2 2.6 2.6v72c-.1 1.5-1.2 2.6-2.7 2.6z" fill="#6fda44"></path><path d="M50.8 80.1c0-5.2-4.7-9.3-10.1-8.2-3.2.7-5.7 3.3-6.4 6.4-.9 4.3 1.6 8.2 5.3 9.6 0 0 .1.1 0 .1l-5.2 14.8c-.2.5.2 1.1.8 1.1h14.4c.5 0 .9-.5.8-1.1L45.2 88c3.2-1.2 5.6-4.3 5.6-7.9z" fill="#34ba08"></path><g fill="#33637a"><path d="M116 18.5l-5.6 1.5 1.1 3.9c.1.4.6.7 1 .6l4.8-1.3-1.3-4.7zM115.6 17.2l-1.4-5.3-4.8 1.3c-.4.1-.7.6-.6 1l1.2 4.5 5.6-1.5zM122.7 20.9l-2.6-9.7c-.1-.4-.6-.7-1-.6l-3.6 1 3.1 11.3 3.6-1c.4-.1.6-.6.5-1z"></path></g></svg>
                                     </div>
                                     <div className="">
-                                        <p className="font-weight-bold m-0 mb-1">4. Pay and invoice through Upwork</p>
-                                        <p className="edit-font-small m-0 help-one-text mb-1 ">Get invoices and make payments after reviewing time billed or approving milestones. With Upwork Payment Protection, only pay for work you authorize.</p>
+                                        <p className="font-weight-bold m-0 mb-1">4. Pay and invoice through Remobay</p>
+                                        <p className="edit-font-small m-0 help-one-text mb-1 ">Get invoices and make payments after reviewing time billed or approving milestones. With Remobay Payment Protection, only pay for work you authorize.</p>
                                         <a href="" className=" help-one-link edit-font-small d-block">View great job post examples</a>
                                         <a href="" className="mb-5 help-one-link edit-font-small">Determine how much to pay freelancers</a>
                                     </div>

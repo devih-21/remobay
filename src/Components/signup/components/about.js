@@ -2,7 +2,7 @@ const About = () => {
     return (
         <div className="about py-4">
             <div className="text-center">
-                <h5 className="font-weight-bold">More than 60k jobs are posted on Upwork every week</h5>
+                <h5 className="font-weight-bold">More than 60k jobs are posted on Remobay every week</h5>
             </div>
             <div className="container my-4 pt-3 about-details">
                 <div className="row">
